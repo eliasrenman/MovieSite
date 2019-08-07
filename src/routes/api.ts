@@ -10,7 +10,7 @@ const router = Router();
 const key = process.env.MDB_KEY;
 
 router.post('/search', parseForm, csrfProtection, (req: Request, res: Response) => {
-    const searchQuery = req.body.search.replace(' ', '%20');
+    const searchQuery = req.body.data.search.replace(' ', '%20');
     axiosGet(req, res, 'search/multi?api_key=' + key + '&language=en-US&query=' + searchQuery);
 });
 

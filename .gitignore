@@ -2,7 +2,8 @@
 node_modules
 /dist
 # Compiled files
-src/public
+src/public/*
+!src/public/img/
 
 # local env files
 /env/development.env
