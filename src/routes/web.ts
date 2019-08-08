@@ -10,7 +10,8 @@ const viewsDir = path.join(__dirname, '../views');
 const router = Router();
 
 router.get('/', csrfProtection, (req: Request, res: Response) => {
-    res.render('index', {csrfToken: req.csrfToken()});
+    const csrfToken = req.csrfToken();
+    res.render('index', {csrfToken: csrfToken, title: "Home"});
 });
 
 // Export the base-router

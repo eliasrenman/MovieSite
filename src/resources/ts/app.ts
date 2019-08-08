@@ -1,12 +1,20 @@
 import Vue from 'vue';
-import App from './components/App.vue';
-import navbar from './components/navbar.vue';
-import search from './components/search.vue';
+import navbar from './components/navbar/navbar.vue';
+import tiles from './components/featured/tiles.vue';
 
 Vue.config.productionTip = false;
-
+/** navbar components */
 Vue.component('navbar', navbar);
-Vue.component('search', search);
-new Vue({
-    // render: (h) => h(App),
-}).$mount('#app');
+Vue.component('vue-tiles', tiles);
+
+/**Feaured tiles components */
+
+// url for getting images.
+// https://image.tmdb.org/t/p/w500/imgId
+
+new Vue({})
+    .$mount('#vue-nav');
+
+
+new Vue({})
+    .$mount('#vue-tiles');

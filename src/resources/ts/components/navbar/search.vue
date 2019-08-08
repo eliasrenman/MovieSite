@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <input type="text" v-model="form._data.search" name="form.search" id="">
+        <input type="text" v-model="search" name="search" id="">
         <button type="submit">
             <img src="/img/search.svg" alt="submit search button">
         </button>
@@ -8,18 +8,15 @@
 </template>
 
 <script>
-import {Form} from '../form';
-
 export default {
-     data() {
+    data() {
         return {
-            form: new Form('{"search":""}')
+            search: '',
         };
     },
     methods: {
         onSubmit() {
-            this.form.post('/api/search')
-                .then(status => console.log(status));
+            window.location.href = '/search/' + this.data.search;
         },
     },
 };

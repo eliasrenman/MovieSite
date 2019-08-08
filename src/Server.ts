@@ -15,7 +15,6 @@ const csrfProtection = csrf({ cookie: true });
 const parseForm = bodyParser.urlencoded({ extended: false });
 
 // Add middleware/settings/routes to express.
-app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
+app.set('view engine', 'pug');
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 

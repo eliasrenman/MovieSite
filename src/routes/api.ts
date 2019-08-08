@@ -15,7 +15,10 @@ router.post('/search', parseForm, csrfProtection, (req: Request, res: Response) 
 });
 
 router.post('/trending', parseForm, csrfProtection, (req: Request, res: Response) => {
-    axiosGet(req, res, 'trending/multi?api_key=' + key);
+    let page = "";
+    if (typeof req.body.page == 'number')
+        page = "&page=" + req.body.page;
+    axiosGet(req, res, 'trending/all/week?api_key=' + key + page);
 });
 
 router.post('/detail/movie', parseForm, csrfProtection, (req: Request, res: Response) => {
@@ -46,7 +49,5 @@ function axiosGet(req: Request, res: Response, url: string) {
         });
 }
 
-// url for getting images.
-// https://image.tmdb.org/t/p/w500/imgId
 // Export the base-router
 export default router;
