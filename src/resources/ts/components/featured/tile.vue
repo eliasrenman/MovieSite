@@ -1,15 +1,21 @@
+
 <template>
-    <div class="overlay-image vue-tile" v-bind:class="{ big: data.tileSizeBig }"><a :href="data.id">
-        <img class="image" :src="'https://image.tmdb.org/t/p/w500' + data.poster_path" alt="Alt text" /> 
-        <div class="hover">
-            <div class="text">
-                <h1 v-text="data.title"></h1>
-                <p v-if="data.tileSizeBig" v-text="data.overview"></p>
-                <p >Rating: {{data.vote_average}} / 10</p>
-            </div>
+    <div>
+        <div class="overlay-image" >
+            <a :href="data.id">
+                <img class="image" :src="'https://image.tmdb.org/t/p/w500' + data.poster_path" alt="Alt text" /> 
+                <div class="hover">
+                    <div class="text">
+                        <h1 v-text="data.title"></h1>
+                        <p v-if="data.tileSizeBig" v-text="data.overview"></p>
+                        <p >Rating: {{data.vote_average}} / 10</p>
+                    </div>
+                </div>
+            </a>
         </div>
-    </a></div>
+    </div>
 </template>
+
 
 <script>
 export default {
@@ -19,7 +25,21 @@ export default {
 
 
 <style lang="scss" scoped>
+    .grid-item {
+        width: 200px;
+        height: 300px;
+        float: left;
+        margin-bottom: 10px;
+    }
 
+    .grid-item-size2 { 
+        width: 410px;
+        height: 610px;
+    }
+    .grid-item-size2 img {
+        width: 410px;
+        height: 610px;
+    }
     .overlay-image {
         position: relative;
         width: 100%;
@@ -27,8 +47,8 @@ export default {
 
     .overlay-image .image {
         display: block;
-        width: 100%;
-        height: auto;
+        max-width:100%;
+        max-height:100%;
     }
     .overlay-image .text {
         color: #fff;
@@ -44,7 +64,7 @@ export default {
     .overlay-image .hover {
         position: absolute;
         top: 0;
-        height: 102%;
+        height: 100%;
         width: 100%;
         opacity: 0;
         transition: .5s ease;
@@ -55,15 +75,4 @@ export default {
     .overlay-image .hover {
         background-color: rgba(0,0,0,0.5);
     }
-
-    .vue-tile {
-        margin: 10px;
-        height: 268px;
-        width: 182px;
-    };
-    .big {
-        margin: 12px;
-        height: 556px;
-        width: 378px;
-    };
 </style>

@@ -1,11 +1,19 @@
 <template>
     <div>
-        <div class="row">
-            <div  v-for="result in this.data.results" :key="result.id">
-                <tile :data="result"></tile>
+        <!-- <div class="grid">
+            <tile v-for="result in this.data.results" :key="result.id" :data="result"></tile>
+            <div v-for="result in this.data.results" :key="result.id" class="grid-item" :class="{'grid-item--width2' : result.tileSizeBig}">
             </div>
+            
+        </div> -->
+        
+        <div v-masonry transition-duration="0.3s" gutter="10" item-selector=".grid-item" column-width="200">
+            <tile v-for="result in this.data.results" :key="result.id" class="grid-item" :class="{'grid-item-size2' : result.tileSizeBig}" :data="result"></tile>
         </div>
-        <div class="row">
+        <!-- <div id="vue-grid">
+            <tile v-for="result in this.data.results" :key="result.id" :data="result"></tile>
+        </div> -->
+        <div class="">
             <button 
                 class="btn btn-primary my-4" 
                 type="submit"
@@ -18,31 +26,46 @@
 </template>
 
 <script>
+import Vue from 'vue'
 // var json = require('./payload.json');
 import ajax from '../../utilities/ajax';
 import tile from './tile.vue';
-
-
+// import Masonry from 'masonry-layout';
+import {VueMasonryPlugin} from 'vue-masonry';
+Vue.use(VueMasonryPlugin);
 export default {
     data() {
         return {
             data: {
-                SizeBigCounter: 0,
                 page: 0,
                 results: []
             },
         };
     },
     created() {
+        
+    },
+    mounted() {
         this.loadMore();
+        
+        this.loadMore();
+        this.$nextTick(() => {
+            this.data.page = 2;
+        });
+
+       
     },
     methods: {
+        reDraw(){
+            this.$nextTick(() => {
+                this.$redrawVueMasonry();
+            });            
+        },
         // TODO Create more generic axios requests.
         loadMore() {
             const self = this;
             this.data.page = this.data.page+1;
             let payload = {page: this.data.page};
-            console.log(payload);
             ajax.post('/api/trending/', payload)
                 .then(response => {
                     // console.log(response);
@@ -56,6 +79,7 @@ export default {
         updateData(data) {
             this.data.page = data.page;
             this.data.results.push(...this.parseData(data.results));
+            this.reDraw();
         },
         parseData(results) {
             const start = (this.data.page-1) * 20;
@@ -73,8 +97,6 @@ export default {
                 // This adds a tileSizeBig boolean to objects that are over the threshold in their rating
                 if(result.vote_average > threshold) {
                     result.tileSizeBig = true;
-                    this.data.SizeBigCounter++;
-                    // console.log(result.vote_average + " Title: " + result.title + " " + i)
                 } else {
                     result.tileSizeBig = false;
                 }
@@ -91,8 +113,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .btn {
-        margin: 0 auto;
-    }
-    
 </style>
