@@ -32,3 +32,9 @@ for production mode.
 # A Fredags project
 This is a friday project created at NTIG as part of my technical forth year.
 The plan is to further develop my skills when it comes to writing backend but also interacting with other apis.
+
+## Roadmap
+
+- [ ] Do some stuff
+- [ ] Do some other stuff
+- [ ] Do some more other stuff
