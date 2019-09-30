@@ -38,5 +38,5 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [ ] Read up on possiblility of using swagger with express or something similar
 - [ ] Read up on caching requests on backend
 - [ ] Refractor current code
-- [ ] Comment ot current existing functions
+- [ ] Comment out current existing functions
 - [ ] Do code stuff
