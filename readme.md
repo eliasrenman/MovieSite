@@ -35,6 +35,8 @@ The plan is to further develop my skills when it comes to writing backend but al
 
 ## Roadmap
 
-- [ ] Do some stuff
-- [ ] Do some other stuff
-- [ ] Do some more other stuff
+- [ ] Read up on possiblility of using swagger with express or something similar
+- [ ] Read up on caching requests on backend
+- [ ] Refractor current code
+- [ ] Comment ot current existing functions
+- [ ] Do code stuff
