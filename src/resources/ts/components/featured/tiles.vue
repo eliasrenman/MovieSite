@@ -1,36 +1,31 @@
 <template>
-    <div>
-        <!-- <div class="grid">
-            <tile v-for="result in this.data.results" :key="result.id" :data="result"></tile>
-            <div v-for="result in this.data.results" :key="result.id" class="grid-item" :class="{'grid-item--width2' : result.tileSizeBig}">
+    <div class="resContainer">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10 resultsCol">
+                <div class="masonary" v-masonry transition-duration="0.0s" gutter="10" fitWidth: true item-selector=".grid-item" column-width="200">
+                    <tile v-for="result in this.data.results" :key="result.id" class="grid-item" :class="{'grid-item-size2' : result.tileSizeBig}" :data="result"></tile>
+                </div>
             </div>
-            
-        </div> -->
-        
-        <div v-masonry transition-duration="0.3s" gutter="10" item-selector=".grid-item" column-width="200">
-            <tile v-for="result in this.data.results" :key="result.id" class="grid-item" :class="{'grid-item-size2' : result.tileSizeBig}" :data="result"></tile>
-        </div>
-        <!-- <div id="vue-grid">
-            <tile v-for="result in this.data.results" :key="result.id" :data="result"></tile>
-        </div> -->
-        <div class="">
-            <button 
-                class="btn btn-primary my-4" 
-                type="submit"
-                @click="loadMore"
-            >
-                Load more
-            </button>
+        </div>        
+        <div class="row justify-content-md-center">
+                <div class="col-md-1 text-align-center">
+                    <button 
+                        class="btn btn-primary my-4 loadMore" 
+                        type="submit"
+                        @click="loadMore"
+                    >
+                        Load more
+                    </button>
+                </div>
+             
         </div>
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
-// var json = require('./payload.json');
 import ajax from '../../utilities/ajax';
 import tile from './tile.vue';
-// import Masonry from 'masonry-layout';
 import {VueMasonryPlugin} from 'vue-masonry';
 Vue.use(VueMasonryPlugin);
 export default {
@@ -43,18 +38,12 @@ export default {
         };
     },
     created() {
-        
+        this.loadMore()
+            .then(respone => {
+                this.loadMore();
+            }).catch(error => console.log(error));
     },
-    mounted() {
-        this.loadMore();
-        
-        this.loadMore();
-        this.$nextTick(() => {
-            this.data.page = 2;
-        });
-
-       
-    },
+    
     methods: {
         reDraw(){
             this.$nextTick(() => {
@@ -63,21 +52,26 @@ export default {
         },
         // TODO Create more generic axios requests.
         loadMore() {
-            const self = this;
-            this.data.page = this.data.page+1;
-            let payload = {page: this.data.page};
-            ajax.post('/api/trending/', payload)
-                .then(response => {
-                    // console.log(response);
-                    self.updateData(response);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            return new Promise((resolve, rejects) => {
+                const self = this;
+                this.data.page = this.data.page+1;
+                let payload = {page: this.data.page};
+                ajax.post('/api/trending/', payload)
+                    .then(response => {
+                        // console.log(response);
+                        resolve("");
+                        self.updateData(response);
+                    })
+                    .catch(error => {
+                        rejects("");
+                        console.log(error);
+                    });
+            });
+            
         },
         
         updateData(data) {
-            this.data.page = data.page;
+            // this.data.page = data.page;
             this.data.results.push(...this.parseData(data.results));
             this.reDraw();
         },
@@ -113,4 +107,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    #list {
+    margin: 0 auto;
+    }
+.resContainer{
+    margin-left: 15px;
+
+    .resultsCol{
+        margin-left: 8vw;
+    }
+    .masonary{
+        width:80vw;
+    }
+
+    @media (min-width: 1441px){
+        .loadMore{
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 1025px){
+        .resultsCol{
+            margin-left: 20vw;
+        }
+    }
+
+    @media (max-width: 769px){
+        .resultsCol{
+            margin-left: 25vw;
+        }
+    }
+
+    @media (max-width: 555px){
+        .resultsCol{
+            margin-left: 10vw;
+        }
+
+        .loadMore{
+            margin-left: 25vw;
+        }
+    }
+}
 </style>

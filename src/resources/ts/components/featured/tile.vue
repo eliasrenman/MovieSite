@@ -31,7 +31,11 @@ export default {
         float: left;
         margin-bottom: 10px;
     }
-
+    .grid-item img {
+        width: 200px;
+        height: 300px;
+        object-fit: cover;
+    }
     .grid-item-size2 { 
         width: 410px;
         height: 610px;
@@ -39,6 +43,7 @@ export default {
     .grid-item-size2 img {
         width: 410px;
         height: 610px;
+        object-fit: cover;
     }
     .overlay-image {
         position: relative;
@@ -74,5 +79,31 @@ export default {
     }
     .overlay-image .hover {
         background-color: rgba(0,0,0,0.5);
+    }
+
+    
+    @media (max-width: 555px){
+
+        .grid-item {
+            width: 300px;
+            height: 400px;
+            float: left;
+            margin-bottom: 10px;
+        }
+
+        .grid-item-size2 { 
+            width: 300px;
+            height: 400px;
+        }
+        .grid-item-size2 img {
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+        }
+        .grid-item img {
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+        }
     }
 </style>
