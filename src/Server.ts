@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import logger from 'morgan';
 import path from 'path';
 import web from './routes/web';
-import api from './routes/api';
+import api from './routes/apiv1';
 import csrf from 'csurf';
 import bodyParser from 'body-parser';
 // Init express
@@ -28,7 +28,7 @@ const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
 app.use('/', web);
-app.use('/api', api);
+app.use('/api/v1', api);
 // error handler
 app.use( (err: { code: string; }, req: Request, res: Response, next: (arg0: any) => void) => {
     if (err.code !== 'EBADCSRFTOKEN') {
