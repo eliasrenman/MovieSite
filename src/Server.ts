@@ -22,15 +22,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Sets Frontend rendering engine to pug
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
 app.set('view engine', 'pug');
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
+// Declares the different routes.
 app.use('/', web);
 app.use('/api/v1', api);
 app.use('/docs/', docs);
+
 // error handler
 app.use( (err: { code: string; }, req: Request, res: Response, next: (arg0: any) => void) => {
     if (err.code !== 'EBADCSRFTOKEN') {

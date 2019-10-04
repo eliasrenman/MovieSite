@@ -9,6 +9,9 @@ const viewsDir = path.join(__dirname, '../views');
 // Init router and path
 const router = Router();
 
+/**
+ * Renders home page.
+ */
 router.get('/', csrfProtection, (req: Request, res: Response) => {
     const csrfToken = req.csrfToken();
     res.render('index', {csrfToken: csrfToken, title: "Home"});
