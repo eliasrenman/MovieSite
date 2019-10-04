@@ -38,6 +38,9 @@ export default {
         };
     },
     created() {
+        /**
+         * This loads more tiles twice.
+         */
         this.loadMore()
             .then(respone => {
                 this.loadMore();
@@ -45,6 +48,9 @@ export default {
     },
     
     methods: {
+        /**
+         * Redraws the masonry tiles.
+         */
         reDraw(){
             this.$nextTick(() => {
                 this.$redrawVueMasonry();
@@ -69,12 +75,18 @@ export default {
             });
             
         },
-        
+        /**
+         * This pushes more data to the array of existing movies.
+         */
         updateData(data) {
             // this.data.page = data.page;
             this.data.results.push(...this.parseData(data.results));
             this.reDraw();
         },
+        
+        /**
+         * Parses incomming data from database.
+         */
         parseData(results) {
             const start = (this.data.page-1) * 20;
             const threshold = 8.3;

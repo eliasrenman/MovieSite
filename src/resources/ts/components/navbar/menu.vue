@@ -18,7 +18,6 @@ export default {
     },
     methods: {
         onShow() {
-            console.log('this is happening');
             this.show = !this.show;
         },
     },  
