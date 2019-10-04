@@ -158,6 +158,7 @@ router.post('/search/person', parseForm, csrfProtection, (req: Request, res: Res
     axiosGet(req, res, 'tv/' + req.body.search + '?api_key=' + key);
 });
 
+
 /**
  * This function sends a Get request to the moviedbs api.
  * @param req request

@@ -3,8 +3,8 @@ import express from 'express';
 import { Request, Response } from 'express';
 import logger from 'morgan';
 import path from 'path';
-import web from './routes/web';
-import api from './routes/api/apiv1';
+import web from './routes/WebRoutes';
+import api from './routes/api/v1/ApiRoutes';
 import csrf from 'csurf';
 import bodyParser from 'body-parser';
 // Init express
