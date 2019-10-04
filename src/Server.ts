@@ -5,6 +5,7 @@ import logger from 'morgan';
 import path from 'path';
 import web from './routes/WebRoutes';
 import api from './routes/api/v1/ApiRoutes';
+import docs from './routes/DocsRoutes';
 import csrf from 'csurf';
 import bodyParser from 'body-parser';
 // Init express
@@ -29,6 +30,7 @@ app.use(express.static(staticDir));
 
 app.use('/', web);
 app.use('/api/v1', api);
+app.use('/docs/', docs);
 // error handler
 app.use( (err: { code: string; }, req: Request, res: Response, next: (arg0: any) => void) => {
     if (err.code !== 'EBADCSRFTOKEN') {

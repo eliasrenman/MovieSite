@@ -132,7 +132,7 @@ router.post('/search/tv', parseForm, csrfProtection, (req: Request, res: Respons
 /**
  * @swagger
  *
- * /api/v1/search/tv:
+ * /api/v1/search/person:
  *   post:
  *     description: Sends a specific search query in the people category.
  *     produces:
