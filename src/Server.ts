@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import logger from 'morgan';
 import path from 'path';
 import web from './routes/web';
-import api from './routes/apiv1';
+import api from './routes/api/apiv1';
 import csrf from 'csurf';
 import bodyParser from 'body-parser';
 // Init express
