@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 import csrf from 'csurf';
 import bodyParser from 'body-parser';
 import axios from 'axios';
-
+import {cache} from '../../../middleware/Memory';
 const csrfProtection = csrf({ cookie: true });
 const parseForm = bodyParser.urlencoded({ extended: false });
 // Init router and path
@@ -34,7 +34,7 @@ const key = process.env.MDB_KEY;
  *       200:
  *         description: Successfully returns the result of a search query.
  */
-router.post('/search', parseForm, csrfProtection, (req: Request, res: Response) => {
+router.post('/search', parseForm, csrfProtection,cache(1200), (req: Request, res: Response) => {
     const searchQuery = req.body.data.search.replace(' ', '%20');
     axiosGet(req, res, 'search/multi?api_key=' + key + '&language=en-US&query=' + searchQuery);
 });
@@ -43,7 +43,7 @@ router.post('/search', parseForm, csrfProtection, (req: Request, res: Response) 
  * @swagger
  *
  * /api/v1/trending:
- *   post:
+ *   get:
  *     description: Sends request to get 20 trending movies.
  *     produces:
  *       - application/json
@@ -64,10 +64,10 @@ router.post('/search', parseForm, csrfProtection, (req: Request, res: Response) 
  *       200:
  *         description: Successfully returns a json containing 20 movies.
  */
-router.post('/trending', parseForm, csrfProtection, (req: Request, res: Response) => {
+router.get('/trending', parseForm, cache(43200), (req: Request, res: Response) => {
     let page = "";
-    if (typeof req.body.page == 'number')
-        page = "&page=" + req.body.page;
+    if (!isNaN(req.query.page))
+        page = "&page=" + req.query.page;
     axiosGet(req, res, 'trending/all/week?api_key=' + key + page);
 });
 
