@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
 import csrf from 'csurf';
 import bodyParser from 'body-parser';
-import {cache} from '../../../middleware/Memory';
-import ApiController from 'src/controllers/ApiController';
-import { axiosGet } from '../../../shared/ApiGet';
+import {cache} from 'src/middleware/Memory';
+import ApiController from 'src/controllers/api/v1/ApiController';
+import { axiosGet } from 'src/shared/ApiGet';
 const csrfProtection = csrf({ cookie: true });
 const parseForm = bodyParser.urlencoded({ extended: false });
 // Init router and path
