@@ -13,19 +13,14 @@ const key = process.env.MDB_KEY;
  * @swagger
  *
  * /api/v1/search:
- *   post:
+ *   get:
  *     description: Sends a general search query expecting a json as a response.
  *     produces:
  *       - application/json
  *     parameters:
  *       - name: search
  *         description: Specified search query to lookup.
- *         in: formData
- *         required: true
- *         type: string
- *       - name: token
- *         description: CSRF Token to stop cross-site requests.
- *         in: formData
+ *         in: query
  *         required: true
  *         type: string
  *     tags:
@@ -34,7 +29,7 @@ const key = process.env.MDB_KEY;
  *       200:
  *         description: Successfully returns the result of a search query.
  */
-router.post('/search', parseForm, csrfProtection,cache(1200), (req: Request, res: Response) => {
+router.get('/search', parseForm, (req: Request, res: Response) => {
     const searchQuery = req.body.data.search.replace(' ', '%20');
     axiosGet(req, res, 'search/multi?api_key=' + key + '&language=en-US&query=' + searchQuery);
 });
@@ -50,14 +45,9 @@ router.post('/search', parseForm, csrfProtection,cache(1200), (req: Request, res
  *     parameters:
  *       - name: page
  *         description: Specified page to get trending movies from.
- *         in: formData
+ *         in: query
  *         required: true
  *         type: int
- *       - name: token
- *         description: CSRF Token to stop cross-site requests.
- *         in: formData
- *         required: true
- *         type: string
  *     tags:
  *         - api
  *     responses:
@@ -82,12 +72,12 @@ router.get('/trending', parseForm, cache(43200), (req: Request, res: Response) =
  *     parameters:
  *       - name: search
  *         description: Specified search query to lookup.
- *         in: formData
+ *         in: query
  *         required: true
  *         type: int
  *       - name: token
  *         description: CSRF Token to stop cross-site requests.
- *         in: formData
+ *         in: query
  *         required: true
  *         type: string
  *     tags:
@@ -111,12 +101,12 @@ router.post('/search/movie', parseForm, csrfProtection, (req: Request, res: Resp
  *     parameters:
  *       - name: search
  *         description: Specified search query to lookup.
- *         in: formData
+ *         in: query
  *         required: true
  *         type: int
  *       - name: token
  *         description: CSRF Token to stop cross-site requests.
- *         in: formData
+ *         in: query
  *         required: true
  *         type: string
  *     tags:
@@ -140,12 +130,12 @@ router.post('/search/tv', parseForm, csrfProtection, (req: Request, res: Respons
  *     parameters:
  *       - name: search
  *         description: Specified search query to lookup.
- *         in: formData
+ *         in: query
  *         required: true
  *         type: int
  *       - name: token
  *         description: CSRF Token to stop cross-site requests.
- *         in: formData
+ *         in: query
  *         required: true
  *         type: string
  *     tags:
