@@ -9,16 +9,16 @@ const router = Router();
 
 router.get('/trending', parseForm, cache(43200), new ApiController().trending);
 
-router.get('/search', parseForm, cache(604800), new ApiController().search);
+router.get('/search', parseForm, new ApiController().search);
 
 /**
  * Detailed search in specific category.
  */
-router.get('/search/movie', parseForm, cache(604800), new ApiDetailedSearchController().movie);
+router.get('/search/movie', parseForm, new ApiDetailedSearchController().movie);
 
-router.get('/search/tv', parseForm, cache(604800), new ApiDetailedSearchController().tv);
+router.get('/search/tv', parseForm, new ApiDetailedSearchController().tv);
 
-router.get('/search/person', parseForm, cache(604800), new ApiDetailedSearchController().person);
+router.get('/search/person', parseForm, new ApiDetailedSearchController().person);
 
 // Export the base-router
 export default router;
