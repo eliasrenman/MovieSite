@@ -1,7 +1,7 @@
 import { Response, Request } from "express-serve-static-core"
 import { axiosGet } from '../shared/ApiGet';
 class ApiController {
-    private key = process.env.MDB_KEY;
+    
     /**
      * Ignored.
      */
@@ -35,8 +35,8 @@ class ApiController {
     public trending(req: Request, res: Response) {
             let page = "";
         if (!isNaN(req.query.page))
-            page = "&page=" + req.query.page;
-        axiosGet(req, res, 'trending/all/week?api_key=' + this.key + page);
+            page = "page=" + req.query.page;
+        axiosGet(req, res, 'trending/all/week?'+ page);
     }
     /**
      * Search controller logic
@@ -63,10 +63,9 @@ class ApiController {
      *         description: Successfully returns the result of a search query.
      */
     public search(req: Request, res: Response)   {
-        const searchQuery = req.body.data.search.replace(' ', '%20');
+        const searchQuery = req.query.search.replace(' ', '%20');
         axiosGet(req, res, 
-            'search/multi?api_key=' + this.key + 
-            '&language=en-US&query=' + searchQuery);
+            'search/multi?language=en-US&query=' + searchQuery);
     }
 }
 export default ApiController;

@@ -8,7 +8,8 @@ import { Response, Request } from "express-serve-static-core"
  * @param url subfolder on moviedb
  */
 export function axiosGet(req: Request, res: Response, url: string) {
-    axios.get('https://api.themoviedb.org/3/' + url)
+    const key = process.env.MDB_KEY;
+    axios.get('https://api.themoviedb.org/3/' + url + '&api_key=' + key)
         .then((response) => {
             res.send(response.data);
         })
