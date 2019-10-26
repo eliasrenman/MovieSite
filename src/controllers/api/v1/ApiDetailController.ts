@@ -1,5 +1,5 @@
 import { Response, Request } from "express-serve-static-core"
-import { axiosGet } from 'src/shared/ApiGet';
+import { movieDbGet } from 'src/shared/ApiGet';
 class ApiDetailsController {
 
     constructor() {
@@ -28,7 +28,7 @@ class ApiDetailsController {
      *         description: Successfully returns a json containing search result.
      */
     public movie(req: Request, res: Response) {
-        axiosGet(req, res, 'movie/' + req.query.id + '?language=en-US');
+        movieDbGet(req, res, 'movie/' + req.query.id + '?language=en-US');
     } 
 
     /**
@@ -52,7 +52,7 @@ class ApiDetailsController {
      *         description: Successfully returns a json containing search result.
      */
     public tv(req: Request, res: Response) {
-        axiosGet(req, res, 'tv/' + req.query.id + '?language=en-US');
+        movieDbGet(req, res, 'tv/' + req.query.id + '?language=en-US');
     }
 
     /**
@@ -76,7 +76,7 @@ class ApiDetailsController {
      *         description: Successfully returns a json containing search result.
      */
     public person(req: Request, res: Response) {
-        axiosGet(req, res, 'person/' + req.query.id + '?language=en-US');
+        movieDbGet(req, res, 'person/' + req.query.id + '?language=en-US');
     }
 }
 

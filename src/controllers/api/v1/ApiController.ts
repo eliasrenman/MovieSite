@@ -1,5 +1,5 @@
-import { Response, Request } from "express-serve-static-core"
-import { axiosGet } from '../../../shared/ApiGet';
+import { Response, Request } from "express-serve-static-core";
+import { movieDbGet } from '../../../shared/ApiGet';
 class ApiController {
     
     /**
@@ -36,7 +36,7 @@ class ApiController {
             let page = "";
         if (!isNaN(req.query.page))
             page = "page=" + req.query.page;
-        axiosGet(req, res, 'trending/all/week?'+ page);
+        movieDbGet(req, res, 'trending/all/week?'+ page);
     }
     /**
      * Search controller logic
@@ -64,7 +64,7 @@ class ApiController {
      */
     public search(req: Request, res: Response)   {
         const searchQuery = req.query.search.replace(' ', '%20');
-        axiosGet(req, res, 
+        movieDbGet(req, res, 
             'search/multi?language=en-US&query=' + searchQuery);
     }
 }
