@@ -27,7 +27,7 @@ class ApiController {
      *         required: true
      *         type: int
      *     tags:
-     *         - api
+     *         - collection
      *     responses:
      *       200:
      *         description: Successfully returns a json containing 20 movies.
@@ -57,7 +57,7 @@ class ApiController {
      *         required: true
      *         type: string
      *     tags:
-     *         - api
+     *         - search
      *     responses:
      *       200:
      *         description: Successfully returns the result of a search query.

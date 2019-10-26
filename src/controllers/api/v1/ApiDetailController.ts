@@ -1,83 +1,83 @@
 import { Response, Request } from "express-serve-static-core"
 import { axiosGet } from 'src/shared/ApiGet';
-class ApiDetailedSearchController {
-    /**
-     * Ignored.
-     */
+class ApiDetailsController {
+
     constructor() {
+
     }
 
+    
     /**
      * @swagger
      *
-     * /api/v1/search/movie:
+     * /api/v1/movie:
      *   get:
-     *     description: Sends a specific search query in the movie category.
+     *     description: Requests the data by id of a movie.
      *     produces:
      *       - application/json
      *     parameters:
-     *       - name: search
-     *         description: Specified search query to lookup.
+     *       - name: id
+     *         descirption: Requested id.
      *         in: query
      *         required: true
      *         type: int
      *     tags:
-     *         - api-detalied
+     *         - details
      *     responses:
      *       200:
      *         description: Successfully returns a json containing search result.
      */
     public movie(req: Request, res: Response) {
-        axiosGet(req, res, 'search/movie/?query=' + req.query.search);
+        axiosGet(req, res, 'movie/' + req.query.id + '?language=en-US');
     } 
 
     /**
      * @swagger
      *
-     * /api/v1/search/tv:
+     * /api/v1/tv:
      *   get:
-     *     description: Sends a specific search query in the tv category.
+     *     description: Requests the data by id of a tv series.
      *     produces:
      *       - application/json
      *     parameters:
-     *       - name: search
-     *         description: Specified search query to lookup.
+     *       - name: id
+     *         descirption: Requested id.
      *         in: query
      *         required: true
      *         type: int
-     *       - name: token
      *     tags:
-     *         - api-detalied
+     *         - details
      *     responses:
      *       200:
      *         description: Successfully returns a json containing search result.
      */
     public tv(req: Request, res: Response) {
-        axiosGet(req, res, 'search/tv?query=' + req.query.search);
+        axiosGet(req, res, 'tv/' + req.query.id + '?language=en-US');
     }
 
     /**
      * @swagger
      *
-     * /api/v1/search/person:
+     * /api/v1/person:
      *   get:
-     *     description: Sends a specific search query in the people category.
+     *     description: Requests the data by id of a person.
      *     produces:
      *       - application/json
      *     parameters:
-     *       - name: search
-     *         description: Specified search query to lookup.
+     *       - name: id
+     *         descirption: Requested id.
      *         in: query
      *         required: true
      *         type: int
      *     tags:
-     *         - api-detalied
+     *         - details
      *     responses:
      *       200:
      *         description: Successfully returns a json containing search result.
      */
     public person(req: Request, res: Response) {
-        axiosGet(req, res, 'search/person?query=' + req.query.search);
+        axiosGet(req, res, 'person/' + req.query.id + '?language=en-US');
     }
 }
-export default ApiDetailedSearchController;
+
+export default ApiDetailsController;
