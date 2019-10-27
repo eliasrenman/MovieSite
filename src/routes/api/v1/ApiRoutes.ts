@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
-import {cache} from 'src/middleware/Memory';
+import {mem_cache} from 'src/middleware/Memory';
 import ApiController from 'src/controllers/api/v1/ApiController';
 import ApiDetailedSearchController from 'src/controllers/api/v1/ApiCategorySearchController';
 import ApiDetailsController from 'src/controllers/api/v1/ApiDetailController';
@@ -8,7 +8,7 @@ const parseForm = bodyParser.urlencoded({ extended: false });
 // Init router and path
 const router = Router();
 
-router.get('/trending', parseForm, cache(43200), new ApiController().trending);
+router.get('/trending', parseForm, mem_cache(43200), new ApiController().trending);
 
 router.get('/search', parseForm, new ApiController().search);
 
