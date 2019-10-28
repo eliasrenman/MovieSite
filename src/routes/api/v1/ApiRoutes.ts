@@ -7,7 +7,6 @@ const csrfProtection = csrf({ cookie: true });
 const parseForm = bodyParser.urlencoded({ extended: false });
 // Init router and path
 const router = Router();
-const key = process.env.MDB_KEY;
 
 /**
  * @swagger
@@ -36,7 +35,7 @@ const key = process.env.MDB_KEY;
  */
 router.post('/search', parseForm, csrfProtection, (req: Request, res: Response) => {
     const searchQuery = req.body.data.search.replace(' ', '%20');
-    axiosGet(req, res, 'search/multi?api_key=' + key + '&language=en-US&query=' + searchQuery);
+    axiosGet(req, res, 'search/multi?api_key=' + process.env.MDB_KEY + '&language=en-US&query=' + searchQuery);
 });
 
 /**
@@ -68,7 +67,7 @@ router.post('/trending', parseForm, csrfProtection, (req: Request, res: Response
     let page = "";
     if (typeof req.body.page == 'number')
         page = "&page=" + req.body.page;
-    axiosGet(req, res, 'trending/all/week?api_key=' + key + page);
+    axiosGet(req, res, 'trending/all/week?api_key=' + process.env.MDB_KEY + page);
 });
 
 /**
@@ -97,7 +96,7 @@ router.post('/trending', parseForm, csrfProtection, (req: Request, res: Response
  *         description: Successfully returns a json containing search result.
  */
 router.post('/search/movie', parseForm, csrfProtection, (req: Request, res: Response) => {
-    axiosGet(req, res, 'movie/' + req.body.search + '?api_key=' + key);
+    axiosGet(req, res, 'movie/' + req.body.search + '?api_key=' + process.env.MDB_KEY);
 });
 
 /**
@@ -126,7 +125,7 @@ router.post('/search/movie', parseForm, csrfProtection, (req: Request, res: Resp
  *         description: Successfully returns a json containing search result.
  */
 router.post('/search/tv', parseForm, csrfProtection, (req: Request, res: Response) => {
-    axiosGet(req, res, 'tv/' + req.body.search + '?api_key=' + key);
+    axiosGet(req, res, 'tv/' + req.body.search + '?api_key=' + process.env.MDB_KEY);
 });
 
 /**
@@ -155,7 +154,7 @@ router.post('/search/tv', parseForm, csrfProtection, (req: Request, res: Respons
  *         description: Successfully returns a json containing search result.
  */
 router.post('/search/person', parseForm, csrfProtection, (req: Request, res: Response) => {
-    axiosGet(req, res, 'tv/' + req.body.search + '?api_key=' + key);
+    axiosGet(req, res, 'tv/' + req.body.search + '?api_key=' + process.env.MDB_KEY);
 });
 
 

@@ -1,17 +1,11 @@
 <template>
-  <nav class="vue-nav" role="navigation" aria-label="main navigation">
-    <div class="d-flex">
-      <div class="d-flex justify-content-start">
-        <div @click="onShow">
+    <div class="menu">
+        <button @click="onShow">
           <img id="vue-burger" src="/img/burger.svg" alt="hamburg menu toggle" />
-        </div>
-      </div>
-      <div class="d-flex ml-auto justify-content-end align-content-center flex-wrap">
+        </button>
         <search></search>
-      </div>
+        <vueMenu ref="vue_menu"></vueMenu>
     </div>
-    <vueMenu ref="vue_menu"></vueMenu>
-  </nav>
 </template>
 
 <script>
