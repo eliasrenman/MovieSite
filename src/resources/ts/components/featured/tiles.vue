@@ -102,15 +102,28 @@ export default {
 <style lang="scss" scoped>
     
     @use '../../../sass/variables' as *;
+    @use "sass:map";
 
     .grid-container {
         display: grid;
         grid-template-rows: repeat(auto, auto);
-        grid-template-columns: repeat($grid-columns, 1fr);
+        grid-template-columns: repeat(#{map.get($grid-columns, xs)}, 1fr);
         grid-gap: 10px;
         grid-auto-flow: row dense;
         width: 100%;
         margin: auto;
+    }
+
+    @each $size, $pixels in $breakpoints {
+
+        @media (min-width: $pixels) {
+
+            .grid-container {
+                grid-template-columns: repeat(#{map.get($grid-columns, $size)}, 1fr);
+            }
+
+        }
+    
     }
 
 </style>
