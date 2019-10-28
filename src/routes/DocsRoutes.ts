@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import SwaggerController from '../controllers/SwaggerController';
-import {mem_cache} from '../middleware/Memory';
+import {mem_cache} from '../middleware/CacheMiddleware';
 
 // Init router and path
 const router = Router();
