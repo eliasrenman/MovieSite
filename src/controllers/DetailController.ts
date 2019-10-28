@@ -1,6 +1,19 @@
 import { Response, Request } from "express-serve-static-core";
 import { axiosGet } from 'src/shared/ApiGet';
-
+interface PayloadModel {
+    backdrop_path: string,
+    name: string,
+    overview: string,
+    poster_path: string,
+    vote_average: number,
+    vote_count: number,
+    genres: [
+        {
+            id: number,
+            name: string
+        }
+    ]
+}
 class DetailController {
     
     /**
@@ -11,11 +24,14 @@ class DetailController {
     public async movie(req: Request, res: Response) {
         // @ts-ignore
         res.send((await this.loadPayload(req, '/api/v1/movie')).data);
+
     }
     
     public async tv(req: Request, res: Response) {
         // @ts-ignore
-        res.send((await this.loadPayload(req, '/api/v1/tv')).data);
+        let payload: PayloadModel = (await this.loadPayload(req, '/api/v1/tv')).data;
+        const csrfToken = req.csrfToken();
+        res.render('details', {csrfToken: csrfToken, title: payload.name, payload: payload});
     }
     
     public async person(req: Request, res: Response) {
@@ -32,6 +48,5 @@ class DetailController {
         return await axiosGet(url, {id: req.params.id})
     }
 }
-
 
 export default DetailController;
