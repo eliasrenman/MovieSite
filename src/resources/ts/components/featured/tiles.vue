@@ -43,7 +43,7 @@ export default {
                 const self = this;
                 this.data.page = this.data.page+1;
                 let payload = {page: this.data.page};
-                ajax.post('/api/v1/trending/', payload)
+                ajax.get('/api/v1/trending/', payload)
                     .then(response => {
                         // console.log(response);
                         resolve("");
