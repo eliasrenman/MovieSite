@@ -42,6 +42,7 @@ export class DbCache {
     public async get(key: string) {
         return new Promise((resolve, reject) => {
             this.db.serialize(() => {
+                this.delete();
                 this.db.get('SELECT * FROM storage WHERE `key` = ?', [key], (err, row) => {
                     if (row) {
                         // console.log(row.value);
@@ -49,7 +50,7 @@ export class DbCache {
                             resolve(row.value);
                             return;
                         }
-                        this.delete(row.id);
+                        
                     } 
                     resolve(undefined);
                 });
@@ -57,16 +58,16 @@ export class DbCache {
         })
     }
     /**
-     * This will delete a index in the database.
+     * This will delete all indexes in the database where expires is smaller than now.
      * 
-     * @param id Id index in database to delete
      */
-    private delete(id: number) {
-        this.db.run(`DELETE FROM storage WHERE id=?`, id, (err) => {
+    private delete() {
+        this.db.run(`DELETE FROM storage WHERE expires<?`, Date.now() / 1000, (err) => {
             if (err) {
               return console.error(err.message);
             }
-            console.log(`Deleted expired index at id: ${id}`);
+            console.log("Deleted expired indexes in database cache");
+            // console.log(`Deleted expired index at id: ${id}`);
           });
     }
 
