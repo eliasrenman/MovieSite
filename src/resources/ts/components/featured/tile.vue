@@ -5,7 +5,7 @@
         <span class="grid-item-hover">
             <p class="grid-item-title" v-text="data.title"></p>
             <p class="grid-item-description" v-if="data.tileSizeBig" v-text="data.overview"></p>
-            <p class="grid-item-rating">Rating: {{data.vote_average}} / 10</p>
+            <p class="grid-item-rating">{{data.vote_average}} / 10</p>
         </span>
     </a>
 </template>
@@ -25,9 +25,7 @@ export default {
     .grid-item {
         position: relative;
         height: 100%;
-        background-color: $primary;
         overflow: hidden;
-        overflow-wrap: break-word;
 
         &.large {
             grid-column-start: auto;
@@ -58,17 +56,18 @@ export default {
             left: 0;
             height: 100%;
             width: 100%;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
             text-decoration: none;
             color: #fff;
-            background-color: rgba($primary, 0.8);
+            background-color: rgba(darken($primary, 50%), 0.8);
             visibility: hidden;
             opacity: 0;
             transition: opacity 0.3s, visibility 0.3s;
 
             p {
-                margin: 0;
+                width: 100%;
+                margin: 5px 0;
             }
 
         }
@@ -79,9 +78,11 @@ export default {
         }
 
         .grid-item-title {
-            font-size: 28px;
-            line-height: 1em;
-            text-transform: uppercase;
+            padding-bottom: 13px;
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 1.1em;
+            border-bottom: 1px solid #fff;
         }
 
     }

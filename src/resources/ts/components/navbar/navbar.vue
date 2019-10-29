@@ -1,10 +1,12 @@
 <template>
     <div class="menu">
-        <button @click="onShow">
-          <img id="vue-burger" src="/img/burger.svg" alt="hamburg menu toggle" />
-        </button>
+        <div class="open">
+            <button type="button" @click="onShow">
+                <img id="vue-burger" src="/img/burger.svg" alt="hamburg menu toggle" />
+            </button>
+            <vueMenu ref="vue_menu"></vueMenu>
+        </div>
         <search></search>
-        <vueMenu ref="vue_menu"></vueMenu>
     </div>
 </template>
 
@@ -26,15 +28,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    #vue-burger {
-        height: 39px;
-        width: 39px;
+    
+    .menu {
+        display: flex;
+        justify-content: space-between;
     }
-    .vue-nav {
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        margin-bottom: 20px;
+
+    .open {
+        display: flex;
     }
+
 </style>
