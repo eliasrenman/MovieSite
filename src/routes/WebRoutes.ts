@@ -19,10 +19,10 @@ router.get('/', csrfProtection, (req: Request, res: Response) => {
     res.render('index', {csrfToken: csrfToken, title: "Home"});
 });
 
-router.get('/search/:search', csrfProtection, async (req: Request, res: Response) => {
+router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
     let page = req.query.page || 1;
     let payload: any = (await axiosGet('/api/v1/search/', {
-        search: req.params.search,
+        search: req.query.search || '',
         page: page, 
         })).data;
     const csrfToken = req.csrfToken();
