@@ -9,37 +9,37 @@
                         {{ genres.join(', ') }}
                     </p>
                     <!-- SERIES SPECIFIC START -->
-                    <div v-if="payload.type == 'series'">
+                    <div v-if="data.type == 'series'">
                         <p>
                             <p class="d-inline pk">Episode Runtime:</p> 
-                            {{ payload.episode_run_time[0] }} min
+                            {{ data.episode_run_time[0] }} min
                         </p>
                         <p>
                         <p>
                             <p class="d-inline pk">Seasons:</p> 
-                            {{ payload.number_of_seasons }}
+                            {{ data.number_of_seasons }}
                         </p>
                             <p class="d-inline pk">Episodes:</p> 
-                            {{ payload.number_of_episodes }}
+                            {{ data.number_of_episodes }}
                         </p>
                         <p>
                             <p class="d-inline pk">First release date:</p> 
-                            {{ payload.first_air_date }}
+                            {{ data.first_air_date }}
                         </p>
                     </div>
                     <!-- MOVIE SPECIFIC START -->
-                    <div v-else-if="payload.type == 'movie'">
+                    <div v-else-if="data.type == 'movie'">
                         <p>
                             <p class="d-inline pk">Runtime:</p> 
-                            {{ payload.runtime }} min
+                            {{ data.runtime }} min
                         </p>
                         <p>
                             <p class="d-inline pk">Release date:</p> 
-                            {{ payload.release_date }}
+                            {{ data.release_date }}
                         </p>
                     </div>
                     <!-- BOTH MOVIE AND SERIES SPECIFIC START -->
-                    <div v-if="payload.created_by">
+                    <div v-if="data.created_by">
                         <p>
                             <p class="d-inline pk">Creators:</p> 
                             {{ creators.join(', ') }}
@@ -54,12 +54,12 @@
             <div class="col-md-6">
                 <h1 class="pt-0">{{ name }}</h1>
                 <h2 v-if="original_name" class="under-title">{{original_name}}</h2>
-                <p>{{ payload.overview }}</p>
+                <p>{{ data.overview }}</p>
                 
                 <h2 class="bottom-border pt-42px">Information</h2>
-                <p v-if="payload.homepage">
+                <p v-if="data.homepage">
                     <p class="d-inline pk">Website: </p>
-                    <a :href=payload.homepage>{{payload.homepage}}</a>
+                    <a :href=data.homepage>{{data.homepage}}</a>
                 </p>
             </div>
         </div>
@@ -79,42 +79,33 @@ export default {
     props: [
         'data'
     ],
-    data: () => {
-        return {
-            payload: "null"
-        }
-    },
-    created() {
-        this.payload = JSON.parse(this.data);
-    },
-
     computed: {
         image_cover() {
-            return "https://image.tmdb.org/t/p/w500/" + this.payload.poster_path;
+            return "https://image.tmdb.org/t/p/w500/" + this.data.poster_path;
         },
         genres() {
-            return this.payload.genres.map(a => a.name);
+            return this.data.genres.map(a => a.name);
         },
         name() {
-            switch(this.payload.type) {
+            switch(this.data.type) {
                 case('series'): 
-                    return this.payload.name;
+                    return this.data.name;
                 case('movie'):
-                    return this.payload.title;
+                    return this.data.title;
                 default:
                     return '';
             }
         },
         country_origin() {
-            switch(this.payload.type) {
+            switch(this.data.type) {
                 case('series'): 
                     return _.uniq(
-                        this.payload.origin_country.map(
+                        this.data.origin_country.map(
                             a => getName(a)
                         ));
                 case('movie'):
                     return _.uniq(
-                        this.payload.production_countries.map(
+                        this.data.production_countries.map(
                             a => a.name
                         ));
                 default:
@@ -122,14 +113,14 @@ export default {
             } 
         },
         creators() {
-            return this.payload.created_by.map(a => a.name);
+            return this.data.created_by.map(a => a.name);
         },
         original_name() {
             if(
-                this.payload.original_name &&
-                this.name != this.payload.original_name) {
+                this.data.original_name &&
+                this.name != this.data.original_name) {
                 
-                return this.payload.original_name;
+                return this.data.original_name;
             }
             return undefined;
         }
