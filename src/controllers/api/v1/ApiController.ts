@@ -64,8 +64,14 @@ class ApiController {
      */
     public async search(req: Request, res: Response)   {
         const searchQuery = req.query.search.replace(' ', '%20');
+        const page = req.query.page || 1;
+
         res.send(await movieDbGet(req, res, 
-            'search/multi?language=en-US&query=' + searchQuery));
+            'search/multi', {
+                query: searchQuery,
+                page: page,
+                language: "en-US"
+            }));
     }
 }
 export default ApiController;
