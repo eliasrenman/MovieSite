@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import SwaggerController from '../controllers/SwaggerController';
-
+import {mem_cache} from '../middleware/CacheMiddleware';
 
 // Init router and path
 const router = Router();
 /**
  * Gets the Swagger routes as json
  */
-router.get('/raw', new SwaggerController().fetch);
+router.get('/raw',mem_cache(143200), new SwaggerController().fetch);
 
 /**
  * Gets the swagger ui site and which then loads the json.

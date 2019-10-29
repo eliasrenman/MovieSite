@@ -28,4 +28,24 @@ export default class Ajax {
                 });
         });
     }
+    /**
+     * This will send a axios post request.
+     *
+     * @param url url endpoint
+     * @param data payload data.
+     */
+    public static get(url: string, data: any) {
+        return new Promise((resolve, reject) => {
+            axios
+                .get(url, {
+                    params: data
+                })
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error.response.data);
+                });
+        });
+    }
 }
