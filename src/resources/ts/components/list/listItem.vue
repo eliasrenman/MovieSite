@@ -7,7 +7,12 @@
         <a :href=link>
             <p>
                 <span class="title">{{ name }}</span>
-                <span class="date">{{ media_type }} ({{ release_date.split('-')[0] }})</span>
+                <span class="date">
+                    {{ media_type }}
+                    <span v-if="release_date"> 
+                        {{ "(" + release_date.split('-')[0] + ")" }}
+                    </span> 
+                </span>
             </p>
             <img alt="Poster" :src=image_cover>
         </a>
@@ -32,20 +37,28 @@ export default {
          * Gets the path for the image cover
          */
         image_cover() {
-            return "https://image.tmdb.org/t/p/w500/" + this.data.poster_path;
+            if(this.data.profile_path || this.data.poster_path) {
+                switch(this.data.media_type) {       
+                    case('person'):
+                        return "https://image.tmdb.org/t/p/w500/" + this.data.profile_path;
+                    default:
+                        return "https://image.tmdb.org/t/p/w500/" + this.data.poster_path;
+                }
+            }
+            //TODO: Create a better placeholder image if a image is missing.
+            return "https://via.placeholder.com/200x300";
+            
         },
 
         /**
          * Returns the name of a series or movie.
          */
         name() {
-            switch(this.data.media_type) {
-                case('tv'): 
-                    return this.data.name;
+            switch(this.data.media_type) {       
                 case('movie'):
                     return this.data.title;
                 default:
-                    return '';
+                    return this.data.name;
             }
         },
 
@@ -58,6 +71,9 @@ export default {
                     return 'Series';
                 case('movie'):
                     return 'Movie';
+                case('person'):
+                    return this.data.known_for_department;
+                
                 default:
                     return '';
             } 
@@ -85,6 +101,8 @@ export default {
                 case('tv'): 
                     return this.data.first_air_date;
                 case('movie'):
+                    return this.data.release_date;
+                case('person'):
                     return this.data.release_date;
                 default:
                     return '';
