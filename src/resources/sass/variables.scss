@@ -1,5 +1,7 @@
 $primary: #6699cc;
 
+$menu-height: 60px;
+
 $breakpoints:(
     xs: 0,
     s: 576px,
@@ -14,4 +16,14 @@ $grid-columns:(
     m: 4,
     l: 6,
     xl: 7
+);
+
+$details-flex-reverse: l;
+
+$details-side-width:(
+    xs: 100%,
+    s: 100%,
+    m: 100%,
+    l: 20%,
+    xl: 30%
 );

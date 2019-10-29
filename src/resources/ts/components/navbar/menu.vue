@@ -29,9 +29,30 @@ export default {
     @use '../../../sass/variables' as *;
 
     .vue-menu{
-        display: inline-block;
+        display: flex;
+        position: absolute;
         height: 100%;
         background-color: $primary;
+        border-radius: calc(#{$menu-height} / 2);
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: $menu-height;
+            width: $menu-height;
+            padding: 15px;
+            background-color: $primary;
+            border: none;
+            border-radius: calc(#{$menu-height} / 2);
+            outline: none;
+
+            img {
+                height: 100%;
+            }
+
+        }
+
     }
 
 </style>

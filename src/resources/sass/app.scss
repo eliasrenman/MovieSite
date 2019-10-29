@@ -5,14 +5,19 @@
 }
 
 body {
+    margin: 0;
     /* byt till webfonts??????? */
     font-family: 'Segoe UI', sans-serif;
+}
+
+button {
+    cursor: pointer;
 }
 
 .wrapper {
     max-width: 1680px;
     margin: auto;
-    padding: 40px;
+    padding: 20px 40px;
 }
 
 ::-webkit-scrollbar {
