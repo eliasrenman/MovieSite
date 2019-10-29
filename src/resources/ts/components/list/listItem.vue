@@ -1,11 +1,14 @@
 <template>
-  
+
     <li class="list-item">
+        <span class="entry-counter">
+            {{ list_index + 1 }}
+        </span>
         <a :href=link>
-        <p>
-            <span>{{ name }}</span>
-            <span>{{ media_type }} ({{ release_date.split('-')[0] }})</span>
-        </p>
+            <p>
+                <span class="title">{{ name }}</span>
+                <span class="date">{{ media_type }} ({{ release_date.split('-')[0] }})</span>
+            </p>
             <img alt="Poster" :src=image_cover>
         </a>
     </li>
@@ -17,6 +20,14 @@ export default {
         'data'
     ],
     computed: {
+
+        /**
+         * Returns the list index
+         */
+        list_index() {
+            return this.$vnode.key;
+        },
+
         /**
          * Gets the path for the image cover
          */
@@ -84,8 +95,15 @@ export default {
 </script>
 <style lang="scss" scoped>
     @use '../../../sass/variables' as *;
+    
+    p {
+        // max-height: 150px;
+        padding: 15px 0px;    
+    }
+
 
     .list-item {
+        
         position: relative;
         display: flex;
         align-items: center;
@@ -97,7 +115,7 @@ export default {
         animation: slideLeft 1s ease-in-out both;
     }
     
-    .list-item a {
+    a {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -109,11 +127,11 @@ export default {
         transition: color 0.3s;
     }
 
-​    .list-item a:hover {
+​    a:hover {
         color: #fff;
     }
 
-    .list-item a p {
+    p {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -121,15 +139,15 @@ export default {
         font-size: 16px;
     }
 
-    .list-item a p span:first-child {
+    .title {
         margin-bottom: 3px;
         padding: 0 10px 2px 0;
         font-size: 1.8em;
         border-bottom: 1px solid rgba(255,255,255,0.5);
     }
 
-    .list-item a img {
-        height: 100px;
+    img {
+        height: 130px;
         width: 200px;
         background-color: rgba(255,255,255,0.2);
         object-fit: cover;
@@ -139,8 +157,15 @@ export default {
         transition: object-position 0.3s, filter 0.3s;
     }
 
-    .list-item a:hover img {
+    a:hover img {
         object-position: 50% 10%;
         filter: grayscale(0%);
     }
+
+    .entry-counter {
+        width: 80px;
+        text-align: center;
+        font-weight: 300;
+    }
+
 </style>

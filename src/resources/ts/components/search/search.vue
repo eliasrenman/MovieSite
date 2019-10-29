@@ -1,6 +1,6 @@
 <template>
   <div class="">
-      <list v-if="data.results.length > 0" :data=data.results>
+      <list v-if="data.results.length > 0" :data=data>
 
       </list>
       <div v-else>
