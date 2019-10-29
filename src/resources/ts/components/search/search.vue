@@ -1,25 +1,22 @@
 <template>
   <div class="">
-      <list-index></list-index>
+      <list v-if="data.results.length > 0" :data=data.results>
+
+      </list>
+      <div v-else>
+          No search results found
+      </div>
   </div>
 </template>
 
 <script>
-import listIndex from './searchList.vue';
+import list from '../list/list.vue';
 export default {
     props: [
         'data'
     ],
-    data: () => {
-        return {
-            payload: "null"
-        }
-    },
-    created() {
-        this.payload = JSON.parse(this.data);
-    },
     components: {
-        listIndex
+        list
     }
 }
 </script>
