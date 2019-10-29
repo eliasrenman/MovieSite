@@ -39,10 +39,10 @@
                         </p>
                     </div>
                     <!-- BOTH MOVIE AND SERIES SPECIFIC START -->
-                    <div v-if="payload.created_by">
+                    <div v-if="producers">
                         <p>
-                            <p class="d-inline pk">Creators:</p> 
-                            {{ creators.join(', ') }}
+                            <p class="d-inline pk">Producer(s):</p> 
+                            {{ producers.join(', ') }}
                         </p>
                     </div>
                     <p>
@@ -57,10 +57,15 @@
                 <p>{{ payload.overview }}</p>
                 
                 <h2 class="bottom-border pt-42px">Information</h2>
+                <p v-if="stars">
+                    <p class="d-inline pk">Stars: </p>
+                    {{ stars.slice(0,5).join(', ') }}
+                </p>
                 <p v-if="payload.homepage">
                     <p class="d-inline pk">Website: </p>
                     <a :href=payload.homepage>{{payload.homepage}}</a>
                 </p>
+
             </div>
         </div>
         <div class="row mx-0">
@@ -70,8 +75,6 @@
 </template>
 
 <script>
-//TODO: Create api routes for getting stars on shows and series.
-//TODO: Acutally style this stuff and also comment functions.
 
 const { getName } = require('country-list');
 const _ = require('lodash');
@@ -89,12 +92,23 @@ export default {
     },
 
     computed: {
+        /**
+         * Gets the path for the image cover
+         */
         image_cover() {
             return "https://image.tmdb.org/t/p/w500/" + this.payload.poster_path;
         },
+        
+        /**
+         * Returns the genres that a series or person is in.
+         */
         genres() {
             return this.payload.genres.map(a => a.name);
         },
+
+        /**
+         * Returns the name of a series or movie.
+         */
         name() {
             switch(this.payload.type) {
                 case('series'): 
@@ -102,9 +116,13 @@ export default {
                 case('movie'):
                     return this.payload.title;
                 default:
-                    return '';
+                    return [''];
             }
         },
+        
+        /**
+         * Returns a list of countries that the movie or series origniated from
+         */
         country_origin() {
             switch(this.payload.type) {
                 case('series'): 
@@ -121,9 +139,19 @@ export default {
                     return [''];
             } 
         },
-        creators() {
-            return this.payload.created_by.map(a => a.name);
+        
+        /**
+         * Returns a list of Producers
+         */
+        producers() {
+            let producers = _.filter(this.payload.crew,['job', 'Producer']);
+            return producers.map(a => a.name);
         },
+
+        /**
+         * Returns the original name of a series or movie
+         * if it is not the same as the translated name.
+         */
         original_name() {
             if(
                 this.payload.original_name &&
@@ -132,7 +160,14 @@ export default {
                 return this.payload.original_name;
             }
             return undefined;
-        }
+        },
+
+        /**
+         * Returns a list of the names of the cast. 
+         */
+        stars() {
+            return this.payload.cast.map(a => a.name);
+        },
     }
     
 }

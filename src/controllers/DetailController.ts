@@ -46,8 +46,7 @@ class DetailController {
     }
 
     private async loadPayload(req: Request, type:string) {
-        let url = type + '/';
-        return await axiosGet(url, {id: req.params.id})
+        return await axiosGet(type + '/', {id: req.params.id})
     }
 }
 
