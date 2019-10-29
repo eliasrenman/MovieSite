@@ -32,11 +32,11 @@ class ApiController {
      *       200:
      *         description: Successfully returns a json containing 20 movies.
      */
-    public trending(req: Request, res: Response) {
+    public async trending(req: Request, res: Response) {
             let page = "";
         if (!isNaN(req.query.page))
             page = "page=" + req.query.page;
-        movieDbGet(req, res, 'trending/all/week?'+ page);
+            res.send(await movieDbGet(req, res, 'trending/all/week?'+ page));
     }
     /**
      * Search controller logic
@@ -62,10 +62,10 @@ class ApiController {
      *       200:
      *         description: Successfully returns the result of a search query.
      */
-    public search(req: Request, res: Response)   {
+    public async search(req: Request, res: Response)   {
         const searchQuery = req.query.search.replace(' ', '%20');
-        movieDbGet(req, res, 
-            'search/multi?language=en-US&query=' + searchQuery);
+        res.send(await movieDbGet(req, res, 
+            'search/multi?language=en-US&query=' + searchQuery));
     }
 }
 export default ApiController;

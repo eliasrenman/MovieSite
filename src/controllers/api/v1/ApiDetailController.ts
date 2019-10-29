@@ -27,8 +27,11 @@ class ApiDetailsController {
      *       200:
      *         description: Successfully returns a json containing search result.
      */
-    public movie(req: Request, res: Response) {
-        movieDbGet(req, res, 'movie/' + req.query.id + '?language=en-US');
+    public async movie(req: Request, res: Response) {
+        res.send({
+            ...await movieDbGet(req, res, 'movie/' + req.query.id + '?language=en-US'),
+            ...await movieDbGet(req, res, 'movie/' + req.query.id + '/credits?language=en-US'),
+        });
     } 
 
     /**
@@ -51,8 +54,11 @@ class ApiDetailsController {
      *       200:
      *         description: Successfully returns a json containing search result.
      */
-    public tv(req: Request, res: Response) {
-        movieDbGet(req, res, 'tv/' + req.query.id + '?language=en-US');
+    public async tv(req: Request, res: Response) {
+        res.send({
+            ...await movieDbGet(req, res, 'tv/' + req.query.id + '?language=en-US'),
+            ...await movieDbGet(req, res, 'tv/' + req.query.id + '/credits?language=en-US'),
+        });
     }
 
     /**
@@ -75,8 +81,8 @@ class ApiDetailsController {
      *       200:
      *         description: Successfully returns a json containing search result.
      */
-    public person(req: Request, res: Response) {
-        movieDbGet(req, res, 'person/' + req.query.id + '?language=en-US');
+    public async person(req: Request, res: Response) {
+        res.send(await movieDbGet(req, res, 'person/' + req.query.id + '?language=en-US'));
     }
 }
 

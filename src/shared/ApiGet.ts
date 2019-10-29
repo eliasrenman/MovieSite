@@ -6,17 +6,12 @@ import { Response, Request } from "express-serve-static-core"
  * @param req request
  * @param res response
  * @param url subfolder on moviedb
+ * @returns {Promise} promise
  */
-const movieDbGet = (req: Request, res: Response, url: string, payload: Object = {}) => {
+async function movieDbGet(req: Request, res: Response, url: string, payload: Object = {}) {
     const key = process.env.MDB_KEY;
-    axiosGet(
-        'https://api.themoviedb.org/3/' + url, {api_key: key, ...payload})
-        .then((response:any) => {
-            res.send(response.data);
-        })
-        .catch((error:any) => {
-            res.send(error);
-        });
+    return (await axiosGet(
+        'https://api.themoviedb.org/3/' + url, {api_key: key, ...payload})).data;
 }
 
 /**
@@ -26,8 +21,8 @@ const movieDbGet = (req: Request, res: Response, url: string, payload: Object = 
  * @param payload optional payload to send with get request.
  * @returns {Promise} data or a error
  */
-const axiosGet = (url: string, payload: Object = {}): Promise<any> => 
-    new Promise<any>((resolve, reject) => {
+function axiosGet(url: string, payload: Object = {}): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
         axios.get(url, {params: payload})
         .then((response) => {
             resolve(response);
@@ -36,5 +31,6 @@ const axiosGet = (url: string, payload: Object = {}): Promise<any> =>
             reject(error);
         });
     });
+}
 
 export {movieDbGet, axiosGet};
