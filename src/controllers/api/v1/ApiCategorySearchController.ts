@@ -27,8 +27,8 @@ class ApiDetailedSearchController {
      *       200:
      *         description: Successfully returns a json containing search result.
      */
-    public movie(req: Request, res: Response) {
-        movieDbGet(req, res, 'search/movie/?query=' + req.query.search);
+    public async movie(req: Request, res: Response) {
+        res.send(await movieDbGet(req, res, 'search/movie/?query=' + req.query.search));
     } 
 
     /**
@@ -51,8 +51,8 @@ class ApiDetailedSearchController {
      *       200:
      *         description: Successfully returns a json containing search result.
      */
-    public tv(req: Request, res: Response) {
-        movieDbGet(req, res, 'search/tv?query=' + req.query.search);
+    public async tv(req: Request, res: Response) {
+        res.send(await movieDbGet(req, res, 'search/tv?query=' + req.query.search));
     }
 
     /**
@@ -75,8 +75,8 @@ class ApiDetailedSearchController {
      *       200:
      *         description: Successfully returns a json containing search result.
      */
-    public person(req: Request, res: Response) {
-        movieDbGet(req, res, 'search/person?query=' + req.query.search);
+    public async person(req: Request, res: Response) {
+        res.send(await movieDbGet(req, res, 'search/person?query=' + req.query.search));
     }
 }
 export default ApiDetailedSearchController;

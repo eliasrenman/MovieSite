@@ -1,7 +1,5 @@
 extends layout/layout
 block content
-
-
-block append script
-    script.
-        var payload = !{JSON.stringify(payload)};
+    #app
+        vue-nav
+        vue-details(data=payload)
