@@ -1,6 +1,10 @@
 <template>
-    <div class="grid-container">
-        <tile v-for="result in this.data.results" :key="result.id" :class="{'large' : result.tileSizeBig}" :data="result"></tile>
+    <div class="grid-container" 
+        v-infinite-scroll="throttledLoadMore"
+        infinite-scroll-distance="1300"
+    >
+        <tile v-for="result in data.results" :key="result.id" :class="{'large' : result.tileSizeBig}" :data="result"></tile>
+        <div class="fadeout"></div>
     </div>
 </template>
 
@@ -8,6 +12,7 @@
 import Vue from 'vue'
 import ajax from '../../utilities/ajax';
 import tile from './tile.vue';
+const _ = require('lodash');
 export default {
     data() {
         return {
@@ -26,43 +31,33 @@ export default {
                 this.loadMore();
             }).catch(error => console.log(error));
     },
-    
     methods: {
-        /**
-         * Redraws the masonry tiles.
-         */
-         /*
-        reDraw(){
-            this.$nextTick(() => {
-                this.$redrawVueMasonry();
-            });            
-        },*/
-        // TODO Create more generic axios requests.
+        throttledLoadMore: _.throttle(function() {
+                this.loadMore(); 
+            }, 500, {
+                trailing: false,
+            }
+        ),
         loadMore() {
             return new Promise((resolve, rejects) => {
-                const self = this;
                 this.data.page = this.data.page+1;
                 let payload = {page: this.data.page};
                 ajax.get('/api/v1/trending/', payload)
                     .then(response => {
-                        // console.log(response);
                         resolve("");
-                        self.updateData(response);
+                        this.updateData(response);
                     })
                     .catch(error => {
                         rejects("");
                         console.log(error);
-                    });
-            });
-            
+                    });    
+            });   
         },
         /**
          * This pushes more data to the array of existing movies.
          */
         updateData(data) {
-            // this.data.page = data.page;
             this.data.results.push(...this.parseData(data.results));
-            this.reDraw();
         },
         
         /**
@@ -113,7 +108,6 @@ export default {
         width: 100%;
         margin: auto;
     }
-
     @each $size, $pixels in $breakpoints {
 
         @media (min-width: $pixels) {

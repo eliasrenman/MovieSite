@@ -149,8 +149,7 @@ export default {
                 default:
                     return [''];
             } 
-        },
-        
+        },        
         /**
          * Returns a list of Producers
          */

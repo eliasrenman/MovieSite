@@ -31,3 +31,8 @@ button {
 ::-webkit-scrollbar-thumb {
     background-color: $primary;
 }
+
+.display-center {
+    display: flex;
+    justify-content: center
+}
