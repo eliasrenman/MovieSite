@@ -36,7 +36,7 @@ class ApiController {
             let page = "";
         if (!isNaN(req.query.page))
             page = "page=" + req.query.page;
-            res.send(await movieDbGet(req, res, 'trending/all/week?'+ page));
+            res.send(await movieDbGet('trending/all/week?'+ page));
     }
     /**
      * Search controller logic
@@ -64,7 +64,7 @@ class ApiController {
      */
     public async search(req: Request, res: Response)   {
         const page = req.query.page || 1;
-        res.send(await movieDbGet(req, res, 
+        res.send(await movieDbGet( 
             'search/multi', {
                 query: req.query.search,
                 page: page,

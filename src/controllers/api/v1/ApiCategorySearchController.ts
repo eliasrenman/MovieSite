@@ -21,6 +21,11 @@ class ApiDetailedSearchController {
      *         in: query
      *         required: true
      *         type: int
+     *       - name: page
+     *         description: page number.
+     *         in: query
+     *         required: false
+     *         type: int
      *     tags:
      *         - search
      *     responses:
@@ -28,7 +33,7 @@ class ApiDetailedSearchController {
      *         description: Successfully returns a json containing search result.
      */
     public async movie(req: Request, res: Response) {
-        res.send(await movieDbGet(req, res, 'search/movie/?query=' + req.query.search));
+        res.send(await movieDbGet('search/movie/?query=' + req.query.search));
     } 
 
     /**
@@ -45,6 +50,11 @@ class ApiDetailedSearchController {
      *         in: query
      *         required: true
      *         type: int
+     *       - name: page
+     *         description: page number.
+     *         in: query
+     *         required: false
+     *         type: int
      *     tags:
      *         - search
      *     responses:
@@ -52,7 +62,7 @@ class ApiDetailedSearchController {
      *         description: Successfully returns a json containing search result.
      */
     public async tv(req: Request, res: Response) {
-        res.send(await movieDbGet(req, res, 'search/tv?query=' + req.query.search));
+        res.send(await movieDbGet('search/tv?query=' + req.query.search));
     }
 
     /**
@@ -69,6 +79,11 @@ class ApiDetailedSearchController {
      *         in: query
      *         required: true
      *         type: int
+     *       - name: page
+     *         description: page number.
+     *         in: query
+     *         required: false
+     *         type: int
      *     tags:
      *         - search
      *     responses:
@@ -76,7 +91,7 @@ class ApiDetailedSearchController {
      *         description: Successfully returns a json containing search result.
      */
     public async person(req: Request, res: Response) {
-        res.send(await movieDbGet(req, res, 'search/person?query=' + req.query.search));
+        res.send(await movieDbGet('search/person?query=' + req.query.search));
     }
 }
 export default ApiDetailedSearchController;
