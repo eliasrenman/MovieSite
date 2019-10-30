@@ -2,7 +2,7 @@
   <div class="vue-menu" v-bind:class="{ active: isActive }">
     <a :href="activeUrl('/')">Home</a>
     <a :href="activeUrl('/toplist/movie')">Top movies</a>
-    <a :href="activeUrl('/toplist/tv')">Top series</a>
+    <a :href="activeUrl('/toplist/series')">Top series</a>
     <a :href="activeUrl('/search')">Search</a>
   </div>
 </template>

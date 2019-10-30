@@ -7,6 +7,8 @@
                 :data=item 
                 :key=" index_offset + index"
                 :use_counter="use_counter"
+                :media_type="get_media_type(item.media_type)"
+                :show_media_type=show_media_type
             ></list-item>
         </div>
         <div class="display-center">
@@ -37,6 +39,14 @@ export default {
         'use_counter': {
             type: Boolean,
             default: false,
+        },
+        'media_type': {
+            type: String,
+            default: "-1"
+        },
+        'show_media_type': {
+            type: Boolean,
+            default: true
         }
     },
     computed: {
@@ -58,6 +68,12 @@ export default {
          */
         paginationCallback(page_index) {
             this.$emit('update-list', page_index);
+        },
+        get_media_type(media_type) {
+            if (this.media_type == "-1") {
+                return media_type;
+            }
+            return this.media_type;
         }
     },
     components: {
