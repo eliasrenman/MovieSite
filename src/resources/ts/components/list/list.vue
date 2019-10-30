@@ -70,7 +70,6 @@ export default {
 <style lang="scss">
     @use '../../../sass/variables' as *;
     
-    //TODO: Add pagination styling classes.
     .toplist {
         width: 50%;
         margin: 80px;
