@@ -13,43 +13,6 @@
                         <span>Episode Runtime:</span> 
                         {{ data.episode_run_time[0] }} min
                     </p>
-                    <!-- SERIES SPECIFIC START -->
-                    <div v-if="data.type == 'series'">
-                        <p>
-                            <p class="d-inline pk">Episode Runtime:</p> 
-                            {{ data.episode_run_time[0] }} min
-                        </p>
-                        <p>
-                        <p>
-                            <p class="d-inline pk">Seasons:</p> 
-                            {{ data.number_of_seasons }}
-                        </p>
-                            <p class="d-inline pk">Episodes:</p> 
-                            {{ data.number_of_episodes }}
-                        </p>
-                        <p>
-                            <p class="d-inline pk">First release date:</p> 
-                            {{ data.first_air_date }}
-                        </p>
-                    </div>
-                    <!-- MOVIE SPECIFIC START -->
-                    <div v-else-if="data.type == 'movie'">
-                        <p>
-                            <p class="d-inline pk">Runtime:</p> 
-                            {{ data.runtime }} min
-                        </p>
-                        <p>
-                            <p class="d-inline pk">Release date:</p> 
-                            {{ data.release_date }}
-                        </p>
-                    </div>
-                    <!-- BOTH MOVIE AND SERIES SPECIFIC START -->
-                    <div v-if="producers">
-                        <p>
-                            <p class="d-inline pk">Producer(s):</p> 
-                            {{ producers.join(', ') }}
-                        </p>
-                    </div>
                     <p>
                         <span>Seasons:</span> 
                         {{ data.number_of_seasons }}
@@ -62,22 +25,24 @@
                         {{ data.first_air_date }}
                     </p>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <h1 class="pt-0">{{ name }}</h1>
-                <h2 v-if="original_name" class="under-title">{{original_name}}</h2>
-                <p>{{ data.overview }}</p>
-                
-                <h2 class="bottom-border pt-42px">Information</h2>
-                <p v-if="stars">
-                    <p class="d-inline pk">Stars: </p>
-                    {{ stars.slice(0,5).join(', ') }}
-                </p>
-                <p v-if="data.homepage">
-                    <p class="d-inline pk">Website: </p>
-                    <a :href=data.homepage>{{data.homepage}}</a>
-                </p>
-
+                <!-- MOVIE SPECIFIC START -->
+                <div v-else-if="data.type == 'movie'">
+                    <p>
+                        <span>Runtime:</span> 
+                        {{ data.runtime }} min
+                    </p>
+                    <p>
+                        <span>Release date:</span> 
+                        {{ data.release_date }}
+                    </p>
+                </div>
+                <!-- BOTH MOVIE AND SERIES SPECIFIC START -->
+                <div v-if="producers">
+                    <p>
+                        <span>Producer(s):</span> 
+                        {{ producers.join(', ') }}
+                    </p>
+                </div>
             </div>
         </div>
         <div class="details-content">
@@ -86,10 +51,14 @@
             <p>{{ data.overview }}</p>
             
             <h2>Information</h2>
+            <p v-if="stars">
+                <span>Stars: </span>
+                {{ stars.slice(0,5).join(', ') }}
+            </p>
             <p v-if="data.homepage">
                 <span>Website: </span>
                 <a :href=data.homepage>{{data.homepage}}</a>
-            </p>
+            </p>    
         </div>
     </div>
 </template>
@@ -190,23 +159,42 @@ export default {
     .details-main {
         display: flex;
         flex-wrap: wrap;
-        margin: 0 -10px;
+        width: 1200px;
+        max-width: 100%;
+        margin: 40px auto;
 
         & > div {
             margin: 0 10px;
         }
+
+        p > span {
+            color: $primary-text;
+        }
     }
 
     .details-side {
+        display: flex;
+        flex-direction: column;
 
         img {
-            width: 100%;
+            width: 400px;
+            max-width: 100%;
+            align-self: center;
+        }
+
+        a {
+            overflow-wrap: break-word;
         }
 
     }
 
     .details-content {
         flex-shrink: 1;
+
+        h1, h2 {
+            color: $primary-text;
+        }
+
     }
 
     @each $size, $pixels in $breakpoints {
@@ -222,6 +210,7 @@ export default {
             
             .details-side {
                 min-width: map.get($details-side-width, $size);
+                max-width: map.get($details-side-width, $size);
             }
 
         }
