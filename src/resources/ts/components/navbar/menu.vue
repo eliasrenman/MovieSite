@@ -1,9 +1,10 @@
 <template>
   <div class="vue-menu" v-bind:class="{ active: isActive }">
+    <!--
     <button type="button" @click="onShow">
       <img src="/img/close.svg"/>
     </button>
-
+    -->
     <a href="/toplist">Top list</a>
     <a href="/search">Search</a>
   </div>
@@ -51,12 +52,14 @@ export default {
             text-transform: uppercase;
             text-decoration: none;
             color: #fff;
-            transition: padding 0.3s;
+            opacity: 0;
+            transition: padding 0.3s, opacity 0.3s 0.3s, letter-spacing 0.3s, color 0.3s;
         }
 
         &.active {
             display: flex;
-            font-size: 22px;
+            font-size: 18px;
+            padding: 0 15px;
 
             button {
               max-width: $menu-height;
@@ -64,7 +67,14 @@ export default {
             }
 
             a {
-                padding: 0 5px;
+                padding: 0 10px;
+                opacity: 1;
+
+                &:hover {
+                    letter-spacing: 1px;
+                    color: $primary-hover;
+                }
+
             }
 
         }
