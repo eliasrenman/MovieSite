@@ -1,17 +1,13 @@
 <template>
-  <nav class="vue-nav" role="navigation" aria-label="main navigation">
-    <div class="d-flex">
-      <div class="d-flex justify-content-start">
-        <div @click="onShow">
-          <img id="vue-burger" src="/img/burger.svg" alt="hamburg menu toggle" />
+    <div class="menu">
+        <div class="open">
+            <button type="button" @click="onShow">
+                <img id="vue-burger" src="/img/burger.svg" alt="hamburg menu toggle" />
+            </button>
+            <vueMenu ref="vue_menu"></vueMenu>
         </div>
-      </div>
-      <div class="d-flex ml-auto justify-content-end align-content-center flex-wrap">
         <search></search>
-      </div>
     </div>
-    <vueMenu ref="vue_menu"></vueMenu>
-  </nav>
 </template>
 
 <script>
@@ -32,15 +28,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    #vue-burger {
-        height: 39px;
-        width: 39px;
+    
+    .menu {
+        display: flex;
+        justify-content: space-between;
     }
-    .vue-nav {
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        margin-bottom: 20px;
+
+    .open {
+        display: flex;
     }
+
 </style>
