@@ -20,11 +20,15 @@ router.get('/', csrfProtection, (req: Request, res: Response) => {
 });
 
 router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
-    let page = req.query.page || 1;
-    let payload: any = (await axiosGet('/api/v1/search/', {
-        search: req.query.search || '',
-        page: page, 
-        })).data;
+    let payload:any = undefined;
+    if (req.query.search) {
+
+        let page = req.query.page || 1;
+        payload = (await axiosGet('/api/v1/search/', {
+            search: req.query.search || '',
+            page: page, 
+            })).data;
+        }
     const csrfToken = req.csrfToken();
     res.render('search', {csrfToken: csrfToken, title: 'search', payload: payload});
 });

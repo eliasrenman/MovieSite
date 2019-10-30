@@ -1,12 +1,12 @@
 <template>
   <div class="">
       <list 
-            v-if="page_data.results.length > 0" 
+            v-if="page_data && page_data.results.length > 0" 
             :data=page_data 
             @update-list="updateList"
             :use_counter="false"
         ></list>
-      <div v-else>
+      <div v-else-if="page_data">
           <h1 class="display-center">No search results found</h1>
       </div>
   </div>
