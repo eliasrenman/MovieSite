@@ -69,6 +69,7 @@
     "vue-infinite-scroll": "^2.0.2",
     "vue-masonry": "^0.11.7",
     "vue-template-compiler": "^2.6.10",
+    "vuejs-paginate": "^2.1.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {}
