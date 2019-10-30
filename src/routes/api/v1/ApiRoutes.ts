@@ -11,7 +11,7 @@ const router = Router();
 const EXPIRATION_TIME_SECONDS = 43200;
 
 
-router.get('/trending', parseForm, mem_cache(EXPIRATION_TIME_SECONDS), new ApiController().trending);
+router.get('/trending', parseForm, db_cache(EXPIRATION_TIME_SECONDS), new ApiController().trending);
 
 router.get('/search', parseForm, db_cache(EXPIRATION_TIME_SECONDS), new ApiController().search);
 
