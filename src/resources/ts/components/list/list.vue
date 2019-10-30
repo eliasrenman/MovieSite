@@ -2,6 +2,7 @@
     <div class="toplist">
         <list-item v-for="(item, index) in data.results" :data=item :key=" index_offset + index"></list-item>
         <paginate
+            v-model="data.page"
             :page-count=data.total_pages
             :page-range="3"
             :click-handler="paginationCallback"

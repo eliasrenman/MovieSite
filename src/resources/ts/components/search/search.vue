@@ -4,7 +4,7 @@
 
       </list>
       <div v-else>
-          No search results found
+          <h1>No search results found</h1>
       </div>
   </div>
 </template>
@@ -25,21 +25,38 @@ export default {
         this.page_data = this.data;
     },
     methods: {
+        /**
+         * Gets a new page from the database and updates this.page_data
+         * @param page_index page to lookup.
+         */
         updateList(page_index) {
             let params = new URLSearchParams(
                 window.location.search.substring(1)
-            );
-            Ajax.get('/api/v1/search/', {
+            );                //TODO: Here update the query parameter page to the relevant index.
+            Ajax.get('/api/v                //TODO: Here update the query parameter page to the relevant index.1/search/', {
                 search: params.get("search"),
                 page: page_index,
             })
             .then((res) => {
-                //TODO: Here update the query parameter page to the relevant index.
                 this.page_data = res;
+                this.setParam("page", this.page_data.page)
             })
             // IGNORED
             .catch((err) => { });
-        }
+        },
+
+        /**
+         * Sets a query param and updates the 
+         */
+        setParam(key, value) {
+            const params = new URLSearchParams(location.search)
+            params.set(key, value);
+            let url = location.protocol + 
+                '//' + location.host + 
+                location.pathname + "?" + 
+                params.toString();
+            window.history.replaceState("Movie site", "Movie site", url);
+        },
     },
     components: {
         list

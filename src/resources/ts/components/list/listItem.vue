@@ -1,7 +1,7 @@
 <template>
 
     <li class="list-item">
-        <span class="entry-counter">
+        <span class="entry-counter" v-if="use_counter">
             {{ list_index + 1 }}
         </span>
         <a :href=link>
@@ -21,9 +21,16 @@
 
 <script>
 export default {
-    props: [
-        'data'
-    ],
+    props: {
+        'data': {
+            type: Object,
+            default: undefined
+        },
+        'use_counter': {
+            type: Boolean,
+            default: false
+        }
+    },
     computed: {
 
         /**
