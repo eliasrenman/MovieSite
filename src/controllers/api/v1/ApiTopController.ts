@@ -10,7 +10,7 @@ class ApiTopController {
      *
      * /api/v1/top/movie:
      *   get:
-     *     description: Sends a specific search query in the people search.
+     *     description: Gets 20 top list entries in the movie category.
      *     produces:
      *       - application/json
      *     parameters:
@@ -23,10 +23,11 @@ class ApiTopController {
      *         - top list
      *     responses:
      *       200:
-     *         description: Successfully returns a json containing search result.
+     *         description: Successfully returns a json containing tmdb response.
     */
     public async movie(req: Request, res: Response) {
-        
+        let page = req.query.page || 1;
+        res.send(await movieDbGet('movie/top_rated', {page: page}));
     }
 
     /**
@@ -34,7 +35,7 @@ class ApiTopController {
      *
      * /api/v1/top/tv:
      *   get:
-     *     description: Sends a specific search query in the people search.
+     *     description: Gets 20 top list entries in the tv category.
      *     produces:
      *       - application/json
      *     parameters:
@@ -47,7 +48,7 @@ class ApiTopController {
      *         - top list
      *     responses:
      *       200:
-     *         description: Successfully returns a json containing search result.
+     *         description: Successfully returns a json containing tmdb response.
     */
     public async tv(req: Request, res: Response) {
         let page = req.query.page || 1;
