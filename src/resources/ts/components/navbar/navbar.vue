@@ -33,9 +33,15 @@ export default {
 
     .nav {
         display: flex;
-        justify-content: space-between;
+        align-items: center;
+        min-height: $menu-height;
         margin-bottom: 20px;
         padding: 0 20px;
+
+        form {
+            margin-left: auto;
+        }
+
     }
 
     .menu {

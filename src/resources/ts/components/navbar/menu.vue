@@ -34,6 +34,7 @@ export default {
         height: 100%;
         background-color: $primary;
         border-radius: calc(#{$menu-height} / 2);
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
 
         button {
             display: flex;
