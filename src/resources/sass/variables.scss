@@ -1,3 +1,17 @@
 $primary: #6699cc;
 
-$grid-columns: 7;
+$breakpoints:(
+    xs: 0,
+    s: 576px,
+    m: 768px,
+    l: 992px,
+    xl: 1200px
+);
+
+$grid-columns:(
+    xs: 2,
+    s: 2,
+    m: 4,
+    l: 6,
+    xl: 7
+);

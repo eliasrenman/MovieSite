@@ -66,6 +66,7 @@
     "tslint": "^5.18.0",
     "typescript": "^3.5.3",
     "vue": "^2.6.10",
+    "vue-infinite-scroll": "^2.0.2",
     "vue-masonry": "^0.11.7",
     "vue-template-compiler": "^2.6.10",
     "vuejs-paginate": "^2.1.0",

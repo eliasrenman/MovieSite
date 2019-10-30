@@ -4,6 +4,8 @@ import tiles from './components/featured/tiles.vue';
 import details from './components/details/details.vue';
 import search from './components/search/search.vue';
 
+//@ts-ignore
+import infiniteScroll from 'vue-infinite-scroll';
 
 Vue.config.productionTip = false;
 /** navbar components */
@@ -12,6 +14,7 @@ Vue.component('vue-tiles', tiles);
 Vue.component('vue-details', details);
 Vue.component('vue-search', search);
 
+Vue.use(infiniteScroll);
 /**Feaured tiles components */
 
 // url for getting images.
@@ -19,4 +22,5 @@ Vue.component('vue-search', search);
 
 new Vue({
     el: '#app',
+    // directives: {infiniteScroll}
 })

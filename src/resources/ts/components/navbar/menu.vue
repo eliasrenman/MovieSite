@@ -1,8 +1,8 @@
 <template>
-  <div class="h-100 vue-menu" v-show="show">
-    <a @click="onShow">
+  <div class="vue-menu" v-show="show">
+    <button type="button" @click="onShow">
       <img src="/img/close.svg"/>
-    </a>
+    </button>
 
     <a href="/toplist">Top list</a>
     <a href="/search">Search</a>
@@ -25,18 +25,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.vue-menu {
-    width: 230px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
-    background-color: #877e95;
-}
-.vue-menu img {
-    margin-left: 170px;
-    margin-top: 25px;
-    height: 33px;
-    width: 33px;
-}
+
+    @use '../../../sass/variables' as *;
+
+    .vue-menu{
+        display: inline-block;
+        height: 100%;
+        background-color: $primary;
+    }
+
 </style>

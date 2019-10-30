@@ -1,5 +1,5 @@
 <template>
-    <div class="grid-container">
+    <div class="grid-container" v-infinite-scroll="loadMore" infinite-scroll-distance="1300">
         <tile v-for="result in this.data.results" :key="result.id" :class="{'large' : result.tileSizeBig}" :data="result"></tile>
     </div>
 </template>
@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import ajax from '../../utilities/ajax';
 import tile from './tile.vue';
+
 export default {
     data() {
         return {
@@ -26,18 +27,7 @@ export default {
                 this.loadMore();
             }).catch(error => console.log(error));
     },
-    
     methods: {
-        /**
-         * Redraws the masonry tiles.
-         */
-         /*
-        reDraw(){
-            this.$nextTick(() => {
-                this.$redrawVueMasonry();
-            });            
-        },*/
-        // TODO Create more generic axios requests.
         loadMore() {
             return new Promise((resolve, rejects) => {
                 const self = this;
@@ -60,9 +50,7 @@ export default {
          * This pushes more data to the array of existing movies.
          */
         updateData(data) {
-            // this.data.page = data.page;
             this.data.results.push(...this.parseData(data.results));
-            this.reDraw();
         },
         
         /**
@@ -102,15 +90,28 @@ export default {
 <style lang="scss" scoped>
     
     @use '../../../sass/variables' as *;
+    @use "sass:map";
 
     .grid-container {
         display: grid;
         grid-template-rows: repeat(auto, auto);
-        grid-template-columns: repeat($grid-columns, 1fr);
+        grid-template-columns: repeat(#{map.get($grid-columns, xs)}, 1fr);
         grid-gap: 10px;
         grid-auto-flow: row dense;
         width: 100%;
         margin: auto;
+    }
+
+    @each $size, $pixels in $breakpoints {
+
+        @media (min-width: $pixels) {
+
+            .grid-container {
+                grid-template-columns: repeat(#{map.get($grid-columns, $size)}, 1fr);
+            }
+
+        }
+    
     }
 
 </style>
