@@ -27,7 +27,7 @@ router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
         page: page, 
         })).data;
     const csrfToken = req.csrfToken();
-    res.render('search', {csrfToken: csrfToken, title: 'search', payload: payload});
+    res.render('search', {csrfToken: csrfToken, title: 'Search', payload: payload});
 });
 
 /**
