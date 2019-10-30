@@ -1,13 +1,9 @@
 <template>
   <div class="vue-menu" v-bind:class="{ active: isActive }">
-    <!--
-    <button type="button" @click="onShow">
-      <img src="/img/close.svg"/>
-    </button>
-    -->
-    <a href="/">Home</a>
-    <a href="/toplist">Top list</a>
-    <a href="/search">Search</a>
+    <a :href="activeUrl('/')">Home</a>
+    <a :href="activeUrl('/toplist/movie')">Top movies</a>
+    <a :href="activeUrl('/toplist/series')">Top series</a>
+    <a :href="activeUrl('/search')">Search</a>
   </div>
 </template>
 
@@ -15,14 +11,21 @@
 export default {
     data() {
         return {
-        isActive: false
+            isActive: false
         };
     },
     methods: {
         onShow() {
             this.isActive = !this.isActive;
         },
-    },  
+        activeUrl(url) {
+            let path = window.location.pathname;
+            if (url == path) {
+                return "#"
+            }
+            return url;
+        }
+    },
 };
 </script>
 

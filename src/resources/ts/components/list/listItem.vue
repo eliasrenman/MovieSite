@@ -8,9 +8,15 @@
             <p>
                 <span class="title">{{ name }}</span>
                 <span class="date">
-                    {{ media_type }}
+                    <span v-if="show_media_type"> 
+                        {{ media_type_string }}
+                    </span>
+                    
                     <span v-if="release_date"> 
                         {{ "(" + release_date.split('-')[0] + ")" }}
+                    </span>
+                    <span v-if="data.vote_average">
+                        Rating: {{ data.vote_average }} / 10
                     </span> 
                 </span>
             </p>
@@ -29,6 +35,14 @@ export default {
         'use_counter': {
             type: Boolean,
             default: false
+        },
+        'media_type': {
+            type: String,
+            default: undefined
+        },
+        'show_media_type': {
+            type: Boolean,
+            default: true
         }
     },
     computed: {
@@ -45,7 +59,7 @@ export default {
          */
         image_cover() {
             if(this.data.profile_path || this.data.poster_path) {
-                switch(this.data.media_type) {       
+                switch(this.media_type) {       
                     case('person'):
                         return "https://image.tmdb.org/t/p/w500/" + this.data.profile_path;
                     default:
@@ -61,19 +75,17 @@ export default {
          * Returns the name of a series or movie.
          */
         name() {
-            switch(this.data.media_type) {       
-                case('movie'):
-                    return this.data.title;
-                default:
-                    return this.data.name;
-            }
+            if (this.data.title) 
+                return this.data.title;
+            
+            return this.data.name;
         },
 
         /**
          * Returns the media type as a string.
          */
-        media_type() {
-           switch(this.data.media_type) {
+        media_type_string() {
+           switch(this.media_type) {
                 case('tv'): 
                     return 'Series';
                 case('movie'):
@@ -90,7 +102,7 @@ export default {
          * Returns the link of the movie or series
          */
         link() {
-            switch(this.data.media_type) {
+            switch(this.media_type) {
                 case('tv'): 
                     return '/series/' + this.data.id;
                 case('movie'):
@@ -104,7 +116,7 @@ export default {
          * Returns the date of the movie or series release date.
          */
         release_date() {
-            switch(this.data.media_type) {
+            switch(this.media_type) {
                 case('tv'): 
                     return this.data.first_air_date;
                 case('movie'):

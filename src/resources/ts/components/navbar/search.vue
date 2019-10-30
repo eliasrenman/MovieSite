@@ -1,10 +1,8 @@
 <template>
-    <form @submit.prevent="onSubmit">
+    <div class="search-field">
         <input type="text" v-model="search" name="search" id="">
-        <button type="submit">
-            <img src="/img/search.svg" alt="submit search button">
-        </button>
-    </form>
+        <img src="/img/search.svg" alt="submit search button" @click="onSubmit"> 
+    </div>
 </template>
 
 <script>
@@ -16,7 +14,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            window.location.href = '/search/' + this.data.search;
+            window.location.href = '/search/?search=' + this.search;
         },
     },
 };

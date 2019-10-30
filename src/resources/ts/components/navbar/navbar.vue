@@ -39,7 +39,7 @@ export default {
         margin-bottom: 20px;
         padding: 0 20px;
 
-        form {
+        .search-field {
             margin-left: auto;
         }
 
