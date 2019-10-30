@@ -1,6 +1,6 @@
 <template>
-    <div class="menu">
-        <div class="open">
+    <div class="nav">
+        <div class="menu">
             <button type="button" @click="onShow">
                 <img id="vue-burger" src="/img/burger.svg" alt="hamburg menu toggle" />
             </button>
@@ -28,14 +28,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    
-    .menu {
+
+    @use '../../../sass/variables' as *;
+
+    .nav {
         display: flex;
-        justify-content: space-between;
+        align-items: center;
+        min-height: $menu-height;
+        margin-bottom: 20px;
+        padding: 0 20px;
+
+        form {
+            margin-left: auto;
+        }
+
     }
 
-    .open {
+    .menu {
         display: flex;
+        position: fixed;
+        top: 20px;
+        height: $menu-height;
+        background-color: $primary;
+        border-radius: calc(#{$menu-height} / 2);
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+        z-index: 1000;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: $menu-height;
+            padding: 15px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+
+            img {
+                height: 100%;
+            }
+
+        }
+
     }
 
 </style>

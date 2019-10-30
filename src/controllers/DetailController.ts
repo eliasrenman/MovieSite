@@ -46,7 +46,7 @@ class DetailController {
     }
 
     private async loadPayload(req: Request, type:string) {
-        return await axiosGet(type + '/', {id: req.params.id})
+        return await axiosGet("http://127.0.0.1:" + process.env.PORT + type + '/', {id: req.params.id})
     }
 }
 
