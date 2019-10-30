@@ -3,6 +3,7 @@ import { Request, Response, Router } from 'express';
 import csrf from 'csurf';
 import DetailController from 'src/controllers/DetailController';
 import { axiosGet } from 'src/shared/ApiGet';
+import TopController from 'src/controllers/TopController';
 
 const csrfProtection = csrf({ cookie: true });
 
@@ -29,7 +30,23 @@ router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
     res.render('search', {csrfToken: csrfToken, title: 'search', payload: payload});
 });
 
+/**
+ * Top list routes
+ */
+router.get('/toplist', (req: Request, res: Response) => {
+    res.redirect('/toplist/movie/');
+});
 
+router.get('/toplist/movie/', csrfProtection, async  (req: Request, res: Response) => {
+    new TopController().movie(req, res); 
+});
+router.get('/toplist/series', csrfProtection, async  (req: Request, res: Response) => {
+    new TopController().tv(req, res); 
+});
+
+/**
+ * Detail pages
+ */
 router.get('/movie/:id', csrfProtection, async  (req: Request, res: Response) => {
     new DetailController().movie(req, res); 
 });
