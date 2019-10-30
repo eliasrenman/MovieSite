@@ -3,12 +3,10 @@ import { Response, Request } from "express-serve-static-core"
 
 /**
  * This function sends a Get request to the moviedbs api.
- * @param req request
- * @param res response
  * @param url subfolder on moviedb
  * @returns {Promise} promise
  */
-async function movieDbGet(req: Request, res: Response, url: string, payload: Object = {}) {
+async function movieDbGet(url: string, payload: Object = {}) {
     const key = process.env.MDB_KEY;
     return (await axiosGet(
         'https://api.themoviedb.org/3/' + url, {api_key: key, ...payload})).data;

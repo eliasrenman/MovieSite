@@ -29,8 +29,8 @@ class ApiDetailsController {
      */
     public async movie(req: Request, res: Response) {
         res.send({
-            ...await movieDbGet(req, res, 'movie/' + req.query.id + '?language=en-US'),
-            ...await movieDbGet(req, res, 'movie/' + req.query.id + '/credits?language=en-US'),
+            ...await movieDbGet('movie/' + req.query.id + '?language=en-US'),
+            ...await movieDbGet('movie/' + req.query.id + '/credits?language=en-US'),
         });
     } 
 
@@ -56,8 +56,8 @@ class ApiDetailsController {
      */
     public async tv(req: Request, res: Response) {
         res.send({
-            ...await movieDbGet(req, res, 'tv/' + req.query.id + '?language=en-US'),
-            ...await movieDbGet(req, res, 'tv/' + req.query.id + '/credits?language=en-US'),
+            ...await movieDbGet('tv/' + req.query.id + '?language=en-US'),
+            ...await movieDbGet('tv/' + req.query.id + '/credits?language=en-US'),
         });
     }
 
@@ -82,7 +82,7 @@ class ApiDetailsController {
      *         description: Successfully returns a json containing search result.
      */
     public async person(req: Request, res: Response) {
-        res.send(await movieDbGet(req, res, 'person/' + req.query.id + '?language=en-US'));
+        res.send(await movieDbGet('person/' + req.query.id + '?language=en-US'));
     }
 }
 
