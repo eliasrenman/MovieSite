@@ -1,12 +1,17 @@
 <template>
-    <div class="container md-fluid">
-        <div class="row pt-105px mx-0">
-            <div class="col-md-4 offset-md-1 order-md-last px-md-0">
-                <img :src=image_cover class="border-radius-5 img-cover" alt="Image cover"/>
-                <div class="px-md-15px">
+    <div class="details-main">
+        <div class="details-side">
+            <img :src=image_cover alt="Image cover"/>
+            <div>
+                <p>
+                    <span>Genre:</span> 
+                    {{ genres.join(', ') }}
+                </p>
+                <!-- SERIES SPECIFIC START -->
+                <div v-if="data.type == 'series'">
                     <p>
-                        <p class="d-inline pk">Genre:</p> 
-                        {{ genres.join(', ') }}
+                        <span>Episode Runtime:</span> 
+                        {{ data.episode_run_time[0] }} min
                     </p>
                     <!-- SERIES SPECIFIC START -->
                     <div v-if="data.type == 'series'">
@@ -46,8 +51,15 @@
                         </p>
                     </div>
                     <p>
-                        <p class="d-inline pk">Produced in:</p> 
-                        {{ country_origin.join(', ') }}
+                        <span>Seasons:</span> 
+                        {{ data.number_of_seasons }}
+                    </p>
+                        <span>Episodes:</span> 
+                        {{ data.number_of_episodes }}
+                    </p>
+                    <p>
+                        <span>First release date:</span> 
+                        {{ data.first_air_date }}
                     </p>
                 </div>
             </div>
@@ -61,15 +73,23 @@
                     <p class="d-inline pk">Stars: </p>
                     {{ stars.slice(0,5).join(', ') }}
                 </p>
-                <p v-if="payload.homepage">
+                <p v-if="data.homepage">
                     <p class="d-inline pk">Website: </p>
                     <a :href=data.homepage>{{data.homepage}}</a>
                 </p>
 
             </div>
         </div>
-        <div class="row mx-0">
-            <div class="col-md-6"></div>
+        <div class="details-content">
+            <h1>{{ name }}</h1>
+            <h2 v-if="original_name">{{original_name}}</h2>
+            <p>{{ data.overview }}</p>
+            
+            <h2>Information</h2>
+            <p v-if="data.homepage">
+                <span>Website: </span>
+                <a :href=data.homepage>{{data.homepage}}</a>
+            </p>
         </div>
     </div>
 </template>
@@ -134,7 +154,7 @@ export default {
          * Returns a list of Producers
          */
         producers() {
-            let producers = _.filter(this.payload.crew,['job', 'Producer']);
+            let producers = _.filter(this.data.crew,['job', 'Producer']);
             return producers.map(a => a.name);
         },
 
@@ -156,16 +176,56 @@ export default {
          * Returns a list of the names of the cast. 
          */
         stars() {
-            return this.payload.cast.map(a => a.name);
+            return this.data.cast.map(a => a.name);
         },
     }
     
 }
 </script>
 <style lang="scss" scoped>
-    $primary_color: aqua;
-    .pk {
-        color: $primary_color;
+
+    @use '../../../sass/variables' as *;
+    @use "sass:map";
+    
+    .details-main {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+
+        & > div {
+            margin: 0 10px;
+        }
+    }
+
+    .details-side {
+
+        img {
+            width: 100%;
+        }
+
+    }
+
+    .details-content {
+        flex-shrink: 1;
+    }
+
+    @each $size, $pixels in $breakpoints {
+
+        @media (min-width: $pixels) {
+
+            @if $details-flex-reverse == $size {
+                .details-main {
+                    flex-direction: row-reverse;
+                    flex-wrap: nowrap;
+                }
+            }
+            
+            .details-side {
+                min-width: map.get($details-side-width, $size);
+            }
+
+        }
+    
     }
 
 </style>
