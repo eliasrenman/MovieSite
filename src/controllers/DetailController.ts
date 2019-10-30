@@ -25,7 +25,7 @@ class DetailController {
     
     public async movie(req: Request, res: Response) {
         // @ts-ignore
-        let payload: PayloadModel = (await this.loadPayload(req, '/api/v1/movie')).data;
+        let payload: any = (await this.loadPayload(req, '/api/v1/movie')).data;
         payload.type = 'movie';
         const csrfToken = req.csrfToken();
         res.render('details', {csrfToken: csrfToken, title: payload.title, payload: payload});
@@ -46,12 +46,7 @@ class DetailController {
     }
 
     private async loadPayload(req: Request, type:string) {
-        let url = req.protocol + 
-            '://' + 
-            req.get('host') + 
-            type + 
-            '/';
-        return await axiosGet(url, {id: req.params.id})
+        return await axiosGet(type + '/', {id: req.params.id})
     }
 }
 
