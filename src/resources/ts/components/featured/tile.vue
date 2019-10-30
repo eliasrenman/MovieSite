@@ -1,7 +1,7 @@
 
 <template>
     <a :href="data.id" class="grid-item">
-        <img class="grid-item-image" :src="'https://image.tmdb.org/t/p/w500' + data.poster_path" alt="Alt text" /> 
+        <img class="grid-item-image" :src="'https://image.tmdb.org/t/p/w500' + data.poster_path" :alt=data.title  /> 
         <span class="grid-item-hover">
             <p class="grid-item-title" v-text="data.title"></p>
             <p class="grid-item-description" v-if="data.tileSizeBig" v-text="data.overview"></p>
