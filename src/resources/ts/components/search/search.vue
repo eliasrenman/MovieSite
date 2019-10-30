@@ -32,8 +32,8 @@ export default {
         updateList(page_index) {
             let params = new URLSearchParams(
                 window.location.search.substring(1)
-            );                //TODO: Here update the query parameter page to the relevant index.
-            Ajax.get('/api/v                //TODO: Here update the query parameter page to the relevant index.1/search/', {
+            );
+            Ajax.get('/api/v1/search/', {
                 search: params.get("search"),
                 page: page_index,
             })
