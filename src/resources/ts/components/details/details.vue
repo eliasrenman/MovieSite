@@ -8,10 +8,10 @@
                     {{ genres.join(', ') }}
                 </p>
                 <!-- SERIES SPECIFIC START -->
-                <div v-if="payload.type == 'series'">
+                <div v-if="data.type == 'series'">
                     <p>
                         <span>Episode Runtime:</span> 
-                        {{ payload.episode_run_time[0] }} min
+                        {{ data.episode_run_time[0] }} min
                     </p>
                     <!-- SERIES SPECIFIC START -->
                     <div v-if="data.type == 'series'">
@@ -52,14 +52,14 @@
                     </div>
                     <p>
                         <span>Seasons:</span> 
-                        {{ payload.number_of_seasons }}
+                        {{ data.number_of_seasons }}
                     </p>
                         <span>Episodes:</span> 
-                        {{ payload.number_of_episodes }}
+                        {{ data.number_of_episodes }}
                     </p>
                     <p>
                         <span>First release date:</span> 
-                        {{ payload.first_air_date }}
+                        {{ data.first_air_date }}
                     </p>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <p class="d-inline pk">Stars: </p>
                     {{ stars.slice(0,5).join(', ') }}
                 </p>
-                <p v-if="payload.homepage">
+                <p v-if="data.homepage">
                     <p class="d-inline pk">Website: </p>
                     <a :href=data.homepage>{{data.homepage}}</a>
                 </p>
@@ -83,12 +83,12 @@
         <div class="details-content">
             <h1>{{ name }}</h1>
             <h2 v-if="original_name">{{original_name}}</h2>
-            <p>{{ payload.overview }}</p>
+            <p>{{ data.overview }}</p>
             
             <h2>Information</h2>
-            <p v-if="payload.homepage">
+            <p v-if="data.homepage">
                 <span>Website: </span>
-                <a :href=payload.homepage>{{payload.homepage}}</a>
+                <a :href=data.homepage>{{data.homepage}}</a>
             </p>
         </div>
     </div>
@@ -154,7 +154,7 @@ export default {
          * Returns a list of Producers
          */
         producers() {
-            let producers = _.filter(this.payload.crew,['job', 'Producer']);
+            let producers = _.filter(this.data.crew,['job', 'Producer']);
             return producers.map(a => a.name);
         },
 
@@ -176,7 +176,7 @@ export default {
          * Returns a list of the names of the cast. 
          */
         stars() {
-            return this.payload.cast.map(a => a.name);
+            return this.data.cast.map(a => a.name);
         },
     }
     
