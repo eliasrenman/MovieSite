@@ -1,7 +1,7 @@
 
 <template>
     <a :href="data.id" class="grid-item">
-        <img class="grid-item-image" :src="'https://image.tmdb.org/t/p/w500' + data.poster_path" :alt=data.title  /> 
+        <img class="grid-item-image" :src="image_cover" :alt=data.title  /> 
         <span class="grid-item-hover">
             <p class="grid-item-title" v-text="data.title"></p>
             <p class="grid-item-description" v-if="data.tileSizeBig" v-text="data.overview"></p>
@@ -14,6 +14,13 @@
 <script>
 export default {
     props: ['data'],
+    computed: {
+        image_cover() {
+            if (this.data.tileSizeBig) 
+                return 'https://image.tmdb.org/t/p/w500' + this.data.poster_path;
+            return 'https://image.tmdb.org/t/p/w300' + this.data.poster_path;
+        }
+    }
 }
 </script>
 
