@@ -5,6 +5,7 @@
       <img src="/img/close.svg"/>
     </button>
     -->
+    <a href="/">Home</a>
     <a href="/toplist">Top list</a>
     <a href="/search">Search</a>
   </div>
