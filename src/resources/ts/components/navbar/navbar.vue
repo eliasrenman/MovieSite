@@ -46,23 +46,24 @@ export default {
 
     .menu {
         display: flex;
-        position: relative;
         position: fixed;
         top: 20px;
+        height: $menu-height;
+        background-color: $primary;
+        border-radius: calc(#{$menu-height} / 2);
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
         z-index: 1000;
 
         button {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: $menu-height;
+            height: 100%;
             width: $menu-height;
             padding: 15px;
-            background-color: $primary;
+            background-color: transparent;
             border: none;
-            border-radius: calc(#{$menu-height} / 2);
             outline: none;
-            box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
 
             img {
                 height: 100%;

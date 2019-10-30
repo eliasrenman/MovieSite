@@ -1,5 +1,5 @@
 <template>
-  <div class="vue-menu" v-show="show">
+  <div class="vue-menu" v-bind:class="{ active: isActive }">
     <button type="button" @click="onShow">
       <img src="/img/close.svg"/>
     </button>
@@ -13,12 +13,12 @@
 export default {
     data() {
         return {
-        show: false
+        isActive: false
         };
     },
     methods: {
         onShow() {
-            this.show = !this.show;
+            this.isActive = !this.isActive;
         },
     },  
 };
@@ -30,11 +30,44 @@ export default {
 
     .vue-menu{
         display: flex;
-        position: absolute;
         height: 100%;
-        background-color: $primary;
-        border-radius: calc(#{$menu-height} / 2);
-        box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+        font-size: 0;
+        transition: all 0.3s;
+
+        button {
+          max-width: 0px;
+          padding: 0;
+          transition: all 0.3s;
+
+          img {
+              width: 100%;
+          }
+
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            transition: padding 0.3s;
+        }
+
+        &.active {
+            display: flex;
+            font-size: 22px;
+
+            button {
+              max-width: $menu-height;
+              padding: 15px;
+            }
+
+            a {
+                padding: 0 5px;
+            }
+
+        }
 
         button {
             display: flex;
@@ -42,15 +75,10 @@ export default {
             align-items: center;
             height: $menu-height;
             width: $menu-height;
-            padding: 15px;
             background-color: $primary;
             border: none;
             border-radius: calc(#{$menu-height} / 2);
             outline: none;
-
-            img {
-                height: 100%;
-            }
 
         }
 
