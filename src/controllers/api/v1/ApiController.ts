@@ -51,7 +51,7 @@ class ApiController {
      *     produces:
      *       - application/json
      *     parameters:
-     *       - name: search
+     *       - name: query
      *         description: Specified search query to lookup.
      *         in: query
      *         required: true
@@ -66,7 +66,7 @@ class ApiController {
         const page = req.query.page || 1;
         res.send(await movieDbGet( 
             'search/multi', {
-                query: req.query.search,
+                query: req.query.query,
                 page: page,
                 language: "en-US"
             }));

@@ -2,7 +2,7 @@ import path from 'path';
 import { Request, Response, Router } from 'express';
 import csrf from 'csurf';
 import DetailController from 'src/controllers/DetailController';
-import { axiosGet } from 'src/shared/ApiGet';
+import { internalApiGet } from 'src/shared/ApiGet';
 import TopController from 'src/controllers/TopController';
 
 const csrfProtection = csrf({ cookie: true });
@@ -22,10 +22,11 @@ router.get('/', csrfProtection, (req: Request, res: Response) => {
 
 router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
     let page = req.query.page || 1;
-    let payload: any = (await axiosGet('/api/v1/search/', {
-        search: req.query.search || '',
+    let payload: any = await internalApiGet('api/v1/search/', {
+        search: req.query.query || '',
         page: page, 
-        })).data;
+    });
+    console.log(payload)
     const csrfToken = req.csrfToken();
     res.render('search', {csrfToken: csrfToken, title: 'Search', payload: payload});
 });

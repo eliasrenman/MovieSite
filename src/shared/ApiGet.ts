@@ -31,4 +31,17 @@ function axiosGet(url: string, payload: Object = {}): Promise<any> {
     });
 }
 
-export {movieDbGet, axiosGet};
+/**
+ * Sends a internal api call
+ * 
+ * @param endpoint url endpoint
+ * @param payload Optional payload with query params
+ */
+async function internalApiGet(endpoint: string, payload: Object = {}) {
+    return (await axiosGet(
+        "http://127.0.0.1:" + 
+        process.env.PORT + 
+        endpoint + '/', payload
+    )).data;
+}
+export {movieDbGet, axiosGet, internalApiGet};

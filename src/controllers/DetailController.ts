@@ -1,5 +1,5 @@
 import { Response, Request } from "express-serve-static-core";
-import { axiosGet } from 'src/shared/ApiGet';
+import { internalApiGet } from 'src/shared/ApiGet';
 interface PayloadModel {
     backdrop_path: string,
     title: string,
@@ -25,7 +25,7 @@ class DetailController {
     
     public async movie(req: Request, res: Response) {
         // @ts-ignore
-        let payload: PayloadModel = (await this.loadPayload(req, '/api/v1/movie')).data;
+        let payload: PayloadModel = await internalApiGet('/api/v1/movie', {id: req.params.id});
         payload.type = 'movie';
         const csrfToken = req.csrfToken();
         res.render('details', {csrfToken: csrfToken, title: payload.title, payload: payload});
@@ -34,7 +34,7 @@ class DetailController {
     
     public async tv(req: Request, res: Response) {
         // @ts-ignore
-        let payload: PayloadModel = (await this.loadPayload(req, '/api/v1/tv')).data;
+        let payload: PayloadModel = await internalApiGet('/api/v1/tv', {id: req.params.id});
         payload.type = 'series';
         const csrfToken = req.csrfToken();
         res.render('details', {csrfToken: csrfToken, title: payload.name, payload: payload});
@@ -42,11 +42,7 @@ class DetailController {
     
     public async person(req: Request, res: Response) {
         // @ts-ignore
-        res.send((await this.loadPayload(req, '/api/v1/person')).data);
-    }
-
-    private async loadPayload(req: Request, type:string) {
-        return await axiosGet("http://127.0.0.1:" + process.env.PORT + type + '/', {id: req.params.id})
+        res.send(await internalApiGet('/api/v1/person'));
     }
 }
 

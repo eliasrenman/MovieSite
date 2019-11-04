@@ -1,5 +1,5 @@
 import { Response, Request } from "express-serve-static-core";
-import { axiosGet } from 'src/shared/ApiGet';
+import { internalApiGet } from 'src/shared/ApiGet';
 interface PayloadModel {
     backdrop_path: string,
     title: string,
@@ -26,9 +26,9 @@ class TopController {
     public async movie(req: Request, res: Response) {
         // @ts-ignore
         let page = req.query.page || 1;
-        let payload: any = (await axiosGet('/api/v1/top/movie', {
+        let payload: any = await internalApiGet('/api/v1/top/movie', {
             page: page, 
-        })).data;
+        });
         const csrfToken = req.csrfToken();
         payload.media_type = 'movie';
         res.render('toplist', {csrfToken: csrfToken, title: "Top movies", payload: payload});
@@ -38,9 +38,9 @@ class TopController {
     public async tv(req: Request, res: Response) {
         // @ts-ignore
         let page = req.query.page || 1;
-        let payload: any = (await axiosGet('/api/v1/top/tv', {
+        let payload: any = await internalApiGet('/api/v1/top/tv', {
             page: page, 
-        })).data;
+        });
         payload.media_type = 'tv';
         const csrfToken = req.csrfToken();
         res.render('toplist', {csrfToken: csrfToken, title: "Top series", payload: payload});
