@@ -42,7 +42,7 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Comment out current existing functions
 - [ ] Navbar mobile anpassning
 - [ ] Navbar search field
-- [ ] Fix search page so that it works again
+- [X] Fix search page so that it works again
 - [ ] Search field on search page
 - [ ] Details page styling
 - [ ] Top list mobile anpassning

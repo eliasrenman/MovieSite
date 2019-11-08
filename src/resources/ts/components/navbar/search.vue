@@ -14,7 +14,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            window.location.href = 'search/?query=' + this.search;
+            window.location.href = '/search/?query=' + this.search;
         },
     },
 };

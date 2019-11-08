@@ -1,7 +1,7 @@
 <template>
   <div class="">
       <list 
-            v-if="page_data.results.length > 0" 
+            v-if="page_data && page_data.results.length > 0" 
             :data=page_data 
             @update-list="updateList"
             :use_counter="false"
