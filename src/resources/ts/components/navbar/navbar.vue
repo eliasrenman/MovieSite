@@ -52,9 +52,10 @@ export default {
 
     .menu {
         display: flex;
+        flex-direction: column;
         position: fixed;
         top: 20px;
-        height: $menu-height;
+        height: auto;
         background-color: $primary;
         border-radius: calc(#{$menu-height} / 2);
         box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
@@ -64,7 +65,7 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            height: $menu-height;
             width: $menu-height;
             padding: 15px;
             background-color: transparent;
@@ -77,6 +78,15 @@ export default {
 
         }
 
+    }
+
+    @media (min-width: 768px) {
+        .menu {
+            flex-direction: row;
+            align-items: center;
+            height: $menu-height;
+            width: auto;
+        }
     }
 
 </style>

@@ -11,7 +11,7 @@
 export default {
     data() {
         return {
-            isActive: false
+            isActive: true
         };
     },
     methods: {
@@ -35,43 +35,37 @@ export default {
 
     .vue-menu{
         display: flex;
-        height: 100%;
+        flex-direction: column;
+        width: 0;
+        height: 0;
         font-size: 0;
         transition: all 0.3s;
-
-        button {
-          max-width: 0px;
-          padding: 0;
-          transition: all 0.3s;
-
-          img {
-              width: 100%;
-          }
-
-        }
 
         a {
             display: flex;
             align-items: center;
             text-transform: uppercase;
             text-decoration: none;
-            color: #fff;
+            color: $text-light;
+            border-bottom: 1px solid rgba($text-light, 0.5);
             opacity: 0;
             transition: padding 0.3s, opacity 0.3s 0.3s, letter-spacing 0.3s, color 0.3s;
         }
 
         &.active {
-            display: flex;
+            width: calc(100vw - 130px);
+            height: 100%;
             font-size: 18px;
-            padding: 0 15px;
+            padding: 0 15px 15px;
 
             button {
-              max-width: $menu-height;
-              padding: 15px;
+                max-height: $menu-height;
+                max-width: $menu-height;
+                padding: 15px;
             }
 
             a {
-                padding: 0 10px;
+                padding: 5px 0;
                 opacity: 1;
 
                 &:hover {
@@ -93,6 +87,42 @@ export default {
             border: none;
             border-radius: calc(#{$menu-height} / 2);
             outline: none;
+
+        }
+
+    }
+
+    @media (min-width: 768px) {
+        .vue-menu {
+            flex-direction: row;
+            width: 100%;
+
+            a {
+                border-bottom: none;
+            }
+
+            &.active {
+                width: auto;
+                padding: 0 15px;
+
+                button {
+                
+                }
+
+                a {
+                    padding: 0 10px;
+
+                    &:hover {
+                        
+                    }
+
+                }
+
+            }
+
+            button {
+
+            }
 
         }
 
