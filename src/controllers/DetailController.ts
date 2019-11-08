@@ -41,8 +41,11 @@ class DetailController {
     }
     
     public async person(req: Request, res: Response) {
-        // @ts-ignore
-        res.send(await internalApiGet('api/v1/person'));
+       // @ts-ignore
+       let payload: PayloadModel = await internalApiGet('api/v1/person', {id: req.params.id});
+       payload.type = 'person';
+       const csrfToken = req.csrfToken();
+       res.render('details', {csrfToken: csrfToken, title: payload.name, payload: payload});
     }
 }
 
