@@ -108,7 +108,7 @@ export default {
                 case('movie'):
                     return '/movie/' + this.data.id;
                 default:
-                    return '';
+                    return '/person/' + this.data.id;
             } 
         },
 

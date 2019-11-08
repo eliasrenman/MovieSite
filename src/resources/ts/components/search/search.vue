@@ -1,5 +1,6 @@
 <template>
   <div class="">
+      <search-field></search-field>
       <list 
             v-if="page_data && page_data.results.length > 0" 
             :data=page_data 
@@ -15,6 +16,7 @@
 <script>
 import list from '../list/list.vue';
 import Ajax from '../../utilities/ajax';
+import searchField from './searchField.vue';
 export default {
     props: [
         'data'
@@ -62,7 +64,8 @@ export default {
         },
     },
     components: {
-        list
+        list,
+        searchField
     }
 }
 </script>

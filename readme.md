@@ -48,4 +48,5 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [ ] Top list mobile anpassning
 - [ ] Adding specific trending pages for movies and series
 - [ ] Default expanded navbar in desktop mode, auto collapses on scroll-down
+- [ ] Person details is borked™ ( ´･･)ﾉ(._.`)
 - [ ] Do code stuff... ༼ つ ◕_◕ ༽つ
