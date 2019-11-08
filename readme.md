@@ -40,4 +40,12 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Read up on caching requests on backend
 - [X] Refractor current code
 - [X] Comment out current existing functions
-- [ ] Do code stuff
+- [ ] Navbar mobile anpassning
+- [ ] Navbar search field
+- [ ] Fix search page so that it works again
+- [ ] Search field on search page
+- [ ] Details page styling
+- [ ] Top list mobile anpassning
+- [ ] Adding specific trending pages for movies and series
+- [ ] Default expanded navbar in desktop mode, auto collapses on scroll-down
+- [ ] Do code stuff... ༼ つ ◕_◕ ༽つ
