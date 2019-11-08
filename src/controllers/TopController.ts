@@ -26,7 +26,7 @@ class TopController {
     public async movie(req: Request, res: Response) {
         // @ts-ignore
         let page = req.query.page || 1;
-        let payload: any = await internalApiGet('/api/v1/top/movie', {
+        let payload: any = await internalApiGet('api/v1/top/movie', {
             page: page, 
         });
         const csrfToken = req.csrfToken();
@@ -38,7 +38,7 @@ class TopController {
     public async tv(req: Request, res: Response) {
         // @ts-ignore
         let page = req.query.page || 1;
-        let payload: any = await internalApiGet('/api/v1/top/tv', {
+        let payload: any = await internalApiGet('api/v1/top/tv', {
             page: page, 
         });
         payload.media_type = 'tv';

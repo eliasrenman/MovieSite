@@ -25,7 +25,7 @@ class DetailController {
     
     public async movie(req: Request, res: Response) {
         // @ts-ignore
-        let payload: PayloadModel = await internalApiGet('/api/v1/movie', {id: req.params.id});
+        let payload: PayloadModel = await internalApiGet('api/v1/movie', {id: req.params.id});
         payload.type = 'movie';
         const csrfToken = req.csrfToken();
         res.render('details', {csrfToken: csrfToken, title: payload.title, payload: payload});
@@ -34,7 +34,7 @@ class DetailController {
     
     public async tv(req: Request, res: Response) {
         // @ts-ignore
-        let payload: PayloadModel = await internalApiGet('/api/v1/tv', {id: req.params.id});
+        let payload: PayloadModel = await internalApiGet('api/v1/tv', {id: req.params.id});
         payload.type = 'series';
         const csrfToken = req.csrfToken();
         res.render('details', {csrfToken: csrfToken, title: payload.name, payload: payload});
@@ -42,7 +42,7 @@ class DetailController {
     
     public async person(req: Request, res: Response) {
         // @ts-ignore
-        res.send(await internalApiGet('/api/v1/person'));
+        res.send(await internalApiGet('api/v1/person'));
     }
 }
 
