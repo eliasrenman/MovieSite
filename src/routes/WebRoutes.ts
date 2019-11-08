@@ -22,11 +22,15 @@ router.get('/', csrfProtection, (req: Request, res: Response) => {
 
 router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
     let page = req.query.page || 1;
-    let payload: any = await internalApiGet('api/v1/search/', {
-        search: req.query.query || '',
-        page: page, 
-    });
-    console.log(payload)
+    let payload: any = undefined;
+    
+    if(req.query.query) {
+        payload = await internalApiGet('api/v1/search', {
+            query: req.query.query || '',
+            page: page, 
+        });
+    }
+    
     const csrfToken = req.csrfToken();
     res.render('search', {csrfToken: csrfToken, title: 'Search', payload: payload});
 });
