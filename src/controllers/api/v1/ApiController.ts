@@ -64,6 +64,13 @@ class ApiController {
      */
     public async search(req: Request, res: Response)   {
         const page = req.query.page || 1;
+        console.log("Request query", req.query.query);
+        
+        if(req.query.query == null || !req.query.query) {
+            res.status(400)
+                .send({"error": "The query Param is missing or is null"});
+            return;
+        }
         res.send(await movieDbGet( 
             'search/multi', {
                 query: req.query.query,
