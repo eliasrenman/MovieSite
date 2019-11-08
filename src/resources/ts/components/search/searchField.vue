@@ -24,7 +24,7 @@ export default {
     },
     watch: {
         query(newVal) {
-            if(this.query)
+            if(this.query != null)
                 this.setParam('query', newVal);
         },
         
