@@ -43,10 +43,10 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Navbar mobile anpassning
 - [X] Navbar search field
 - [X] Fix search page so that it works again
-- [ ] Search field on search page
-- [ ] Details page styling
+- [X] Search field on search page
 - [ ] Top list mobile anpassning
-- [ ] Adding specific trending pages for movies and series
 - [ ] Default expanded navbar in desktop mode, auto collapses on scroll-down
+- [ ] Details page styling
+- [ ] Adding specific trending pages for movies and series
 - [ ] Person details is borked™ ( ´･･)ﾉ(._.`)
 - [ ] Do code stuff... ༼ つ ◕_◕ ༽つ
