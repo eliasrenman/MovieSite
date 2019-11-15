@@ -3,16 +3,23 @@
     <a :href="activeUrl('/')">Home</a>
     <a :href="activeUrl('/toplist/movie')">Top movies</a>
     <a :href="activeUrl('/toplist/series')">Top series</a>
-    <a :href="activeUrl('/search')">Search</a>
+    <a v-if="!isMobile" :href="activeUrl('/search')">Search</a>
+    <search v-else></search>
   </div>
 </template>
 
 <script>
+import search from './search.vue';
 export default {
     data() {
         return {
             isActive: true
         };
+    },
+    computed: {
+        isMobile() {
+            return (screen.width <= 760)
+        },
     },
     methods: {
         onShow() {
@@ -26,6 +33,9 @@ export default {
             return url;
         }
     },
+    components: {
+        search
+    }
 };
 </script>
 
@@ -41,6 +51,18 @@ export default {
         font-size: 0;
         transition: all 0.3s;
 
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: $menu-height;
+            width: $menu-height;
+            background-color: $primary;
+            border: none;
+            border-radius: calc(#{$menu-height} / 2);
+            outline: none;
+        }
+
         a {
             display: flex;
             align-items: center;
@@ -52,8 +74,14 @@ export default {
             transition: padding 0.3s, opacity 0.3s 0.3s, letter-spacing 0.3s, color 0.3s;
         }
 
+        .search-field {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+        }
+
         &.active {
-            width: calc(100vw - 130px);
+            width: calc(100vw - 120px);
             height: 100%;
             font-size: 18px;
             padding: 0 15px 15px;
@@ -75,18 +103,10 @@ export default {
 
             }
 
-        }
-
-        button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: $menu-height;
-            width: $menu-height;
-            background-color: $primary;
-            border: none;
-            border-radius: calc(#{$menu-height} / 2);
-            outline: none;
+            .search-field {
+                max-height: 100px;
+                margin-top: 10px;
+            }
 
         }
 
@@ -105,22 +125,9 @@ export default {
                 width: auto;
                 padding: 0 15px;
 
-                button {
-                
-                }
-
                 a {
                     padding: 0 10px;
-
-                    &:hover {
-                        
-                    }
-
                 }
-
-            }
-
-            button {
 
             }
 

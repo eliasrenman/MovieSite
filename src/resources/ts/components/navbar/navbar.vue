@@ -6,7 +6,7 @@
             </button>
             <vueMenu ref="vue_menu"></vueMenu>
         </div>
-        <search></search>
+        <search v-if="!isMobile"></search>
         <img src="https://www.themoviedb.org/assets/2/v4/logos/powered-by-rectangle-blue-61ce76f69ce1e4f68a6031d975df16cc184d5f04fa7f9f58ae6412646f2481c1.svg">
     </div>
 </template>
@@ -15,7 +15,11 @@
 import search from './search.vue';
 import vueMenu from './menu.vue';
 export default {
-
+    computed: {
+        isMobile() {
+            return (screen.width <= 760)
+        },
+    },
     methods: {
         onShow() {
             this.$refs.vue_menu.onShow();
@@ -34,14 +38,11 @@ export default {
 
     .nav {
         display: flex;
+        justify-content: flex-end;
         align-items: center;
         min-height: $menu-height;
         margin-bottom: 20px;
         padding: 0 20px;
-
-        .search-field {
-            margin-left: auto;
-        }
 
         & > img {
             height: $menu-height;
@@ -52,9 +53,11 @@ export default {
 
     .menu {
         display: flex;
+        justify-content: flex-end;
         flex-direction: column;
         position: fixed;
         top: 20px;
+        left: 60px;
         height: auto;
         background-color: $primary;
         border-radius: calc(#{$menu-height} / 2);
