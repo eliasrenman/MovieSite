@@ -6,6 +6,7 @@
             :data=page_data 
             @update-list="updateList"
             :use_counter="false"
+            :media_type="category()"
         ></list>
       <div v-else-if="searchQuery && searchQuery.length > 0">
           <h1 class="display-center">No search results found</h1>
@@ -27,7 +28,6 @@ export default {
             endpoint: '/api/v1/search/',
         }
     },
-    
     created() {
         this.page_data = this.data;
     },
