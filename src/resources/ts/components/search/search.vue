@@ -7,7 +7,7 @@
             @update-list="updateList"
             :use_counter="false"
             :media_type="category()"
-        ></list>
+      ></list>
       <div v-else-if="searchQuery && searchQuery.length > 0">
           <h1 class="display-center">No search results found</h1>
       </div>
@@ -17,7 +17,6 @@
 <script>
 import list from '../list/list.vue';
 import Ajax from '../../utilities/ajax';
-import searchField from './searchField.vue';
 export default {
     props: [
         'data'
@@ -88,7 +87,6 @@ export default {
     },
     components: {
         list,
-        searchField
     }
 }
 </script>

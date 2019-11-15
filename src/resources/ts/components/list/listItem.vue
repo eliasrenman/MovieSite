@@ -134,77 +134,70 @@ export default {
 </script>
 <style lang="scss" scoped>
     @use '../../../sass/variables' as *;
-    
-    p {
-        // max-height: 150px;
-        padding: 15px 0px;    
-    }
-
 
     .list-item {
-        
-        position: relative;
         display: flex;
         align-items: center;
         margin-bottom: 15px;
         color: #fff;
         background-color: $primary;
-        border-radius: 10px 0 0 10px;
+        border-radius: 20px 0 0 20px;
         box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
-        animation: slideLeft 1s ease-in-out both;
-    }
-    
-    a {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        padding-left: 30px;
-        text-decoration: none;
-        color: var(--c-primary-text);
-        background-color: var(--c-primary);
-        transition: color 0.3s;
-    }
 
-​    a:hover {
-        color: #fff;
-    }
+        .entry-counter {
+            padding: 40px;
+            text-align: center;
+            font-weight: 300;
+        }
 
-    p {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0;
-        font-size: 16px;
-    }
+        a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-decoration: none;
+            color: var(--c-primary-text);
+            background-color: var(--c-primary);
+            transition: color 0.3s;
 
-    .title {
-        margin-bottom: 3px;
-        padding: 0 10px 2px 0;
-        font-size: 1.8em;
-        border-bottom: 1px solid rgba(255,255,255,0.5);
-    }
+            &:hover {
+                color: #fff;
+            }
 
-    img {
-        height: 130px;
-        width: 200px;
-        background-color: rgba(255,255,255,0.2);
-        object-fit: cover;
-        object-position: 50% 5%;
-        clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
-        filter: grayscale(50%);
-        transition: object-position 0.3s, filter 0.3s;
-    }
+            p {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin: 0;
+                padding: 15px 0px;    
+                font-size: 16px;
+            }
 
-    a:hover img {
-        object-position: 50% 10%;
-        filter: grayscale(0%);
-    }
+            .title {
+                margin-bottom: 3px;
+                padding: 0 10px 2px 0;
+                font-size: 1.8em;
+                border-bottom: 1px solid rgba(255,255,255,0.5);
+            }
 
-    .entry-counter {
-        width: 80px;
-        text-align: center;
-        font-weight: 300;
+            img {
+                min-height: 130px;
+                width: 200px;
+                background-color: rgba(255,255,255,0.2);
+                object-fit: cover;
+                object-position: 50% 5%;
+                clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+                filter: grayscale(50%);
+                transition: object-position 0.3s, filter 0.3s;
+            }
+
+            &:hover img {
+                object-position: 50% 10%;
+                filter: grayscale(0%);
+            }
+
+        }
+
     }
 
 </style>

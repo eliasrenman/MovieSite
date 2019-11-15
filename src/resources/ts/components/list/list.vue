@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="toplist">
-
             <list-item 
                 v-for="(item, index) in data.results" 
                 :data=item 
@@ -11,7 +10,7 @@
                 :show_media_type=show_media_type
             ></list-item>
         </div>
-        <div class="display-center">
+        <div class="flex-center">
             <paginate v-if="data.total_pages > 1"
                 v-model="data.page"
                 :page-count=data.total_pages
@@ -92,36 +91,46 @@ export default {
         font-size: 40px;
     }
 
-    .display-center {
-        display: flex;
-        justify-content: center
-    }
-
     .pagination {
-        display: inline-block;
-    }
+        font-size: 16px;
+        margin: 10px 0;
+        padding-left: 0;
 
-    .pagination li {
-        color: black;
-        float: left;
-        padding: 8px 16px;
-        border: 1px solid #ddd; /* Gray */
-        text-decoration: none;
-        list-style-type: none;
-    }
+        li {
+            display: inline-block;
+            float: left;
+            margin: 0 2px;
+            text-decoration: none;
+            list-style-type: none;
+            color: black;
+            background-color: $bg-faded;
+            border: none;
+            border-radius: 5px;
 
-    .pagination li.active {
-        background-color: $primary;
-        color: white;
-    }
+            a {
+                display: block;
+                padding: 8px 16px;
+                outline: none!important;
+            }
 
-    .pagination li:first-child {
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }
+            &.active {
+                background-color: $primary;
+                color: white;
+            }
 
-    .pagination li:last-child {
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+            &:first-child, &:last-child {
+                background-color: $primary;
+                color: $text-light;
+            }
+
+            &:first-child {
+                border-radius: 20px 5px 5px 20px;
+            }
+
+            &:last-child {
+                border-radius: 5px 20px 20px 5px;
+            }
+        }
     }
+    
 </style>

@@ -1,6 +1,13 @@
 $primary: #6699cc;
 $primary-hover: lighten($primary, 25%);
 $primary-text: darken($primary, 25%);
+$primary-text-light: lighten($primary, 15%);
+
+$bg: #fff;
+$bg-faded: #eee;
+
+$text-dark: #333;
+$text-light: #fff;
 
 $menu-height: 60px;
 
