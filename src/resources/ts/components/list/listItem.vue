@@ -59,7 +59,9 @@ export default {
          */
         image_cover() {
             if(this.data.profile_path || this.data.poster_path) {
-                switch(this.media_type) {       
+                let media_type = this.media_type !== "" ? 
+                    this.media_type : this.data.media_type;
+                switch(media_type) {       
                     case('person'):
                         return "https://image.tmdb.org/t/p/w500/" + this.data.profile_path;
                     default:
