@@ -17,6 +17,7 @@
 <script>
 import list from '../list/list.vue';
 import Ajax from '../../utilities/ajax';
+import searchField from './searchField.vue';
 export default {
     props: [
         'data'
@@ -87,6 +88,7 @@ export default {
     },
     components: {
         list,
+        searchField
     }
 }
 </script>
