@@ -26,15 +26,15 @@ router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
     let category = undefined;
     switch (req.query.category) {
         case 'tv': {
-            category = 'tv';
+            category = '/tv';
             break;
         }
         case 'movie': {
-            category = 'movie';
+            category = '/movie';
             break;
         }
         case 'person': {
-            category = 'person';
+            category = '/person';
             break;
         }
         default: {
@@ -44,7 +44,7 @@ router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
     }
 
     if(req.query.query) {
-        payload = await internalApiGet('api/v1/search/' + category, {
+        payload = await internalApiGet('api/v1/search' + category, {
             query: req.query.query || '',
             page: page, 
         });

@@ -1,7 +1,19 @@
 <template>
     <div class="search-field">
-        <input type="text" v-model="search" name="search" placeholder="Search..." id="">
-        <img src="/img/search.svg" alt="submit search button" @click="onSubmit"> 
+        <input type="text" 
+            v-model="search" 
+            name="search" 
+            placeholder="Search..." 
+            id=""
+            @keyup.enter="onSubmit"
+
+        >
+        <img src="/img/search.svg" 
+            alt="submit search button" 
+            @click="onSubmit"
+            @keyup.enter="onSubmit"
+            tabindex="0"
+        > 
     </div>
 </template>
 
