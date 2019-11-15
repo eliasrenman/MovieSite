@@ -45,12 +45,10 @@ export class DbCache {
                 this.delete();
                 this.db.get('SELECT * FROM storage WHERE `key` = ?', [key], (err, row) => {
                     if (row) {
-                        // console.log(row.value);
                         if(Date.now() / 1000 < row.expires) {
                             resolve(row.value);
                             return;
                         }
-                        
                     } 
                     resolve(undefined);
                 });
@@ -66,9 +64,7 @@ export class DbCache {
             if (err) {
               return console.error(err.message);
             }
-            console.log("Deleted expired indexes in database cache");
-            // console.log(`Deleted expired index at id: ${id}`);
-          });
+        });
     }
 
     /**

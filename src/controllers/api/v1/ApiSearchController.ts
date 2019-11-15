@@ -67,7 +67,6 @@ class ApiSearchController {
      */
     public async movie(req: Request, res: Response) {
         ApiSearchController.sendSearchRequest(req, res, 'search/movie/');
-        // res.send(await movieDbGet(?query=' + req.query.query
     } 
 
     /**
@@ -97,7 +96,6 @@ class ApiSearchController {
      */
     public async tv(req: Request, res: Response) {
         ApiSearchController.sendSearchRequest(req, res, 'search/tv')
-        // res.send(await movieDbGet('search/tv?query=' + req.query.query));
     }
 
     /**
@@ -127,12 +125,10 @@ class ApiSearchController {
      */
     public async person(req: Request, res: Response) {
         ApiSearchController.sendSearchRequest(req, res, 'search/person');
-        // res.send(await movieDbGet('search/person?query=' + req.query.query));
     }
 
     public static async sendSearchRequest(req: Request, res: Response, endpoint: string) {
         const page = req.query.page || 1;
-        console.log("Request query", req.query.query);
         
         if(req.query.query == null || !req.query.query) {
             res.status(400)
