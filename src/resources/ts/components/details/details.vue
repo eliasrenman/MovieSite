@@ -104,7 +104,9 @@ export default {
          * Returns the genres that a series or person is in.
          */
         genres() {
-            return this.data.genres.map(a => a.name);
+            if(this.data.genres)
+                return this.data.genres.map(a => a.name);
+            return undefined;
         },
 
         /**

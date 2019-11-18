@@ -18,6 +18,7 @@ export default {
         };
     },
     created () {
+        this.isActive = !this.isMobile;
         window.addEventListener('scroll', this.handleScroll);
     },
     destroyed () {
@@ -30,6 +31,9 @@ export default {
     },
     methods: {
         handleScroll: throttle(function() {
+            if(this.isMobile) 
+                return;
+
             if(window.scrollY > 0 && this.isActive) {
                 this.isActive = false;
             } else if (window.scrollY == 0 && !this.isActive) {
