@@ -45,8 +45,9 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Fix search page so that it works again
 - [X] Search field on search page
 - [X] Default expanded navbar in desktop mode, auto collapses on scroll-down
+- [X] Person details is borked™ ( ´･･)ﾉ(._.`)
+- [ ] Issue with scroll to top on mobile
 - [ ] Adding specific trending pages for movies and series
-- [ ] Person details is borked™ ( ´･･)ﾉ(._.`)
 - [ ] Top list mobile anpassning
 - [ ] Details page styling
 - [ ] Do code stuff... ༼ つ ◕_◕ ༽つ
