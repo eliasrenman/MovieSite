@@ -2,7 +2,8 @@
     <div>
         <div class="list-wrapper">
             <div class="toplist">
-                <list-item 
+                <list-item
+                    v-on:getPreview="getPreview"
                     v-for="(item, index) in data.results" 
                     :data=item 
                     :key=" index_offset + index"
@@ -12,7 +13,7 @@
                 ></list-item>
             </div>
             <div class="details">
-            
+                <details-preview v-if="details_preview" :data="details_preview"/>
             </div>
         </div>
         <div class="flex-center">
@@ -33,7 +34,8 @@
 <script>
 import listItem from './listItem.vue';
 import paginate from 'vuejs-paginate';
-
+import details from '../details/detailsPreview.vue';
+import Ajax from '../../utilities/ajax';
 export default {
     props: {
         "data": {
@@ -53,8 +55,12 @@ export default {
             default: true
         }
     },
+    data() {
+        return {
+            'details_preview': undefined,
+        }
+    },
     computed: {
-
         /**
          * Gets the start index offset for the first element
          */
@@ -63,7 +69,10 @@ export default {
         }
     },
     methods: {
-
+        getPreview(endpoint) {
+            endpoint[1].type = endpoint[0];
+            this.details_preview = endpoint[1];
+        },
         /**
          * Pagination onclick callback function.
          * Emits to the parent component that it wishes to update the prop data.
@@ -83,6 +92,7 @@ export default {
     components: {
         'list-item': listItem,
         'paginate': paginate,
+        'details-preview': details,
     }
 }
 </script>
