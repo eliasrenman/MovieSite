@@ -25,8 +25,9 @@
             </div>
         </div>
         <div class="details-content">
-            <p class="overview-text" v-if="data.overview">{{ data.overview }}</p>
-            <p class="overview-text" v-if="data.biography">{{ data.biography }}</p>
+            <h2 class="mb-0">Synopsis</h2>
+            <p class="mt-1 overview-text" v-if="data.overview">{{ data.overview }}</p>
+            <p class="mt-1 overview-text" v-if="data.biography">{{ data.biography }}</p>
             
         </div>
     </div>
@@ -116,6 +117,17 @@ export default {
 
     @use '../../../sass/variables' as *;
     @use "sass:map";
+
+    h1, h2 {
+        color: $primary-text;
+    }
+    .mt-1 {
+        margin-top: 5px;
+    }
+
+    .mb-0 {
+        margin-bottom: 0;
+    }
     .details-main {
         position: fixed;
         left: 60%;
