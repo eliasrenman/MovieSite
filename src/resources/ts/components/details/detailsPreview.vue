@@ -2,9 +2,8 @@
     <div class="details-main">
         <div class="details-side">
             <div style="inline-block">
-
-                <div 
-                    @click="redirect()"
+                <a 
+                    :href=link
                     class="link max-width"
                 >
                     <h1>{{name}}</h1>
@@ -12,12 +11,10 @@
                         v-if="original_name">{{original_name}}
                     </h2>
         
-                </div>
+                </a>
             </div>
             
-            <img 
-                @click="redirect()" 
-                class="link"
+            <img
                 :src=image_cover
                 alt="Image cover"
             />
@@ -39,7 +36,7 @@
             </div>
         </div>
         <div class="details-content">
-            <h2 class="mb-0">Synopsis</h2>
+            <h2 class="mb-0" v-if="synopsis">Synopsis</h2>
             <p class="mt-1 max-width" v-if="synopsis">{{ synopsis }}</p>
             <a :href=link>More info</a>
         </div>
@@ -134,11 +131,6 @@ export default {
             } 
         },
     },
-    methods: {
-        redirect() {
-            window.location.href = this.link;
-        }
-    }
 }
 </script>
 <style lang="scss" scoped>
@@ -148,11 +140,10 @@ export default {
     
     .link {
         display: inline-block;
-    }
-
-    .link:hover {
-        cursor: pointer;
-        text-decoration: underline;
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
     h1, h2 {
         color: $primary-text;
@@ -182,7 +173,7 @@ export default {
         color: $primary-text;
         text-decoration: none;
         &:hover {
-        text-decoration: underline;
+            text-decoration: underline;
         }
     }
 
