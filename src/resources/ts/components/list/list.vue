@@ -1,14 +1,19 @@
 <template>
     <div>
-        <div class="toplist">
-            <list-item 
-                v-for="(item, index) in data.results" 
-                :data=item 
-                :key=" index_offset + index"
-                :use_counter="use_counter"
-                :media_type="get_media_type(item.media_type)"
-                :show_media_type=show_media_type
-            ></list-item>
+        <div class="list-wrapper">
+            <div class="toplist">
+                <list-item 
+                    v-for="(item, index) in data.results" 
+                    :data=item 
+                    :key=" index_offset + index"
+                    :use_counter="use_counter"
+                    :media_type="get_media_type(item.media_type)"
+                    :show_media_type=show_media_type
+                ></list-item>
+            </div>
+            <div class="details">
+            
+            </div>
         </div>
         <div class="flex-center">
             <paginate v-if="data.total_pages > 1"
@@ -26,6 +31,7 @@
 </template>
 
 <script>
+import details from '../details/details.vue';
 import listItem from './listItem.vue';
 import paginate from 'vuejs-paginate';
 
@@ -84,10 +90,17 @@ export default {
 
 <style lang="scss">
     @use '../../../sass/variables' as *;
+
+    .list-wrapper {
+        display: flex;
+        margin-top: 40px;
+    }
+
+    .details {
+        display: none;
+    }
     
     .toplist {
-        width: 50%;
-        margin: 80px;
         font-size: 40px;
     }
 
@@ -131,6 +144,27 @@ export default {
                 border-radius: 5px 20px 20px 5px;
             }
         }
+    }
+
+    @media (min-width: 768px) {
+        
+        .list-wrapper {
+            margin: 40px -10px 0;
+
+            & > div {
+                margin: 0 10px;
+            }
+
+        }
+
+        .toplist {
+            width: 50%;
+        }
+
+        .details {
+            display: block;
+        }
+
     }
     
 </style>
