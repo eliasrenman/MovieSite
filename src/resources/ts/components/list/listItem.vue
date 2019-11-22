@@ -3,7 +3,7 @@
         <span class="entry-counter" v-if="use_counter">
             {{ list_index + 1 }}
         </span>
-        <a :href=link>
+        <a :href=link v-on:click.prevent="$emit('getPreview', detail_endpoint)">
             <p>
                 <span class="title">{{ name }}</span>
                 <span class="date">
@@ -81,6 +81,13 @@ export default {
                 return this.data.title;
             
             return this.data.name;
+        },
+
+        detail_endpoint() {
+            let media_type = this.media_type !== "" ? 
+                this.media_type : this.data.media_type;
+            return media_type + "?id=" + this.data.id;
+                
         },
 
         /**
