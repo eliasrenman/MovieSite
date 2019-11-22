@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import SwaggerController from '../controllers/SwaggerController';
+import SwaggerController from '../controllers/web/SwaggerController';
 import {mem_cache} from '../middleware/CacheMiddleware';
 
 // Init router and path

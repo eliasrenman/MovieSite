@@ -1,9 +1,9 @@
 import path from 'path';
 import { Request, Response, Router } from 'express';
 import csrf from 'csurf';
-import DetailController from 'src/controllers/DetailController';
+import DetailController from 'src/controllers/web/DetailController';
 import { internalApiGet } from 'src/shared/ApiGet';
-import TopController from 'src/controllers/TopController';
+import TopController from 'src/controllers/web/TopController';
 
 const csrfProtection = csrf({ cookie: true });
 
