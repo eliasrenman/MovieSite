@@ -14,6 +14,15 @@ import ajax from '../../utilities/ajax';
 import tile from './tile.vue';
 const _ = require('lodash');
 export default {
+    props: {
+        type: {
+            type: String,
+            default: 'all'
+        }
+    },
+    // props: [
+    //     'category'
+    // ],
     data() {
         return {
             data: {
@@ -31,6 +40,23 @@ export default {
                 this.loadMore();
             }).catch(error => console.log(error));
     },
+    computed: {
+        endpoint() {
+            let _endpoint = '/api/v1/trending/';
+            switch(this.type) {
+                case 'tv': {
+                    return _endpoint + 'tv/'
+                }
+                case 'movie': {
+                    return _endpoint + 'movie/'
+                }
+                default: {
+                    return _endpoint;
+                }
+            }
+        }
+    },
+
     methods: {
         throttledLoadMore: _.throttle(function() {
                 this.loadMore(); 
@@ -42,7 +68,7 @@ export default {
             return new Promise((resolve, rejects) => {
                 this.data.page = this.data.page+1;
                 let payload = {page: this.data.page};
-                ajax.get('/api/v1/trending/', payload)
+                ajax.get(this.endpoint, payload)
                     .then(response => {
                         resolve("");
                         this.updateData(response);

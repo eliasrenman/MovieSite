@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
 import {mem_cache, db_cache} from 'src/middleware/CacheMiddleware';
-import ApiController from 'src/controllers/api/v1/ApiController';
+import ApiTrendingController from 'src/controllers/api/v1/ApiTrendingController';
 import ApiSearchController from 'src/controllers/api/v1/ApiSearchController';
 import ApiDetailsController from 'src/controllers/api/v1/ApiDetailController';
 import ApiTopController from 'src/controllers/api/v1/ApiTopController';
@@ -14,7 +14,11 @@ const EXPIRATION_TIME_SECONDS = 43200;
 /**
  * Trending page showed on start page.
  */
-router.get('/trending', parseForm, db_cache(EXPIRATION_TIME_SECONDS), new ApiController().trending);
+router.get('/trending', parseForm, db_cache(EXPIRATION_TIME_SECONDS), new ApiTrendingController().index);
+
+router.get('/trending/tv', parseForm, db_cache(EXPIRATION_TIME_SECONDS), new ApiTrendingController().tv);
+
+router.get('/trending/movie', parseForm, db_cache(EXPIRATION_TIME_SECONDS), new ApiTrendingController().movie);
 
 /**
  * Top lists.

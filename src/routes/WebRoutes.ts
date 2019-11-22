@@ -1,9 +1,11 @@
 import path from 'path';
 import { Request, Response, Router } from 'express';
 import csrf from 'csurf';
-import DetailController from 'src/controllers/DetailController';
-import { internalApiGet } from 'src/shared/ApiGet';
-import TopController from 'src/controllers/TopController';
+import DetailController from 'src/controllers/web/DetailController';
+
+import TopController from 'src/controllers/web/TopController';
+import SearchController from 'src/controllers/web/SearchController';
+import TrendingController from 'src/controllers/web/TrendingController';
 
 const csrfProtection = csrf({ cookie: true });
 
@@ -13,49 +15,22 @@ const viewsDir = path.join(__dirname, '../views');
 const router = Router();
 
 /**
- * Renders home page.
+ * Trending pages.
  */
-router.get('/', csrfProtection, (req: Request, res: Response) => {
-    const csrfToken = req.csrfToken();
-    res.render('index', {csrfToken: csrfToken, title: "Home"});
-});
+router.get('/', csrfProtection, new TrendingController().index);
+router.get('/trending/series', csrfProtection, new TrendingController().tv);
+router.get('/trending/movie', csrfProtection, new TrendingController().movie);
 
+
+/**
+ * Search page
+ */
 router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
-    let page = req.query.page || 1;
-    let payload: any = undefined;
-    let category = undefined;
-    switch (req.query.category) {
-        case 'tv': {
-            category = '/tv';
-            break;
-        }
-        case 'movie': {
-            category = '/movie';
-            break;
-        }
-        case 'person': {
-            category = '/person';
-            break;
-        }
-        default: {
-            category = '';
-            break;
-        }
-    }
-
-    if(req.query.query) {
-        payload = await internalApiGet('api/v1/search' + category, {
-            query: req.query.query || '',
-            page: page, 
-        });
-    }
-    
-    const csrfToken = req.csrfToken();
-    res.render('search', {csrfToken: csrfToken, title: 'Search', payload: payload});
+    new SearchController().index(req, res);
 });
 
 /**
- * Top list routes
+ * Top list pages
  */
 router.get('/toplist', (req: Request, res: Response) => {
     res.redirect('/toplist/movie/');
