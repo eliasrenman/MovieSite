@@ -3,6 +3,8 @@
     <a :href="activeUrl('/')">Home</a>
     <a :href="activeUrl('/toplist/movie')">Top movies</a>
     <a :href="activeUrl('/toplist/series')">Top series</a>
+    <a :href="activeUrl('/trending/movie')">Trending movies</a>
+    <a :href="activeUrl('/trending/series')">Trending series</a>
     <a v-if="!isMobile" :href="activeUrl('/search')">Search</a>
     <search v-else></search>
   </div>
