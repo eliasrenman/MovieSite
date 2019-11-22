@@ -1,18 +1,18 @@
 <template>
     <div class="details-main">
         <div class="details-side">
-            <div style="display:inline-block"></div>
-            <div 
-                style="display: inline-block"
-                @click="redirect()"
-                class="link"
-            >
-                <h1 class="max-width">{{name}}</h1>
-            
-            <h2 
-                v-if="original_name">{{original_name}}
-            </h2>
-    
+            <div style="inline-block">
+
+                <div 
+                    @click="redirect()"
+                    class="link max-width"
+                >
+                    <h1>{{name}}</h1>
+                    <h2 
+                        v-if="original_name">{{original_name}}
+                    </h2>
+        
+                </div>
             </div>
             
             <img 
@@ -146,6 +146,10 @@ export default {
     @use '../../../sass/variables' as *;
     @use "sass:map";
     
+    .link {
+        display: inline-block;
+    }
+
     .link:hover {
         cursor: pointer;
         text-decoration: underline;
@@ -173,4 +177,13 @@ export default {
     .max-width {
         max-width: 80%;
     }
+
+    a {
+        color: $primary-text;
+        text-decoration: none;
+        &:hover {
+        text-decoration: underline;
+        }
+    }
+
 </style>
