@@ -74,10 +74,17 @@
             <p v-if="data.biography">{{ data.biography }}</p>
             
             <h2>Information</h2>
-            <p v-if="stars">
-                <span>Stars: </span>
-                {{ stars.slice(0,5).join(', ') }}
-            </p>
+            <div v-if="stars">
+                <p v-if="stars.length > 1">
+                    <span>Notable actors: </span>
+                    {{ stars.slice(0,5).join(', ') }}
+                </p>
+                <p v-else>
+                    <span>Notable actor: </span>
+                    {{ stars.slice(0,5).join(', ') }}
+                </p>
+                
+            </div>
             <p v-if="data.homepage">
                 <span>Website: </span>
                 <a :href=data.homepage>{{data.homepage}}</a>
