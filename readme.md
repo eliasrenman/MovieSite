@@ -48,6 +48,8 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Person details is borked™ ( ´･･)ﾉ(._.`)
 - [X] Issue with scroll to top on mobile
 - [ ] Adding specific trending pages for movies and series
-- [ ] Top list mobile anpassning
+- [X] Top list mobile anpassning
+- [ ] Details on toplist page
 - [ ] Details page styling
+- [ ] Pagination mobile anpassning
 - [ ] Do code stuff... ༼ つ ◕_◕ ༽つ
