@@ -1,5 +1,4 @@
 <template>
-
     <li class="list-item">
         <span class="entry-counter" v-if="use_counter">
             {{ list_index + 1 }}
@@ -20,7 +19,8 @@
                     </span> 
                 </span>
             </p>
-            <img alt="Poster" :src=image_cover>
+            <!--<img alt="Poster" :src=image_cover>-->
+            <div class="poster" :style="{ backgroundImage: `url(${image_cover})` }"></div>
         </a>
     </li>
 </template>
@@ -138,20 +138,25 @@ export default {
     }
 }
 </script>
+
 <style lang="scss" scoped>
     @use '../../../sass/variables' as *;
 
     .list-item {
         display: flex;
-        align-items: center;
+        align-items: stretch;
+        max-width: 100%;
         margin-bottom: 15px;
-        color: #fff;
+        color: $text-light;
         background-color: $primary;
         border-radius: 20px 0 0 20px;
         box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        overflow: hidden;
 
         .entry-counter {
-            padding: 40px;
+            align-self: center;
+            padding: 20px;
+            padding-right: 0;
             text-align: center;
             font-weight: 300;
         }
@@ -159,7 +164,7 @@ export default {
         a {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: stretch;
             width: 100%;
             text-decoration: none;
             color: var(--c-primary-text);
@@ -174,36 +179,62 @@ export default {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                height: 100%;
                 margin: 0;
-                padding: 15px 0px;    
+                padding: 20px 0 20px 20px;    
                 font-size: 16px;
             }
 
             .title {
-                margin-bottom: 3px;
-                padding: 0 10px 2px 0;
+                margin-bottom: 5px;
+                padding: 0 10px 10px 0;
                 font-size: 1.8em;
+                line-height: 1.1em;
                 border-bottom: 1px solid rgba(255,255,255,0.5);
             }
 
-            img {
-                min-height: 130px;
-                width: 200px;
-                background-color: rgba(255,255,255,0.2);
-                object-fit: cover;
-                object-position: 50% 5%;
+            .poster {
+                min-width: 80px;
+                background-size: cover;
+                background-position: center;
                 clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
-                filter: grayscale(50%);
-                transition: object-position 0.3s, filter 0.3s;
-            }
-
-            &:hover img {
-                object-position: 50% 10%;
-                filter: grayscale(0%);
             }
 
         }
 
+    }
+
+    @media (min-width: 768px) {
+        
+        .list-item {
+            
+            .entry-counter {
+                padding: 40px;
+                padding-right: 0;
+            }
+            
+            a {
+
+                p {
+                    padding: 15px 0 15px 40px;
+                }
+
+                .poster {
+                    min-width: 200px;
+                    background-position: 50% 0;
+                    filter: grayscale(50%);
+                    transition: background-position 0.3s, filter 0.3s;
+                }
+
+                &:hover .poster {
+                    background-position: 50% 10%;
+                    filter: grayscale(0%);
+                }
+
+            }
+
+        }
+    
     }
 
 </style>

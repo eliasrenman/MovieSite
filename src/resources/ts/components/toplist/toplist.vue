@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
       <list 
             v-if="page_data.results.length > 0" 
             :data=page_data 
