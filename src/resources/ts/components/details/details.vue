@@ -2,7 +2,7 @@
     <div class="details-main">
         <div class="details-side">
             <img :src=image_cover alt="Image cover"/>
-            <div>
+            <div v-if="data.type != 'person'">
                 <p>
                     <span>Genre:</span> 
                     {{ genres.join(', ') }}
@@ -44,11 +44,26 @@
                     </p>
                 </div>
             </div>
+            <div v-else>
+                <p>
+                    <span>Birthday:</span> 
+                    {{ data.birthday }}
+                </p>
+                <p v-if="data.deathday">
+                    <span>Deathday:</span> 
+                    {{ data.deathday }}
+                </p>
+                <p v-if="data.place_of_birth">
+                    <span>Place of birth:</span> 
+                    {{ data.place_of_birth }}
+                </p>
+            </div>
         </div>
         <div class="details-content">
             <h1>{{ name }}</h1>
             <h2 v-if="original_name">{{original_name}}</h2>
-            <p>{{ data.overview }}</p>
+            <p v-if="data.overview">{{ data.overview }}</p>
+            <p v-if="data.biography">{{ data.biography }}</p>
             
             <h2>Information</h2>
             <p v-if="stars">
@@ -76,14 +91,22 @@ export default {
          * Gets the path for the image cover
          */
         image_cover() {
-            return "https://image.tmdb.org/t/p/w500/" + this.data.poster_path;
+            switch (this.data.type) {
+                case 'person': 
+                    return "https://image.tmdb.org/t/p/w500/" + this.data.profile_path;
+                default: 
+                    return "https://image.tmdb.org/t/p/w500/" + this.data.poster_path;
+            }
+            
         },
         
         /**
          * Returns the genres that a series or person is in.
          */
         genres() {
-            return this.data.genres.map(a => a.name);
+            if(this.data.genres)
+                return this.data.genres.map(a => a.name);
+            return undefined;
         },
 
         /**
@@ -91,12 +114,10 @@ export default {
          */
         name() {
             switch(this.data.type) {
-                case('series'): 
-                    return this.data.name;
                 case('movie'):
                     return this.data.title;
                 default:
-                    return [''];
+                    return this.data.name;
             }
         },
         
@@ -145,7 +166,9 @@ export default {
          * Returns a list of the names of the cast. 
          */
         stars() {
-            return this.data.cast.map(a => a.name);
+            if(this.data.cast)
+                return this.data.cast.map(a => a.name);
+            
         },
     }
     

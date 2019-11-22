@@ -59,7 +59,9 @@ export default {
          */
         image_cover() {
             if(this.data.profile_path || this.data.poster_path) {
-                switch(this.media_type) {       
+                let media_type = this.media_type !== "" ? 
+                    this.media_type : this.data.media_type;
+                switch(media_type) {       
                     case('person'):
                         return "https://image.tmdb.org/t/p/w500/" + this.data.profile_path;
                     default:
@@ -85,7 +87,9 @@ export default {
          * Returns the media type as a string.
          */
         media_type_string() {
-           switch(this.media_type) {
+            let media_type = this.media_type !== "" ? 
+                    this.media_type : this.data.media_type;
+           switch(media_type) {
                 case('tv'): 
                     return 'Series';
                 case('movie'):
@@ -102,7 +106,9 @@ export default {
          * Returns the link of the movie or series
          */
         link() {
-            switch(this.media_type) {
+            let media_type = this.media_type !== "" ? 
+                    this.media_type : this.data.media_type;
+            switch(media_type) {
                 case('tv'): 
                     return '/series/' + this.data.id;
                 case('movie'):
@@ -116,7 +122,9 @@ export default {
          * Returns the date of the movie or series release date.
          */
         release_date() {
-            switch(this.media_type) {
+            let media_type = this.media_type !== "" ? 
+                    this.media_type : this.data.media_type;
+            switch(media_type) {
                 case('tv'): 
                     return this.data.first_air_date;
                 case('movie'):

@@ -19,12 +19,7 @@ Vue.component('vue-toplist', toplist);
 Vue.component('vue-top', scroll_top);
 
 Vue.use(infiniteScroll);
-/**Feaured tiles components */
-
-// url for getting images.
-// https://image.tmdb.org/t/p/w500/imgId
 
 new Vue({
     el: '#app',
-    // directives: {infiniteScroll}
 })

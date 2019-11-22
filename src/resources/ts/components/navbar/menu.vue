@@ -10,11 +10,19 @@
 
 <script>
 import search from './search.vue';
+import  {throttle} from 'lodash';
 export default {
     data() {
         return {
             isActive: true
         };
+    },
+    created () {
+        this.isActive = !this.isMobile;
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed () {
+        window.removeEventListener('scroll', this.handleScroll);
     },
     computed: {
         isMobile() {
@@ -22,9 +30,21 @@ export default {
         },
     },
     methods: {
+        handleScroll: throttle(function() {
+            if(this.isMobile) 
+                return;
+
+            if(window.scrollY > 0 && this.isActive) {
+                this.isActive = false;
+            } else if (window.scrollY == 0 && !this.isActive) {
+                this.isActive = true;
+            }
+        }, 100, {leading: false, trailing: true}),
+        
         onShow() {
             this.isActive = !this.isActive;
         },
+
         activeUrl(url) {
             let path = window.location.pathname;
             if (url == path) {
