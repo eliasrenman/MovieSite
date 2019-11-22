@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import details from '../details/detailsPage.vue';
 import listItem from './listItem.vue';
 import paginate from 'vuejs-paginate';
 
