@@ -51,6 +51,7 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Top list mobile anpassning
 - [x] Details preview on toplist page
 - [X] Pagination mobile anpassning
+- [ ] Add groups to dropdown to minimize the width of it
 - [ ] Add ratings on list preview
 - [ ] Details page styling
 - [ ] Do code stuff... ༼ つ ◕_◕ ༽つ
