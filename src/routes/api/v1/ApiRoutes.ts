@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
 import {mem_cache, db_cache} from 'src/middleware/CacheMiddleware';
-import ApiController from 'src/controllers/api/v1/ApiController';
+import ApiController from 'src/controllers/api/v1/ApiTrendingController';
 import ApiSearchController from 'src/controllers/api/v1/ApiSearchController';
 import ApiDetailsController from 'src/controllers/api/v1/ApiDetailController';
 import ApiTopController from 'src/controllers/api/v1/ApiTopController';
