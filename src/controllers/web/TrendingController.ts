@@ -7,11 +7,11 @@ class TrendingController {
     }
 
     public tv(req: Request, res: Response) {
-        res.render('index', {title: "Trending Series"});
+        res.render('index', {title: "Trending Series", type: 'tv'});
     }
     
     public movie(req: Request, res: Response) {
-        res.render('index', {title: "Trending Movies"});
+        res.render('index', {title: "Trending Movies", type: 'movie'});
     }
 }
 export default TrendingController;
