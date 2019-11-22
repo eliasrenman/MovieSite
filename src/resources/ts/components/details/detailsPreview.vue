@@ -1,12 +1,26 @@
 <template>
     <div class="details-main">
         <div class="details-side">
-            <div>
-                <h1 class="overview-text">{{name}}</h1>
+            <div style="display:inline-block"></div>
+            <div 
+                style="display: inline-block"
+                @click="redirect()"
+                class="link"
+            >
+                <h1 class="max-width">{{name}}</h1>
+            
+            <h2 
+                v-if="original_name">{{original_name}}
+            </h2>
+    
             </div>
-            <h2 v-if="original_name">{{original_name}}</h2>
-
-            <img :src=image_cover alt="Image cover"/>
+            
+            <img 
+                @click="redirect()" 
+                class="link"
+                :src=image_cover
+                alt="Image cover"
+            />
             <div v-if="data.type != 'person'">
                 <!-- SERIES SPECIFIC START -->
                 <div v-if="data.type == 'series'">
@@ -26,7 +40,8 @@
         </div>
         <div class="details-content">
             <h2 class="mb-0">Synopsis</h2>
-            <p class="mt-1 overview-text" v-if="synopsis">{{ synopsis }}</p>
+            <p class="mt-1 max-width" v-if="synopsis">{{ synopsis }}</p>
+            <a :href=link>More info</a>
         </div>
     </div>
 </template>
@@ -54,7 +69,7 @@ export default {
         },
         
         synopsis() {
-            let allowedLength = 500;
+            let allowedLength = 300;
             let str = undefined;
             if(this.data.overview) {
                 str = this.data.overview.substring(0,allowedLength);
@@ -103,15 +118,38 @@ export default {
             }
             return undefined;
         },
+
+        /**
+         * Returns the link of the movie or series
+         */
+        link() {
+            let media_type = this.data.type;
+            switch(media_type) {
+                case('tv'): 
+                    return '/series/' + this.data.id;
+                case('movie'):
+                    return '/movie/' + this.data.id;
+                default:
+                    return '/person/' + this.data.id;
+            } 
+        },
+    },
+    methods: {
+        redirect() {
+            window.location.href = this.link;
+        }
     }
-    
 }
 </script>
 <style lang="scss" scoped>
 
     @use '../../../sass/variables' as *;
     @use "sass:map";
-
+    
+    .link:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
     h1, h2 {
         color: $primary-text;
     }
@@ -132,7 +170,7 @@ export default {
             align-self: center;
         }
     }
-    .overview-text {
+    .max-width {
         max-width: 80%;
     }
 </style>
