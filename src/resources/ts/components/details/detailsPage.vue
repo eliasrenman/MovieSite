@@ -62,6 +62,14 @@
         <div class="details-content">
             <h1>{{ name }}</h1>
             <h2 v-if="original_name">{{original_name}}</h2>
+            <div class="details-rating">
+                {{ data.vote_average }} / 10
+                <div class="stars">
+                    <div class="full">★★★★★</div>
+                    <div class="percent" :style="{width: 'calc( ' + data.vote_average + ' * 10%)'}">★★★★★</div>
+                </div>
+                <span class="small">{{ data.vote_count }} votes</span>
+            </div>
             <p v-if="data.overview">{{ data.overview }}</p>
             <p v-if="data.biography">{{ data.biography }}</p>
             
@@ -216,6 +224,40 @@ export default {
 
         h1, h2 {
             color: $primary-text;
+        }
+
+    }
+
+    .details-rating {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        font-size: 22px;
+        color: $text-light;
+        background-color: $primary;
+        border-radius: 10px;
+
+        .stars {
+            position: relative;
+            margin: 0 0 5px 10px;
+            font-size: 32px;
+
+            .full {
+                color: $primary-text-light;
+            }
+
+            .percent {
+                position: absolute;
+                top: 0;
+                color: $text-light;
+                overflow-x: hidden;
+            }
+
+        }
+
+        .small {
+            margin-left: auto;
+            font-size: 0.8em;
         }
 
     }
