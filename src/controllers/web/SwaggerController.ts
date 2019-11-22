@@ -15,7 +15,7 @@ class SwaggerController {
      * @param res response
      */
     index(req: Request, res: Response) {
-        const viewsDir = path.join(__dirname, '../views/docs/');
+        const viewsDir = path.join(__dirname, '../../views/docs/');
         res.sendFile(viewsDir + 'index.html');
     }
 
