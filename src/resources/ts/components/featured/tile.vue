@@ -3,7 +3,9 @@
     <a :href="data.id" class="grid-item">
         <img class="grid-item-image" :src="image_cover" :alt=data.title  /> 
         <span class="grid-item-hover">
-            <p class="grid-item-title" v-text="data.title"></p>
+            <div class="grid-item-title">
+                <p v-text="data.title"></p>
+            </div>
             <p class="grid-item-description" v-if="data.tileSizeBig" v-text="data.overview"></p>
             <p class="grid-item-rating">{{data.vote_average}} / 10</p>
         </span>
@@ -63,7 +65,7 @@ export default {
             left: 0;
             height: 100%;
             width: 100%;
-            padding: 25px;
+            padding: 15px;
             text-align: center;
             text-decoration: none;
             color: #fff;
@@ -85,11 +87,40 @@ export default {
         }
 
         .grid-item-title {
+            position: relative;
+            top: -20px;
             padding-bottom: 13px;
             font-size: 32px;
             font-weight: 300;
             line-height: 1.1em;
+            word-break: break-word;
             border-bottom: 1px solid #fff;
+            opacity: 0;
+            transition: opacity 0.3s, top 0.3s;
+            transition-delay: 0.4s;
+
+            p {
+                overflow-y: hidden;
+                height: 100%;
+                margin: 2px 0;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+            }
+
+        }
+
+        .grid-item-title, .grid-item-description, .grid-item-rating {
+            position: relative;
+            top: -20px;
+            opacity: 0;
+            transition: opacity 0.3s, top 0.3s;
+            transition-delay: 0.3s;
+        }
+
+        &:hover .grid-item-title, &:hover .grid-item-description, &:hover .grid-item-rating {
+            top: 0;
+            opacity: 1;
         }
 
     }
