@@ -2,8 +2,9 @@ import path from 'path';
 import { Request, Response, Router } from 'express';
 import csrf from 'csurf';
 import DetailController from 'src/controllers/web/DetailController';
-import { internalApiGet } from 'src/shared/ApiGet';
+
 import TopController from 'src/controllers/web/TopController';
+import SearchController from 'src/controllers/web/SearchController';
 
 const csrfProtection = csrf({ cookie: true });
 
@@ -21,37 +22,7 @@ router.get('/', csrfProtection, (req: Request, res: Response) => {
 });
 
 router.get('/search/', csrfProtection, async (req: Request, res: Response) => {
-    let page = req.query.page || 1;
-    let payload: any = undefined;
-    let category = undefined;
-    switch (req.query.category) {
-        case 'tv': {
-            category = '/tv';
-            break;
-        }
-        case 'movie': {
-            category = '/movie';
-            break;
-        }
-        case 'person': {
-            category = '/person';
-            break;
-        }
-        default: {
-            category = '';
-            break;
-        }
-    }
-
-    if(req.query.query) {
-        payload = await internalApiGet('api/v1/search' + category, {
-            query: req.query.query || '',
-            page: page, 
-        });
-    }
-    
-    const csrfToken = req.csrfToken();
-    res.render('search', {csrfToken: csrfToken, title: 'Search', payload: payload});
+    new SearchController().index(req, res);
 });
 
 /**
