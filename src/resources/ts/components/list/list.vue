@@ -34,7 +34,7 @@
 <script>
 import listItem from './listItem.vue';
 import paginate from 'vuejs-paginate';
-import details from '../details/detailsPage.vue';
+import details from '../details/detailsPreview.vue';
 import Ajax from '../../utilities/ajax';
 export default {
     props: {
@@ -58,7 +58,6 @@ export default {
     data() {
         return {
             'details_preview': undefined,
-            old_url: undefined,
         }
     },
     computed: {
@@ -70,14 +69,9 @@ export default {
         }
     },
     methods: {
-        getPreview(url) {
-            if(url != this.old_url) {
-                Ajax.get('/api/v1/' + url)
-                .then((res) => {
-                    this.details_preview = res;
-                    this.old_url = url;
-                });
-            }
+        getPreview(endpoint) {
+            endpoint[1].type = endpoint[0];
+            this.details_preview = endpoint[1];
         },
         /**
          * Pagination onclick callback function.

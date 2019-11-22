@@ -3,7 +3,7 @@
         <span class="entry-counter" v-if="use_counter">
             {{ list_index + 1 }}
         </span>
-        <a :href=link v-on:click.prevent="$emit('getPreview', detail_endpoint)">
+        <a :href=link v-on:click.prevent="onClick">
             <p>
                 <span class="title">{{ name }}</span>
                 <span class="date">
@@ -45,8 +45,20 @@ export default {
             default: true
         }
     },
-    computed: {
+    methods: {
+        onClick() {
+            if(this.isMobile) {
+                window.location.href = this.link;
 
+            } else {
+                this.$emit('getPreview', this.detail_endpoint)
+            }
+        }
+    },
+    computed: {
+        isMobile() {
+            return (screen.width <= 760);
+        },
         /**
          * Returns the list index
          */
@@ -86,7 +98,8 @@ export default {
         detail_endpoint() {
             let media_type = this.media_type !== "" ? 
                 this.media_type : this.data.media_type;
-            return media_type + "?id=" + this.data.id;
+            
+            return [media_type, this.data];
                 
         },
 
