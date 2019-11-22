@@ -50,7 +50,7 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Adding specific trending pages for movies and series
 - [X] Top list mobile anpassning
 - [x] Details preview on toplist page
+- [X] Pagination mobile anpassning
 - [ ] Add ratings on list preview
 - [ ] Details page styling
-- [ ] Pagination mobile anpassning
 - [ ] Do code stuff... ༼ つ ◕_◕ ༽つ
