@@ -2,7 +2,7 @@
     <div class="details-main">
         <div class="details-side">
             <div>
-                <h1>{{name}}</h1>
+                <h1 class="overview-text">{{name}}</h1>
             </div>
             <h2 v-if="original_name">{{original_name}}</h2>
 
@@ -26,9 +26,7 @@
         </div>
         <div class="details-content">
             <h2 class="mb-0">Synopsis</h2>
-            <p class="mt-1 overview-text" v-if="data.overview">{{ data.overview }}</p>
-            <p class="mt-1 overview-text" v-if="data.biography">{{ data.biography }}</p>
-            
+            <p class="mt-1 overview-text" v-if="synopsis">{{ synopsis }}</p>
         </div>
     </div>
 </template>
@@ -55,13 +53,18 @@ export default {
             
         },
         
-        /**
-         * Returns the genres that a series or person is in.
-         */
-        genres() {
-            if(this.data.genres)
-                return this.data.genres.map(a => a.name);
-            return undefined;
+        synopsis() {
+            let allowedLength = 500;
+            let str = undefined;
+            if(this.data.overview) {
+                str = this.data.overview.substring(0,allowedLength);
+            } else if(this.data.biography) {
+                str = this.data.biography.substring(0,allowedLength);
+            }
+            if(str && str.length >= allowedLength) {
+                str += "...";
+            }
+            return str;
         },
 
         /**
@@ -99,15 +102,6 @@ export default {
                 return original_name;
             }
             return undefined;
-        },
-
-        /**
-         * Returns a list of the names of the cast. 
-         */
-        stars() {
-            if(this.data.cast)
-                return this.data.cast.map(a => a.name);
-            
         },
     }
     
