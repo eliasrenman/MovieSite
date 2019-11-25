@@ -6,7 +6,7 @@
             <div class="grid-item-title">
                 <p v-text="data.title"></p>
             </div>
-            <p class="grid-item-description" v-if="data.tileSizeBig" v-text="data.overview"></p>
+            <p class="grid-item-description" v-if="data.tileSizeBig" v-text="synopsis"></p>
             <p class="grid-item-rating">{{data.vote_average}} / 10</p>
         </span>
     </a>
@@ -21,7 +21,20 @@ export default {
             if (this.data.tileSizeBig) 
                 return 'https://image.tmdb.org/t/p/w500' + this.data.poster_path;
             return 'https://image.tmdb.org/t/p/w300' + this.data.poster_path;
-        }
+        },
+        synopsis() {
+            let allowedLength = 300;
+            let str = undefined;
+            if(this.data.overview) {
+                str = this.data.overview.substring(0,allowedLength);
+            } else if(this.data.biography) {
+                str = this.data.biography.substring(0,allowedLength);
+            }
+            if(str && str.length >= allowedLength) {
+                str += "...";
+            }
+            return str;
+        },
     }
 }
 </script>
