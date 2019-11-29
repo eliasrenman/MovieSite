@@ -1,9 +1,11 @@
 <template>
   <div class="vue-menu" v-bind:class="{ active: isActive }">
     <a :href="activeUrl('/')">Home</a>
-    <span class="inline-dropdown" v-if="!isMobile">
-        <a href="#" @click.prevent="toggleDropDown('topDropdown')">Top list</a>
-        <div  class="dropdown" :class="{'show': dropdowns.topDropdown}">
+    
+    <span class="inline-dropdown" v-if="!isMobile" :class="{'active': dropdowns.topDropdown}">
+        <a href="#" @click.prevent="toggleDropDown('topDropdown')" >Top list</a>
+        <div  class="dropdown" 
+            :class="{'show': dropdowns.topDropdown, 'active': dropdowns.topDropdown}">
             <a :href="activeUrl('/toplist/movie')">Movies</a>
             <a :href="activeUrl('/toplist/series')">Series</a>
         </div>
@@ -13,10 +15,13 @@
         <a :href="activeUrl('/toplist/movie')">Top movies</a>
         <a :href="activeUrl('/toplist/series')">Top series</a>
     </span>
-    <span class="inline-dropdown" v-if="!isMobile">
+    
+    <span class="inline-dropdown" v-if="!isMobile" :class="{'active': dropdowns.trendingDropdown}">
         <a href="#" @click.prevent="toggleDropDown('trendingDropdown')">Trending</a>
 
-        <div  class="dropdown" :class="{'show': dropdowns.trendingDropdown}">
+        <div  class="dropdown" 
+            :class="{'show': dropdowns.trendingDropdown, 'active': dropdowns.trendingDropdown}"
+        >
             <a :href="activeUrl('/trending/movie')">Movies</a>
             <a :href="activeUrl('/trending/series')">Series</a>
         </div>
@@ -105,11 +110,13 @@ export default {
         background-color: $primary;
         border-radius: 0 0 10px 10px;
         a {
-            margin: 5px;
+            margin: 5px 0;
         }
     }
     .show {
-        display: block;
+        display: table;
+        width: 100%;
+        table-layout: fixed;
     }
 
     .inline-dropdown {
@@ -125,6 +132,9 @@ export default {
         height: 0;
         font-size: 0;
         transition: all 0.3s;
+        .active {
+            background: #476b8e;
+        }
 
         button {
             display: flex;
