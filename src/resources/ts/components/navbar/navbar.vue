@@ -30,7 +30,6 @@ export default {
             this.$refs.vue_menu.onShow();
         },
         atTopChanged(boolean) {
-            console.log("this happens");
             this.isAtTop = boolean;
         }
     },
