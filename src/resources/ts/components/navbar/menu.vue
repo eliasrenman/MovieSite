@@ -1,10 +1,30 @@
 <template>
   <div class="vue-menu" v-bind:class="{ active: isActive }">
     <a :href="activeUrl('/')">Home</a>
-    <a :href="activeUrl('/toplist/movie')">Top movies</a>
-    <a :href="activeUrl('/toplist/series')">Top series</a>
-    <a :href="activeUrl('/trending/movie')">Trending movies</a>
-    <a :href="activeUrl('/trending/series')">Trending series</a>
+    <span class="inline-dropdown" v-if="!isMobile">
+        <a href="#" @click.prevent="toggleDropDown('topDropdown')">Top list</a>
+        <div  class="dropdown" :class="{'show': dropdowns.topDropdown}">
+            <a :href="activeUrl('/toplist/movie')">Movies</a>
+            <a :href="activeUrl('/toplist/series')">Series</a>
+        </div>
+        
+    </span>
+    <span v-else>
+        <a :href="activeUrl('/toplist/movie')">Top movies</a>
+        <a :href="activeUrl('/toplist/series')">Top series</a>
+    </span>
+    <span class="inline-dropdown" v-if="!isMobile">
+        <a href="#" @click.prevent="toggleDropDown('trendingDropdown')">Trending</a>
+
+        <div  class="dropdown" :class="{'show': dropdowns.trendingDropdown}">
+            <a :href="activeUrl('/trending/movie')">Movies</a>
+            <a :href="activeUrl('/trending/series')">Series</a>
+        </div>
+    </span>
+    <span v-else>
+        <a :href="activeUrl('/trending/movie')">Trending movies</a>
+        <a :href="activeUrl('/trending/series')">Trending series</a>
+    </span>
     <a v-if="!isMobile" :href="activeUrl('/search')">Search</a>
     <search v-else></search>
   </div>
@@ -16,7 +36,11 @@ import  {throttle} from 'lodash';
 export default {
     data() {
         return {
-            isActive: true
+            isActive: true,
+            dropdowns: {
+                "trendingDropdown": false,
+                "topDropdown": false,
+            }
         };
     },
     created () {
@@ -32,6 +56,16 @@ export default {
         },
     },
     methods: {
+        toggleDropDown(dropdown) {
+            for (const [key, value] of Object.entries(this.dropdowns)) {
+                if(dropdown == key) {
+                    this.dropdowns[key] = !this.dropdowns[key];
+                } else {
+                    this.dropdowns[key] = false;
+                }
+            }
+        },
+
         handleScroll: throttle(function() {
             if(this.isMobile) 
                 return;
@@ -64,6 +98,25 @@ export default {
 <style lang="scss" scoped>
 
     @use '../../../sass/variables' as *;
+    .dropdown {
+        display: none;
+        position: absolute;
+        top: 45px;
+        background-color: $primary;
+        border-radius: 0 0 10px 10px;
+        a {
+            margin: 5px;
+        }
+    }
+    .show {
+        display: block;
+    }
+
+    .inline-dropdown {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
 
     .vue-menu{
         display: flex;
