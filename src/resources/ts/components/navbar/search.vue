@@ -38,7 +38,7 @@ export default {
     .search-field {
         display: flex;
         align-items: center;
-
+        margin-top: 1vh;
         input {
             width: 100%;
             margin-right: 10px;
@@ -47,9 +47,8 @@ export default {
             font-weight: 300;
             background-color: $text-light;
             border: none;
+            outline: none;
             border-radius: 5px 5px 5px 15px;
-            outline-color: $primary;
-
             &::placeholder {
                 font-weight: 300;
                 color: $primary-text-light;
