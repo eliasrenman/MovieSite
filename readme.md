@@ -49,7 +49,9 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Issue with scroll to top on mobile
 - [X] Adding specific trending pages for movies and series
 - [X] Top list mobile anpassning
-- [ ] Details on toplist page
+- [X] Details preview on toplist page
+- [X] Pagination mobile anpassning
+- [X] Add groups to dropdown to minimize the width of it
+- [ ] Add ratings on list preview
 - [ ] Details page styling
-- [ ] Pagination mobile anpassning
 - [ ] Do code stuff... ༼ つ ◕_◕ ༽つ

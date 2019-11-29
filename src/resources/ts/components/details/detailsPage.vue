@@ -162,12 +162,15 @@ export default {
          * Returns the original name of a series or movie
          * if it is not the same as the translated name.
          */
-        original_name() {
-            if(
-                this.data.original_name &&
-                this.name != this.data.original_name) {
+        original_name() { 
+            let original_name = this.data.type == 'movie' ? 
+                this.data.original_title:
+                this.data.original_name;
+            
+            if(this.name &&
+                this.name != original_name) {
                 
-                return this.data.original_name;
+                return original_name;
             }
             return undefined;
         },
