@@ -84,6 +84,7 @@ export default {
         
         onShow() {
             this.isActive = !this.isActive;
+            this.toggleDropDown(undefined);
         },
 
         activeUrl(url) {
