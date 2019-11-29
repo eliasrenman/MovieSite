@@ -1,10 +1,10 @@
 <template>
     <div class="nav">
         <div class="menu">
-            <button type="button" @click="onShow" :at-top-change="atTopChanged" :class="{'no-pointer': isAtTop}">
+            <button type="button" @click="onShow" :class="{'no-pointer': isAtTop}">
                 <img id="vue-burger" src="/img/burger.svg" alt="hamburg menu toggle" />
             </button>
-            <vueMenu ref="vue_menu"></vueMenu>
+            <vueMenu ref="vue_menu" v-on:at-top-change="atTopChanged"></vueMenu>
         </div>
         <search v-if="!isMobile"></search>
         <img src="https://www.themoviedb.org/assets/2/v4/logos/powered-by-rectangle-blue-61ce76f69ce1e4f68a6031d975df16cc184d5f04fa7f9f58ae6412646f2481c1.svg">
@@ -30,6 +30,7 @@ export default {
             this.$refs.vue_menu.onShow();
         },
         atTopChanged(boolean) {
+            console.log("this happens");
             this.isAtTop = boolean;
         }
     },
