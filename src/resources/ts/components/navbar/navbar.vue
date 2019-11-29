@@ -1,7 +1,7 @@
 <template>
     <div class="nav">
         <div class="menu">
-            <button type="button" @click="onShow">
+            <button type="button" @click="onShow" :at-top-change="atTopChanged" :class="{'no-pointer': isAtTop}">
                 <img id="vue-burger" src="/img/burger.svg" alt="hamburg menu toggle" />
             </button>
             <vueMenu ref="vue_menu"></vueMenu>
@@ -15,6 +15,11 @@
 import search from './search.vue';
 import vueMenu from './menu.vue';
 export default {
+    data() {
+        return {
+            isAtTop: true,
+        }
+    },
     computed: {
         isMobile() {
             return (screen.width <= 760)
@@ -24,6 +29,9 @@ export default {
         onShow() {
             this.$refs.vue_menu.onShow();
         },
+        atTopChanged(boolean) {
+            this.isAtTop = boolean;
+        }
     },
     components: {
         search,
@@ -52,6 +60,9 @@ export default {
     }
 
     .menu {
+        .no-pointer {
+            cursor: inherit;
+        }
         display: flex;
         justify-content: flex-end;
         flex-direction: column;

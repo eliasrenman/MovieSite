@@ -42,6 +42,7 @@ export default {
     data() {
         return {
             isActive: true,
+            isAtTop: true,
             dropdowns: {
                 "trendingDropdown": false,
                 "topDropdown": false,
@@ -77,14 +78,21 @@ export default {
 
             if(window.scrollY > 0 && this.isActive) {
                 this.isActive = false;
+                this.isAtTop = false;
+                this.$emit('at-top-change', false);
+
             } else if (window.scrollY == 0 && !this.isActive) {
                 this.isActive = true;
+                this.isAtTop = true;
+                this.$emit('at-top-change', true);
             }
         }, 100, {leading: false, trailing: true}),
         
         onShow() {
-            this.isActive = !this.isActive;
-            this.toggleDropDown(undefined);
+            if(!this.isAtTop) {
+                this.isActive = !this.isActive;
+                this.toggleDropDown(undefined);
+            }
         },
 
         activeUrl(url) {
