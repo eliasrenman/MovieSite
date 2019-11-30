@@ -35,15 +35,21 @@
                 </div>
             </div>
         </div>
+        
+        <rating class="max-width"
+            :score="data.vote_average" :votes="data.vote_count"/>
+        
         <div class="details-content">
             <h2 class="mb-0" v-if="synopsis">Synopsis</h2>
             <p class="mt-1 max-width" v-if="synopsis">{{ synopsis }}</p>
             <a :href=link>More info</a>
         </div>
+        
     </div>
 </template>
 
 <script>
+import rating from '../details/rating.vue';
 
 const { getName } = require('country-list');
 const _ = require('lodash');
@@ -131,6 +137,9 @@ export default {
             } 
         },
     },
+    components: {
+        rating,
+    }
 }
 </script>
 <style lang="scss" scoped>
