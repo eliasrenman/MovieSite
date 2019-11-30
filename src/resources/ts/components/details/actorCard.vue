@@ -28,12 +28,18 @@ export default {
 <style lang="scss" scoped>
     @use '../../../sass/variables' as *;
     .container {
+        flex: 0 0 auto;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
         background-color: $primary;
         width: 138px;
         padding: 0;
         min-height: 250px;
+        margin: 0 7px;
+    }
+    img {
+        margin-right: 15px;
+        border-radius: 10px 10px 0 0; 
     }
     .text-wrapper {
         padding: 10px;

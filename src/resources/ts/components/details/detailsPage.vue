@@ -1,63 +1,65 @@
 <template>
     <div class="details-main">
         <div class="details-side">
-            <img :src=image_cover alt="Image cover"/>
-            <div v-if="data.type != 'person'">
-                <p>
-                    <span>Genre:</span> 
-                    {{ genres.join(', ') }}
-                </p>
-                <!-- SERIES SPECIFIC START -->
-                <div v-if="data.type == 'series'">
+            <div class="side-card">
+                <img :src=image_cover alt="Image cover" class="movie-img"/>
+                <div v-if="data.type != 'person'">
                     <p>
-                        <span>Episode Runtime:</span> 
-                        {{ data.episode_run_time[0] }} min
+                        <span>Genre:</span> 
+                        {{ genres.join(', ') }}
                     </p>
+                    <!-- SERIES SPECIFIC START -->
+                    <div v-if="data.type == 'series'">
+                        <p>
+                            <span>Episode Runtime:</span> 
+                            {{ data.episode_run_time[0] }} min
+                        </p>
+                        <p>
+                            <span>Seasons:</span> 
+                            {{ data.number_of_seasons }}
+                        </p>
+                        <p>
+                            <span>Episodes:</span> 
+                            {{ data.number_of_episodes }}
+                        </p>
+                        <p>
+                            <span>First release date:</span> 
+                            {{ data.first_air_date }}
+                        </p>
+                    </div>
+                    <!-- MOVIE SPECIFIC START -->
+                    <div v-else-if="data.type == 'movie'">
+                        <p>
+                            <span>Runtime:</span> 
+                            {{ data.runtime }} min
+                        </p>
+                        <p>
+                            <span>Release date:</span> 
+                            {{ data.release_date }}
+                        </p>
+                    </div>
+                    <!-- BOTH MOVIE AND SERIES SPECIFIC START -->
+                    <div v-if="producers">
+                        <p>
+                            <span>Producer(s):</span> 
+                            {{ producers.join(', ') }}
+                        </p>
+                    </div>
+                </div>
+                <div v-else>
                     <p>
-                        <span>Seasons:</span> 
-                        {{ data.number_of_seasons }}
+                        <span>Birthday:</span> 
+                        {{ data.birthday }}
                     </p>
-                    <p>
-                        <span>Episodes:</span> 
-                        {{ data.number_of_episodes }}
+                    <p v-if="data.deathday">
+                        <span>Deathday:</span> 
+                        {{ data.deathday }}
                     </p>
-                    <p>
-                        <span>First release date:</span> 
-                        {{ data.first_air_date }}
+                    <p v-if="data.place_of_birth">
+                        <span>Place of birth:</span> 
+                        {{ data.place_of_birth }}
                     </p>
                 </div>
-                <!-- MOVIE SPECIFIC START -->
-                <div v-else-if="data.type == 'movie'">
-                    <p>
-                        <span>Runtime:</span> 
-                        {{ data.runtime }} min
-                    </p>
-                    <p>
-                        <span>Release date:</span> 
-                        {{ data.release_date }}
-                    </p>
-                </div>
-                <!-- BOTH MOVIE AND SERIES SPECIFIC START -->
-                <div v-if="producers">
-                    <p>
-                        <span>Producer(s):</span> 
-                        {{ producers.join(', ') }}
-                    </p>
-                </div>
-            </div>
-            <div v-else>
-                <p>
-                    <span>Birthday:</span> 
-                    {{ data.birthday }}
-                </p>
-                <p v-if="data.deathday">
-                    <span>Deathday:</span> 
-                    {{ data.deathday }}
-                </p>
-                <p v-if="data.place_of_birth">
-                    <span>Place of birth:</span> 
-                    {{ data.place_of_birth }}
-                </p>
             </div>
         </div>
         <div class="details-content">
@@ -73,13 +75,13 @@
                 <span>Website: </span>
                 <a :href=data.homepage>{{ data.homepage }}</a>
             </p>
-            <div v-if="stars">
+            <div v-if="cast">
                 <h3>Cast</h3>
                 <div class="actor-cards">
-                    <actor-card v-for="star in stars" :key="star.id" :data="star"/> 
+                    <actor-card v-for="star in cast" :key="star.id" :data="star"/> 
                 </div>
             </div>
-            <div v-if="data.results">
+            <div v-if="data.results && data.results.length > 0 ">
                 <h3>Trailer</h3>
                 <video-viewer :data="data.results"/>
             </div>
@@ -177,10 +179,9 @@ export default {
         /**
          * Returns a list of the names of the cast. 
          */
-        stars() {
+        cast() {
             if(this.data.cast)
                 return this.data.cast.slice(0,5);
-            
         },
     },
     components: {
@@ -197,9 +198,16 @@ export default {
     .actor-cards {
         display: flex;
         padding-left: 0;
-        justify-content: space-between
+        justify-items: start;
     }
-
+    @media all and (max-width: 736px) {
+        .actor-cards {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            width: 80vw;
+            padding: 10px;
+        }
+    }
     h3 {
        color: $primary-text; 
     }
@@ -235,7 +243,16 @@ export default {
         }
 
     }
-
+    @media all and (min-width: 736px) {
+            .movie-img {
+                padding-top: 85px;
+            }
+            .details-side {
+                padding-left: 30px;
+                // border-left: 5px solid $primary;
+                // border-radius: 10px;
+            }
+        }
     .details-content {
         flex-shrink: 1;
 
