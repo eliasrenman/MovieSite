@@ -102,13 +102,22 @@ export default {
     ],
     computed: {
         image_cover() {
-            switch (this.data.type) {
-                case 'person': 
-                    return "https://image.tmdb.org/t/p/w500/" + this.data.profile_path;
-                default: 
-                    return "https://image.tmdb.org/t/p/w500/" + this.data.poster_path;
+            if(this.data.profile_path || this.data.poster_path) {
+                switch (this.data.type) {
+                    case 'person': 
+                        return "https://image.tmdb.org/t/p/w500/" + this.data.profile_path;
+                    default: 
+                        return "https://image.tmdb.org/t/p/w500/" + this.data.poster_path;
+                }
             }
-            
+            switch(this.data.type) {
+                case('person'): {
+                    return '/img/placeholder_person.png';
+                }
+                default: {
+                    return '/img/placeholder_movie.png';
+                }
+            }  
         },
         
         /**

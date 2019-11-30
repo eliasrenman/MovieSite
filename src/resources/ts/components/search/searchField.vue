@@ -1,6 +1,6 @@
 <template>
-    <div class="flex-center">
-        <div class="rows wrapper">
+    <div class="flex">
+        <div class="rows container">
 
             <div class="flex-center ">
                 <div class="search-field flex-center">
@@ -114,15 +114,20 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../../sass/variables' as *;
-
+   
+    .flex {
+        display: flex;
+    }
     .v-spacing {
         margin: 0px 10px;
     }
     .rows {
         flex-direction: row;
     }
-    .wrapper {
+    .container {
         background: $primary;
+        margin-left: 10vw;
+        padding: 20px 40px;
         border-radius: 48px;
         box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
     }
@@ -151,5 +156,11 @@ export default {
         img {
             filter: brightness(10);
         };
+    }
+
+    @media all and (max-width: 1024px) {
+        .container {
+            margin-left: 0;
+        }
     }
 </style>

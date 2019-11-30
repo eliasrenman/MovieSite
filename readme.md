@@ -54,6 +54,7 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Add groups to dropdown to minimize the width of it
 - [X] Add ratings on list preview
 - [X] Details page styling
-- [ ] fix search placement
-- [ ] Details mobile styling
-- [ ] Do code stuff... ༼ つ ◕_◕ ༽つ
+- [X] Details mobile styling
+- [X] Fix search placement
+- [X] Make better placeholder images
+- [ ] Come up with a better name

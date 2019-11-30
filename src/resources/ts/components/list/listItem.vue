@@ -70,9 +70,10 @@ export default {
          * Gets the path for the image cover
          */
         image_cover() {
-            if(this.data.profile_path || this.data.poster_path) {
-                let media_type = this.media_type !== "" ? 
+            let media_type = this.media_type !== "" ? 
                     this.media_type : this.data.media_type;
+            if(this.data.profile_path || this.data.poster_path) {
+                
                 switch(media_type) {       
                     case('person'):
                         return "https://image.tmdb.org/t/p/w500/" + this.data.profile_path;
@@ -80,9 +81,14 @@ export default {
                         return "https://image.tmdb.org/t/p/w500/" + this.data.poster_path;
                 }
             }
-            //TODO: Create a better placeholder image if a image is missing.
-            return "https://via.placeholder.com/200x300";
-            
+            switch(media_type) {
+                case('person'): {
+                    return '/img/placeholder_person.png';
+                }
+                default: {
+                    return '/img/placeholder_movie.png';
+                }
+            }
         },
 
         /**
