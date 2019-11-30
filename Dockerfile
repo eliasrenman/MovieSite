@@ -12,7 +12,6 @@ RUN npm install
 
 COPY --chown=node:node . .
 RUN cp 'env/production.env.example' 'env/production.env'
-RUN npm run prod
 RUN npm run build
 
 EXPOSE 3000
