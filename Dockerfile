@@ -9,10 +9,10 @@ COPY package*.json ./
 USER node
 
 RUN npm install
-RUN npm run prod
 
 COPY --chown=node:node . .
 
+RUN npm run prod
 RUN npm run build
 
 EXPOSE 3000
