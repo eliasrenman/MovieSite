@@ -9,7 +9,6 @@ import bodyParser from 'body-parser';
 const app = express();
 
 // setup route middlewares
-const csrfProtection = csrf({ cookie: true });
 const parseForm = bodyParser.urlencoded({ extended: false });
 
 // Add middleware/settings/routes to express.

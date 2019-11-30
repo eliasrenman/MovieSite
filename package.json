@@ -52,7 +52,6 @@
     "sass": "^1.22.9",
     "sass-loader": "^7.1.0",
     "sqlite3": "^4.1.0",
-    "supertest": "^4.0.2",
     "swagger-jsdoc": "^3.4.0",
     "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
@@ -63,7 +62,7 @@
     "vue-infinite-scroll": "^2.0.2",
     "vue-masonry": "^0.11.7",
     "vue-template-compiler": "^2.6.10",
-    "vuejs-paginate": "^2.1.0",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {}
 }
