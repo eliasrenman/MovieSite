@@ -58,3 +58,4 @@ The plan is to further develop my skills when it comes to writing backend but al
 - [X] Fix search placement
 - [X] Make better placeholder images
 - [ ] Come up with a better name
+- [ ] Search engine optimisation
