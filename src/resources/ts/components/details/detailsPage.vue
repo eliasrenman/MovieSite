@@ -17,6 +17,7 @@
                         <span>Seasons:</span> 
                         {{ data.number_of_seasons }}
                     </p>
+                    <p>
                         <span>Episodes:</span> 
                         {{ data.number_of_episodes }}
                     </p>
@@ -62,33 +63,34 @@
         <div class="details-content">
             <h1>{{ name }}</h1>
             <h2 v-if="original_name">{{original_name}}</h2>
-            <rating :score="data.vote_average" :votes="data.vote_count">
-            </rating>
+            <rating v-if="data.vote_average" :score="data.vote_average" :votes="data.vote_count" />
+            
             <p v-if="data.overview">{{ data.overview }}</p>
             <p v-if="data.biography">{{ data.biography }}</p>
             
             <h2>Information</h2>
-            <div v-if="stars">
-                <p v-if="stars.length > 1">
-                    <span>Notable actors: </span>
-                    {{ stars.slice(0,5).join(', ') }}
-                </p>
-                <p v-else>
-                    <span>Notable actor: </span>
-                    {{ stars.slice(0,5).join(', ') }}
-                </p>
-                
-            </div>
             <p v-if="data.homepage">
                 <span>Website: </span>
-                <a :href=data.homepage>{{data.homepage}}</a>
-            </p>    
+                <a :href=data.homepage>{{ data.homepage }}</a>
+            </p>
+            <div v-if="stars">
+                <h3>Cast</h3>
+                <div class="actor-cards">
+                    <actor-card v-for="star in stars" :key="star.id" :data="star"/> 
+                </div>
+            </div>
+            <div v-if="data.results">
+                <h3>Trailer</h3>
+                <video-viewer :data="data.results"/>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import rating from './rating.vue';
+import actorCard from './actorCard.vue';
+import videoViewer from './videoViewer.vue';
 
 const { getName } = require('country-list');
 const _ = require('lodash');
@@ -97,9 +99,6 @@ export default {
         'data'
     ],
     computed: {
-        /**
-         * Gets the path for the image cover
-         */
         image_cover() {
             switch (this.data.type) {
                 case 'person': 
@@ -180,12 +179,14 @@ export default {
          */
         stars() {
             if(this.data.cast)
-                return this.data.cast.map(a => a.name);
+                return this.data.cast.slice(0,5);
             
         },
     },
     components: {
-        'rating': rating,
+        rating,
+        actorCard,
+        videoViewer
     }
 }
 </script>
@@ -193,7 +194,16 @@ export default {
 
     @use '../../../sass/variables' as *;
     @use "sass:map";
-    
+    .actor-cards {
+        display: flex;
+        padding-left: 0;
+        justify-content: space-between
+    }
+
+    h3 {
+       color: $primary-text; 
+    }
+
     .details-main {
         display: flex;
         flex-wrap: wrap;
