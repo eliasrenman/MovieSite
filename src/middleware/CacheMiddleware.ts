@@ -1,6 +1,6 @@
 import { Response, Request } from "express-serve-static-core"
 import memory from 'memory-cache';
-import { DbCache } from 'src/shared/SqliteCache';
+import { DbCache } from '../shared/SqliteCache';
 
 /**
  * Memory chaching middleware

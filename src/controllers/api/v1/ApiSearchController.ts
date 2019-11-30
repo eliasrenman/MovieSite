@@ -1,5 +1,5 @@
 import { Response, Request } from "express-serve-static-core"
-import { movieDbGet } from 'src/shared/ApiGet';
+import { movieDbGet } from '../../../shared/ApiGet';
 class ApiSearchController {
     /**
      * Ignored.

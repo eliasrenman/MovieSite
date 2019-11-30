@@ -1,11 +1,11 @@
 import path from 'path';
 import { Request, Response, Router } from 'express';
 import csrf from 'csurf';
-import DetailController from 'src/controllers/web/DetailController';
+import DetailController from '../controllers/web/DetailController';
 
-import TopController from 'src/controllers/web/TopController';
-import SearchController from 'src/controllers/web/SearchController';
-import TrendingController from 'src/controllers/web/TrendingController';
+import TopController from '../controllers/web/TopController';
+import SearchController from '../controllers/web/SearchController';
+import TrendingController from '../controllers/web/TrendingController';
 
 const csrfProtection = csrf({ cookie: true });
 
