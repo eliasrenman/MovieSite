@@ -7,7 +7,9 @@
             <vueMenu ref="vue_menu" v-on:at-top-change="atTopChanged"></vueMenu>
         </div>
         <search v-if="!isMobile"></search>
-        <img src="https://www.themoviedb.org/assets/2/v4/logos/powered-by-rectangle-blue-61ce76f69ce1e4f68a6031d975df16cc184d5f04fa7f9f58ae6412646f2481c1.svg">
+        <a class="tmdb" href="https://www.themoviedb.org/" target="_blank">
+            <img class="tmdb" src="https://www.themoviedb.org/assets/2/v4/logos/powered-by-rectangle-blue-61ce76f69ce1e4f68a6031d975df16cc184d5f04fa7f9f58ae6412646f2481c1.svg">
+        </a>
     </div>
 </template>
 
@@ -52,7 +54,7 @@ export default {
         margin-bottom: 20px;
         padding: 0 20px;
 
-        & > img {
+        .tmdb {
             height: $menu-height;
             margin-left: 15px;
         }
