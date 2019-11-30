@@ -79,7 +79,10 @@
                     <actor-card v-for="star in stars" :key="star.id" :data="star"/> 
                 </div>
             </div>
-                
+            <div v-if="data.results">
+                <h3>Trailer</h3>
+                <video-viewer :data="data.results"/>
+            </div>
         </div>
     </div>
 </template>
@@ -87,6 +90,7 @@
 <script>
 import rating from './rating.vue';
 import actorCard from './actorCard.vue';
+import videoViewer from './videoViewer.vue';
 
 const { getName } = require('country-list');
 const _ = require('lodash');
@@ -181,7 +185,8 @@ export default {
     },
     components: {
         rating,
-        actorCard
+        actorCard,
+        videoViewer
     }
 }
 </script>
@@ -192,7 +197,6 @@ export default {
     .actor-cards {
         display: flex;
         padding-left: 0;
-        // flex-flow: row wrap;
         justify-content: space-between
     }
 

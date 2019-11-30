@@ -31,6 +31,7 @@ class ApiDetailsController {
         res.send({
             ...await movieDbGet('movie/' + req.query.id + '?language=en-US'),
             ...await movieDbGet('movie/' + req.query.id + '/credits?language=en-US'),
+            ...await movieDbGet('movie/' + req.query.id + '/videos?language=en-US'),
         });
     } 
 
@@ -58,6 +59,7 @@ class ApiDetailsController {
         res.send({
             ...await movieDbGet('tv/' + req.query.id + '?language=en-US'),
             ...await movieDbGet('tv/' + req.query.id + '/credits?language=en-US'),
+            ...await movieDbGet('tv/' + req.query.id + '/videos?language=en-US'),
         });
     }
 
