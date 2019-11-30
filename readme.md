@@ -5,7 +5,7 @@ This is a stylistic but usable website created to interact with [The movie DB](h
 * Vue
 * Typescript
 * Express
-* JS Masonry
+* The movie DB's REST API
 ## Installation
 
 ### Quick start
