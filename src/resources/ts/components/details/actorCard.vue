@@ -21,12 +21,6 @@ export default {
         image_cover() {    
             return "https://image.tmdb.org/t/p/w138_and_h175_face/" + this.data.profile_path;
         },
-        first_name() {
-            return this.data.name.split(' ',)[0];
-        },
-        last_name() {
-            return this.data.name.split(' ',)[1];
-        }
     }
 }
 </script>
