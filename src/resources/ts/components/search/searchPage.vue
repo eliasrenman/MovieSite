@@ -8,7 +8,7 @@
             :use_counter="false"
             :media_type="category()"
       ></list>
-      <div v-else-if="searchQuery && searchQuery.length > 0">
+      <div v-else-if="searchQuery() && searchQuery().length > 0">
           <h1 class="display-center">No search results found</h1>
       </div>
   </div>
