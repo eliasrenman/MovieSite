@@ -24,3 +24,5 @@ yarn-error.log*
 *.sln
 *.sw?
 database.sqlite
+logs/combined.log
+logs/error.log

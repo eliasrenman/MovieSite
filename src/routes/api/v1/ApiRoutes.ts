@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
-import {mem_cache, db_cache} from 'src/middleware/CacheMiddleware';
-import ApiTrendingController from 'src/controllers/api/v1/ApiTrendingController';
-import ApiSearchController from 'src/controllers/api/v1/ApiSearchController';
-import ApiDetailsController from 'src/controllers/api/v1/ApiDetailController';
-import ApiTopController from 'src/controllers/api/v1/ApiTopController';
+import {mem_cache, db_cache} from '../../../middleware/CacheMiddleware';
+import ApiTrendingController from '../../../controllers/api/v1/ApiTrendingController';
+import ApiSearchController from '../../../controllers/api/v1/ApiSearchController';
+import ApiDetailsController from '../../../controllers/api/v1/ApiDetailController';
+import ApiTopController from '../../../controllers/api/v1/ApiTopController';
 const parseForm = bodyParser.urlencoded({ extended: false });
 // Init router and path
 const router = Router();

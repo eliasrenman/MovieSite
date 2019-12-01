@@ -1,4 +1,4 @@
-import { movieDbGet } from 'src/shared/ApiGet';
+import { movieDbGet } from '../../../shared/ApiGet';
 import { Request, Response } from 'express-serve-static-core';
 
 class ApiTopController {

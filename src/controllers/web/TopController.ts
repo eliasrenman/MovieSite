@@ -1,5 +1,5 @@
 import { Response, Request } from "express-serve-static-core";
-import { internalApiGet } from 'src/shared/ApiGet';
+import { internalApiGet } from '../../shared/ApiGet';
 interface PayloadModel {
     backdrop_path: string,
     title: string,

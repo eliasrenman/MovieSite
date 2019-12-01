@@ -73,11 +73,12 @@ export default {
         },
 
         handleScroll: throttle(function() {
-            if(this.isMobile)
+            if(this.isMobile) {
                 this.isAtTop = false;
                 this.$emit('at-top-change', false);
                 return;
-
+            }
+            
             if(window.scrollY > 0 && this.isActive) {
                 this.isActive = false;
                 this.isAtTop = false;

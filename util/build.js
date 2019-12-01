@@ -8,4 +8,5 @@ fs.copySync('./src/public', './dist/public');
 fs.copySync('./src/views', './dist/views');
 
 // transpile the typescript files
+childProcess.exec('npm run prod');
 childProcess.exec('tsc --build tsconfig.prod.json');

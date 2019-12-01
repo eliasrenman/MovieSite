@@ -1,5 +1,5 @@
 import { Request, Response } from "express-serve-static-core";
-import { internalApiGet } from 'src/shared/ApiGet';
+import { internalApiGet } from '../../shared/ApiGet';
 
 class SearchController {
     public async index(req: Request, res: Response) {

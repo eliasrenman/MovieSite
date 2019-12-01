@@ -21,7 +21,7 @@ export default {
         image_cover() {
             if(this.data.profile_path)
                 return "https://image.tmdb.org/t/p/w138_and_h175_face/" + this.data.profile_path;
-            return '/img/placeholder_person.png';
+            return '/img/placeholder_person_small.png';
         },
     }
 }
