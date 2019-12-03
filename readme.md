@@ -28,11 +28,6 @@ for development mode do
 for production mode.
 ``npm run start``
 
-
-# A Fredags project
-This is a friday project created at NTIG as part of my technical forth year.
-The plan is to further develop my skills when it comes to writing backend but also interacting with other apis.
-
 ## Roadmap
 
 - [X] Read up on possiblility of using swagger with express or something similar
