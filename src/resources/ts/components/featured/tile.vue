@@ -18,9 +18,12 @@ export default {
     props: ['data'],
     computed: {
         image_cover() {
-            if (this.data.tileSizeBig) 
-                return 'https://image.tmdb.org/t/p/w500' + this.data.poster_path;
-            return 'https://image.tmdb.org/t/p/w300' + this.data.poster_path;
+            if(this.data.poster_path) {
+                if (this.data.tileSizeBig) 
+                    return 'https://image.tmdb.org/t/p/w500' + this.data.poster_path;
+                return 'https://image.tmdb.org/t/p/w300' + this.data.poster_path;
+            }
+            return '/img/placeholder_movie.png';
         },
         synopsis() {
             let allowedLength = 300;

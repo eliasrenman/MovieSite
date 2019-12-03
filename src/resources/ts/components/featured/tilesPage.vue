@@ -84,6 +84,10 @@ export default {
          */
         updateData(data) {
             this.data.results.push(...this.parseData(data.results));
+            this.deleteDuplicates();
+        },
+        deleteDuplicates() {
+            this.data.results = _.uniq(this.data.results);
         },
         
         /**

@@ -1,6 +1,7 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { Request, Response } from 'express';
+import logger from 'morgan';
 import path from 'path';
 import web from './routes/WebRoutes';
 import api from './routes/api/v1/ApiRoutes';
@@ -15,7 +16,7 @@ const csrfProtection = csrf({ cookie: true });
 const parseForm = bodyParser.urlencoded({ extended: false });
 
 // Add middleware/settings/routes to express.
-// app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -45,3 +46,4 @@ app.use( (err: { code: string; }, req: Request, res: Response, next: (arg0: any)
   });
 
 export default app;
+    
