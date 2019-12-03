@@ -23,10 +23,10 @@ npm install
 ``
 
 To run the server do:
-for development mode do
+for development mode run
 ``npm run start-dev`` 
 for production mode.
-``npm run start``
+```npm run build & npm run start```
 
 ## Roadmap
 
