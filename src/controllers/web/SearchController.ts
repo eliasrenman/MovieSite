@@ -11,7 +11,7 @@ class SearchController {
         );
 
         const csrfToken = req.csrfToken();
-        res.render('search', {csrfToken: csrfToken, title: 'Search', payload: payload});
+        res.render('search', {csrfToken: csrfToken, title: 'Search', payload: payload, query: req.query.query});
     }
 
     public async getPayload(query: string, page: number, category: string) {
