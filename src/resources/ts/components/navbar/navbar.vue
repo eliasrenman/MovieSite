@@ -74,7 +74,7 @@ export default {
         height: auto;
         background-color: $primary;
         border-radius: calc(#{$menu-height} / 2);
-        box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
         z-index: 1000;
 
         button {
