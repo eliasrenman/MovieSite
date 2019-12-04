@@ -52,7 +52,7 @@ for production mode.
 - [X] Details mobile styling
 - [X] Fix search placement
 - [X] Make better placeholder images
-- [ ] Remove duplicates from trending list
+- [X] Remove duplicates from trending list
 - [ ] Fix mobile onhover for tiles
 - [ ] Come up with a better name
-- [ ] Search engine optimisation
+- [X] Search engine optimisation
