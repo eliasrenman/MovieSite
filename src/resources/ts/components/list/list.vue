@@ -56,6 +56,12 @@ export default {
             default: true
         }
     },
+    created() {
+        if(this.data.results.length > 0) {
+            this.data.results[0].type = this.data.results[0].media_type;
+            this.details_preview = this.data.results[0];
+        }
+    },
     data() {
         return {
             'details_preview': undefined,
@@ -81,9 +87,9 @@ export default {
         }
     },
     methods: {
-        getPreview(endpoint) {
-            endpoint[1].type = endpoint[0];
-            this.details_preview = endpoint[1];
+        getPreview(arr) {
+            arr[1].type = arr[0];
+            this.details_preview = arr[1];
         },
         /**
          * Pagination onclick callback function.

@@ -21,7 +21,6 @@
                 </div>
             </div>
             <div class="radio-buttons">
-                <!-- TODO: make labels clickable ☜(ﾟヮﾟ☜) -->
                 <input type="radio" name="multi" 
                     v-model="endpoint"
                     v-bind:value="'multi'"
@@ -155,6 +154,7 @@ export default {
         };
         img {
             filter: brightness(10);
+            cursor: pointer;
         };
     }
 
