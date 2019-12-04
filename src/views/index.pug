@@ -1,4 +1,16 @@
 extends layout/layout
+block head
+    meta(name='description', content='Sed iaculis bibendum odio ut elementum. Sed hendrerit varius accumsan. Vivamus vitae massa nisl. Suspendisse molestie dignissim ligula. Nulla luctus nunc ipsum, at pulvinar magna vestibulum quis.')
+    meta(property='og:type', content='website')
+    meta(property='og:url', content='https://placeholder.abborren.cf')
+    meta(property='og:title', content=title+ " - Movie site")
+    meta(property='og:description', content='Sed iaculis bibendum odio ut elementum. Sed hendrerit varius accumsan. Vivamus vitae massa nisl. Suspendisse molestie dignissim ligula. Nulla luctus nunc ipsum, at pulvinar magna vestibulum quis.')
+    
+    meta(property='twitter:card', content='summary_large_image')
+    meta(property='twitter:url', content='https://placeholder.abborren.cf')
+    meta(property='twitter:title', content=title+ " - Movie site")
+    meta(property='twitter:description', content='Sed iaculis bibendum odio ut elementum. Sed hendrerit varius accumsan. Vivamus vitae massa nisl. Suspendisse molestie dignissim ligula. Nulla luctus nunc ipsum, at pulvinar magna vestibulum quis.')
+ 
 block content
     #app
         vue-nav

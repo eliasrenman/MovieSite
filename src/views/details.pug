@@ -1,4 +1,20 @@
 extends layout/layout
+block head
+    - var desc=function(){let a=void 0;return payload.overview?a=payload.overview.substring(0,300):payload.biography&&(a=payload.biography.substring(0,300)),a&&a.length>=300&&(a+="..."),a};
+    - var image=function(){if(payload.profile_path||payload.poster_path)switch(payload.type){case"person":return"https://image.tmdb.org/t/p/w500/"+payload.profile_path;default:return"https://image.tmdb.org/t/p/w500/"+payload.poster_path}switch(payload.type){case"person":return"/img/placeholder_person.png";default:return"/img/placeholder_movie.png"}};
+    meta(name='title', content=(payload.title ? payload.title : payload.name) + " - Movie site")
+    meta(name='description', content=desc())
+    meta(property='og:type', content='website')
+    meta(property='og:url', content='https://placeholder.abborren.cf')
+    meta(property='og:title', content=(payload.title ? payload.title : payload.name) + " - Movie site")
+    meta(property='og:description', content=desc())
+    meta(property='og:image', content=image())
+    meta(property='twitter:card', content='summary_large_image')
+    meta(property='twitter:url', content='https://placeholder.abborren.cf')
+    meta(property='twitter:title', content=(payload.title ? payload.title : payload.name) + " - Movie site")
+    meta(property='twitter:description', content=desc())
+    meta(property='twitter:image', content=image())
+
 block content
     #app
         vue-nav
