@@ -1,17 +1,20 @@
 extends layout/layout
 block head
-    meta(property='og:description', content='OPEN_GRAPH_DESCRIPTION')
-    meta(property='og:title', content='OPEN_GRAPH_TITLE')
+    - var desc=function(){let a=void 0;return payload.overview?a=payload.overview.substring(0,300):payload.biography&&(a=payload.biography.substring(0,300)),a&&a.length>=300&&(a+="..."),a};
+    - var image=function(){if(payload.profile_path||payload.poster_path)switch(payload.type){case"person":return"https://image.tmdb.org/t/p/w500/"+payload.profile_path;default:return"https://image.tmdb.org/t/p/w500/"+payload.poster_path}switch(payload.type){case"person":return"/img/placeholder_person.png";default:return"/img/placeholder_movie.png"}};
+    meta(name='title', content=(payload.title ? payload.title : payload.name) + " - Movie site")
+    meta(name='description', content=desc())
     meta(property='og:type', content='website')
-    meta(property='og:url', content='WEBSITE_URL')
-    // Image
-    meta(property='og:image', content=payload.backdrop_path ? 'https://image.tmdb.org/t/p/w500 '+ payload.backdrop_path  : '/img/placeholder_movie.png' )
-    meta(property='og:image:alt', content='Website icon')
-    meta(property='og:image:height', content='80')
-    meta(property='og:image:secure_url', content='URL_TO_IMAGE')
-    meta(property='og:image:type', content='image/png')
-    meta(property='og:image:width', content='80')
-    meta(property='og:locale', content='en_GB')
+    meta(property='og:url', content='https://placeholder.abborren.cf')
+    meta(property='og:title', content=(payload.title ? payload.title : payload.name) + " - Movie site")
+    meta(property='og:description', content=desc())
+    meta(property='og:image', content=image())
+    meta(property='twitter:card', content='summary_large_image')
+    meta(property='twitter:url', content='https://placeholder.abborren.cf')
+    meta(property='twitter:title', content=(payload.title ? payload.title : payload.name) + " - Movie site")
+    meta(property='twitter:description', content=desc())
+    meta(property='twitter:image', content=image())
+
 block content
     #app
         vue-nav
