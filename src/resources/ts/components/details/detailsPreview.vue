@@ -36,7 +36,7 @@
             </div>
         </div>
         
-        <rating class="max-width"
+        <rating v-if="data.vote_average && data.vote_count" class="max-width"
             :score="data.vote_average" :votes="data.vote_count"/>
         
         <div class="details-content">

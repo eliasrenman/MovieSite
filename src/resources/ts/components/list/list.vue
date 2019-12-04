@@ -59,6 +59,9 @@ export default {
     created() {
         if(this.data.results.length > 0) {
             this.data.results[0].type = this.data.results[0].media_type;
+            if(this.data.results[0].type == undefined) {
+                this.data.results[0].type = this.media_type;
+            }
             this.details_preview = this.data.results[0];
         }
     },
