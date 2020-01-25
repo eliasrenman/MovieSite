@@ -1,7 +1,6 @@
 <template>
   <div class="vue-menu" v-bind:class="{ active: isActive }">
     <a :href="activeUrl('/')">Home</a>
-    
     <span class="inline-dropdown" v-if="!isMobile" :class="{'active': dropdowns.topDropdown}">
         <a href="#" @click.prevent="toggleDropDown('topDropdown')" >Top list</a>
         <div  class="dropdown" 
@@ -31,7 +30,8 @@
         <a :href="activeUrl('/trending/series')">Trending series</a>
     </span>
     <a v-if="!isMobile" :href="activeUrl('/search')">Search</a>
-    <search v-else></search>
+    
+    <search v-if="isMobile"></search>
   </div>
 </template>
 
@@ -137,7 +137,7 @@ export default {
         position: relative;
     }
 
-    .vue-menu{
+    .vue-menu {
         display: flex;
         flex-direction: column;
         width: 0;
@@ -145,7 +145,7 @@ export default {
         font-size: 0;
         transition: all 0.3s;
         .active {
-            background: #476b8e;
+            background: $primary-text;
         }
 
         button {
@@ -170,7 +170,6 @@ export default {
             opacity: 0;
             transition: padding 0.3s, opacity 0.3s 0.3s, letter-spacing 0.3s, color 0.3s;
         }
-
         .search-field {
             max-height: 0;
             overflow: hidden;

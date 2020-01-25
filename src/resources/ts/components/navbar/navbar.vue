@@ -6,16 +6,17 @@
             </button>
             <vueMenu ref="vue_menu" v-on:at-top-change="atTopChanged"></vueMenu>
         </div>
+        <github-icon/>
         <search v-if="!isMobile"></search>
-        <a class="tmdb" href="https://www.themoviedb.org/" target="_blank">
-            <img class="tmdb" src="https://www.themoviedb.org/assets/2/v4/logos/powered-by-rectangle-blue-61ce76f69ce1e4f68a6031d975df16cc184d5f04fa7f9f58ae6412646f2481c1.svg">
-        </a>
+        <tmdb-icon/>
     </div>
 </template>
 
 <script>
 import search from './search.vue';
 import vueMenu from './menu.vue';
+import githubIcon from '../icons/githubIcon.vue';
+import tmdbIcon from '../icons/tmdbIcon.vue';
 export default {
     data() {
         return {
@@ -37,7 +38,9 @@ export default {
     },
     components: {
         search,
-        vueMenu
+        vueMenu,
+        githubIcon,
+        tmdbIcon
     }
 };
 </script>
@@ -53,12 +56,6 @@ export default {
         min-height: $menu-height;
         margin-bottom: 20px;
         padding: 0 20px;
-
-        .tmdb {
-            height: $menu-height;
-            margin-left: 15px;
-        }
-
     }
 
     .menu {

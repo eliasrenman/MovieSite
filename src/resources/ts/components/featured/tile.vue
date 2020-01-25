@@ -85,7 +85,7 @@ export default {
             text-align: center;
             text-decoration: none;
             color: #fff;
-            background-color: rgba(darken($primary, 50%), 0.8);
+            background-color: rgba(darken($primary, 50%), 0.4);
             visibility: hidden;
             opacity: 0;
             transition: opacity 0.3s, visibility 0.3s;

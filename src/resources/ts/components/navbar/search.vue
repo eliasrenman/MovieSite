@@ -8,16 +8,16 @@
             @keyup.enter="onSubmit"
 
         >
-        <img src="/img/search.svg" 
-            alt="submit search button" 
-            @click="onSubmit"
-            @keyup.enter="onSubmit"
+        <search-icon
+            class="clickable"
+            @onClick="onSubmit()"
             tabindex="0"
-        > 
+        />
     </div>
 </template>
 
 <script>
+import searchIcon from '../icons/searchIcon';
 export default {
     data() {
         return {
@@ -29,12 +29,17 @@ export default {
             window.location.href = '/search/?query=' + this.search;
         },
     },
+    components: {
+        searchIcon
+    }
 };
 </script>
 
 <style lang="scss" scoped>
 @use '../../../sass/variables' as *;
-
+    .clickable {
+        cursor: pointer;
+    }
     .search-field {
         display: flex;
         align-items: center;
@@ -56,10 +61,6 @@ export default {
 
         }
 
-        img {
-            filter: brightness(10);
-        }
-
     }
 
     @media (min-width: 768px) {
@@ -71,11 +72,6 @@ export default {
                 border-bottom: 2px solid $primary;
                 border-radius: 0;
             }
-         
-            img {
-                filter: brightness(1);
-            }
-
         }
 
     }
