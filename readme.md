@@ -9,7 +9,7 @@ This is a stylistic but usable website created to interact with [The movie DB](h
 ## Installation
 
 ### Quick start
-For Setting up and building this locally follow the following steps, for a hosted example of this see [placeholder](example.com).
+For Setting up and building this locally follow the following steps. There is currently no hosted version of this, sorry for the inconvenience!
 ``
 git clone https://github.com/eliasrenman/MovieSite.git
 ``
