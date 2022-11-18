@@ -50,7 +50,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
     "pug": "^2.0.4",
-    "resolve-url-loader": "^3.1.0",
+    "resolve-url-loader": "^5.0.0",
     "sass": "^1.22.9",
     "sass-loader": "^7.1.0",
     "sqlite3": "^4.1.0",
